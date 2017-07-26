@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="comcesar1287.github.tagyou.view.TagsFilterAffinityActivity">
+
+    <com.adroitandroid.chipcloud.ChipCloud
+        xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/chip_cloud_affinity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        chipcloud:deselectTransitionMS="250"
+        chipcloud:selectTransitionMS="450"
+        chipcloud:selectMode="multi"
+        chipcloud:allCaps="true"
+        chipcloud:gravity="center"
+        chipcloud:minHorizontalSpacing="32dp"
+        chipcloud:verticalSpacing="16dp"
+        chipcloud:textSize="18sp"/>
+
+    <Button
+        android:id="@+id/btNextAffinity"
+        android:text="Próximo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

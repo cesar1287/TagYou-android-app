@@ -4,13 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import android.os.Handler;
 
 import comcesar1287.github.tagyou.R;
-
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -28,7 +25,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashScreenActivity.this, MainActivity.class);
+                Intent i = new Intent(SplashScreenActivity.this, SignWithActivity.class);
                 startActivity(i);
                 finish();
             }

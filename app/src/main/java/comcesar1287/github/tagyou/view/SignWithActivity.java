@@ -3,6 +3,7 @@ package comcesar1287.github.tagyou.view;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,10 +58,13 @@ public class SignWithActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
+        mAuth = FirebaseAuth.getInstance();
+
+        verifyUserIsLogged();
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         callbackManager = CallbackManager.Factory.create();
-        mAuth = FirebaseAuth.getInstance();
 
         setContentView(R.layout.activity_sign_with);
 
@@ -85,6 +89,16 @@ public class SignWithActivity extends AppCompatActivity {
                         Toast.makeText(SignWithActivity.this, R.string.error_facebook_login_unknown_error, Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    public void verifyUserIsLogged(){
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            // User is signed out
+            startActivity(new Intent(SignWithActivity.this, TagsFilterSegmentActivity.class));
+            finish();
+        }
     }
 
     @Override
@@ -130,7 +144,7 @@ public class SignWithActivity extends AppCompatActivity {
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
                             dialog.dismiss();
-                            startActivity(new Intent(SignWithActivity.this, MainActivity.class));
+                            startActivity(new Intent(SignWithActivity.this, TagsFilterSegmentActivity.class));
                             finish();
                         }
                     }
