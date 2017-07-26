@@ -3,33 +3,31 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_empresas"
+            android:icon="@drawable/tagyou_icon_companies"
+            android:title="Empresas"/>
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_pessoas"
+            android:icon="@drawable/tagyou_icon_person"
+            android:title="Pessoas"/>
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_editar_preferencias"
+            android:icon="@drawable/tagyou_icon_edit"
+            android:title="Editar Preferềncias"/>
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_chat"
+            android:icon="@drawable/tagyou_icon_chat"
+            android:title="Chat"/>
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Contato e Dúvidas">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_duvidas"
+                android:title="Duvidas Frequentes"/>
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_fale_conosco"
+                android:title="Fale Conosco"/>
         </menu>
     </item>
 
