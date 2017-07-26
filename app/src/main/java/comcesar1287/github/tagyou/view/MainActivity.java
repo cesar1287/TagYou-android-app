@@ -1,7 +1,9 @@
-package comcesar1287.github.tagyou;
+package comcesar1287.github.tagyou.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import comcesar1287.github.tagyou.R;
 
 public class MainActivity extends AppCompatActivity {
 
