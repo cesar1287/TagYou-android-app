@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">TagYou</string>
+<<<<<<< HEAD
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="title_lateralMenu">TagYou</string>
+=======
+
+    <string name="facebook_app_id">292069404601274</string>
+    <string name="fb_login_protocol_scheme">fb292069404601274</string>
+
+    <string name="error_facebook_login_canceled">Login com o Facebook cancelado.</string>
+    <string name="error_facebook_login_unknown_error">Erro desconhecido com o login com o Facebook, tente novamente e contate o administrador.</string>
+    <string name="error_failed_signin_email_exists">Falha ao entrar\n\nEsse e-mail já está sendo usado em nosso sistema e dispositivo.\nTente novamente com outro método de login.</string>
+    <string name="error_unknown_error">Erro desconhecido, tente novamente e contate o administrador.</string>
+    <string name="error_signin">Algo deu errado ao fazer login, tente novamente.</string>
+
+    <string name="processing_login">Processando login, por favor aguarde…</string>
+>>>>>>> 6efe7851d53e7cba97fd48b733dc3ac0ab5a100f
 </resources>
