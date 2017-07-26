@@ -4,7 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackgroundSplash"
     tools:context="comcesar1287.github.tagyou.view.TagsFilterAffinityActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecione as opções você tem mais afinidade"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:gravity="center"
+        android:textColor="@color/white"/>
 
     <com.adroitandroid.chipcloud.ChipCloud
         xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
@@ -19,13 +31,16 @@
         chipcloud:gravity="center"
         chipcloud:minHorizontalSpacing="32dp"
         chipcloud:verticalSpacing="16dp"
-        chipcloud:textSize="18sp"/>
+        chipcloud:textSize="18sp"
+        android:paddingTop="85dp"/>
 
     <Button
         android:id="@+id/btNextAffinity"
         android:text="Próximo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
+        android:layout_gravity="end"
+        android:layout_alignParentBottom="true"
+        />
 
 </RelativeLayout>
