@@ -23,7 +23,9 @@
         </activity>
         <activity
             android:name=".view.SignWithActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:label="@string/title_login"
+            />
         <activity
             android:name=".view.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
