@@ -1,10 +1,11 @@
 package comcesar1287.github.tagyou.view;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -25,10 +26,12 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.domain.Company;
+import comcesar1287.github.tagyou.controller.fragment.CompanyFragment;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
 public class MainActivity extends AppCompatActivity
@@ -38,7 +41,13 @@ public class MainActivity extends AppCompatActivity
 
     private FirebaseAuth mAuth;
 
-    String name, email, profilePic, id;
+    String name, profilePic;
+
+    ArrayList<Company> companiesList;
+
+    NavigationView navigationView;
+
+    CompanyFragment frag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +66,16 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        setupUI();
+    }
+
+    private void setupUI() {
+
         sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-        id = sharedPreferences.getString("id", "0");
         name = sharedPreferences.getString("name","Carregando...");
-        email = sharedPreferences.getString("email","Carregando...");
         profilePic = sharedPreferences.getString("profile_pic","Carregando...");
 
         View hView =  navigationView.getHeaderView(0);
@@ -80,6 +92,64 @@ public class MainActivity extends AppCompatActivity
         });
         TextView nav_nome = (TextView)hView.findViewById(R.id.header_name);
         nav_nome.setText(name);
+
+        companiesList = new ArrayList<>();
+
+        Company extra = new Company();
+        extra.setName("Extra");
+        Uri uriExtra = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_extra);
+        extra.setBanner(uriExtra);
+        companiesList.add(extra);
+
+        Company mcDonalds = new Company();
+        mcDonalds.setName("Mc Donalds");
+        Uri uriMcDonalds = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_mcdonalds);
+        mcDonalds.setBanner(uriMcDonalds);
+        companiesList.add(mcDonalds);
+
+        Company leroyMerlin = new Company();
+        leroyMerlin.setName("Leroy Merlin");
+        Uri uriLeroyMerlin = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_leroymerlin);
+        leroyMerlin.setBanner(uriLeroyMerlin);
+        companiesList.add(leroyMerlin);
+
+        Company habbibs = new Company();
+        habbibs.setName("Habbib's");
+        Uri uriHabbibs = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_habibs);
+        habbibs.setBanner(uriHabbibs);
+        companiesList.add(habbibs);
+
+        Company ceA = new Company();
+        ceA.setName("C&A");
+        Uri uriCEA = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_cea);
+        ceA.setBanner(uriCEA);
+        companiesList.add(ceA);
+
+        Company pagueMenos = new Company();
+        pagueMenos.setName("Pague Menos");
+        Uri uriPagueMenos = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_paguemenos);
+        pagueMenos.setBanner(uriPagueMenos);
+        companiesList.add(pagueMenos);
+
+        Company carrefour = new Company();
+        carrefour.setName("Carrefour");
+        Uri uriCarrefour = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_carrefour);
+        carrefour.setBanner(uriCarrefour);
+        companiesList.add(carrefour);
+
+        Company pizzaHut = new Company();
+        pizzaHut.setName("Pizza Hut");
+        Uri uriPizzaHut = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_pizzahut);
+        pizzaHut.setBanner(uriPizzaHut);
+        companiesList.add(pizzaHut);
+
+        frag = (CompanyFragment) getSupportFragmentManager().findFragmentByTag("mainFrag");
+        if(frag == null) {
+            frag = new CompanyFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.companies_fragment_container, frag, "mainFrag");
+            ft.commit();
+        }
     }
 
     public void signOut(View view){

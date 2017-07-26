@@ -10,6 +10,8 @@ public class Utility {
 
     public static final String APP_PACKAGE_NAME = "comcesar1287.github.tagyou";
 
+    public static final String URI_PACKAGE = "android.resource://comcesar1287.github.tagyou/";
+
     private static final int[] pesoCPF = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
 
     public static boolean isValidCPF(String cpf) {
