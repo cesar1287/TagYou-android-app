@@ -20,6 +20,11 @@
 
     <string name="processing_login">Processando login, por favor aguarde…</string>
 
+    <string name="tags_filter_group">group</string>
+    <string name="tags_filter_segment">segment</string>
+    <string name="done">done</string>
+    <string name="tags_filter_affinity">affinity</string>
+
     <string-array name="tags_filter_segments">
         <item>Arte</item>
         <item>Esporte</item>
