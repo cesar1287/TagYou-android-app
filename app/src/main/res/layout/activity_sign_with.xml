@@ -8,7 +8,6 @@
     tools:context="comcesar1287.github.tagyou.view.SignWithActivity"
     android:background="@color/colorBackgroundSplash">
 
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
