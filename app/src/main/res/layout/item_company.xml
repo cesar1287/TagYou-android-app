@@ -9,7 +9,7 @@
 
 
     <android.support.v7.widget.CardView
-        android:layout_width="165dp"
+        android:layout_width="175dp"
         android:layout_height="165dp"
         android:layout_centerHorizontal="true"
         app:cardBackgroundColor="#ccd9ff"
@@ -20,12 +20,12 @@
 
         <ImageView
             android:id="@+id/company_banner"
-            android:layout_width="165dp"
+            android:layout_width="175dp"
             android:layout_height="165dp"
             android:layout_gravity="center_horizontal"/>
 
         <RelativeLayout
-            android:layout_width="165dp"
+            android:layout_width="185dp"
             android:layout_height="35dp"
             android:layout_marginTop="130dp"
             android:background="#fff">
