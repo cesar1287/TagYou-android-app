@@ -1,5 +1,6 @@
 package comcesar1287.github.tagyou.view;
 
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 
@@ -43,9 +44,11 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    public void SignOut(View view){
+    public void signOut(View view){
         LoginManager.getInstance().logOut();
         mAuth.signOut();
+        startActivity(new Intent(this, SignWithActivity.class));
+        finish();
     }
 
     @Override

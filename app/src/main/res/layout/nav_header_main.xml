@@ -19,6 +19,6 @@
         android:text="Sair"
         android:layout_gravity="end"
         android:background="@null"
-        android:onClick="SignOut"/>
+        android:onClick="signOut"/>
 
 </LinearLayout>
