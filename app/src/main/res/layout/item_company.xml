@@ -19,7 +19,7 @@
 
 
         <ImageView
-            android:id="@+id/segment_banner"
+            android:id="@+id/company_banner"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"/>
@@ -30,7 +30,7 @@
             android:layout_marginTop="115dp"
             android:background="#fff">
             <TextView
-                android:id="@+id/segment_name"
+                android:id="@+id/company_name"
                 android:text="Deldo de fresa"
                 android:textSize="12dp"
                 android:textColor="#333333"

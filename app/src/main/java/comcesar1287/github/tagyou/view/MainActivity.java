@@ -25,7 +25,10 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.List;
+
 import comcesar1287.github.tagyou.R;
+import comcesar1287.github.tagyou.controller.domain.Company;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
 public class MainActivity extends AppCompatActivity
@@ -141,5 +144,9 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public List<Company> getCompaniesList() {
+        return companiesList;
     }
 }
