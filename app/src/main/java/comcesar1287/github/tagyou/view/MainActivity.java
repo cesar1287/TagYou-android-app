@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity
 
         extra.setName("Extra");
         Uri uriExtra = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_extra);
-        extra.setBanner(uriExtra);
+        extra.setBanner(uriExtra.toString());
         Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
         extra.setLogo(uriExtraLogo.toString());
         extra.setQuantity(2);
@@ -113,7 +113,9 @@ public class MainActivity extends AppCompatActivity
         Company mcDonalds = new Company();
         mcDonalds.setName("Mc Donalds");
         Uri uriMcDonalds = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_mc_donalds);
-        mcDonalds.setBanner(uriMcDonalds);
+        mcDonalds.setBanner(uriMcDonalds.toString());
+        Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
+        extra.setLogo(uriExtraLogo.toString());
         mcDonalds.setQuantity(5);
         mcDonalds.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
         mcDonalds.setPhone("(37) 99935-2949");
@@ -125,7 +127,9 @@ public class MainActivity extends AppCompatActivity
         Company leroyMerlin = new Company();
         leroyMerlin.setName("Leroy Merlin");
         Uri uriLeroyMerlin = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_leroy_merlin);
-        leroyMerlin.setBanner(uriLeroyMerlin);
+        leroyMerlin.setBanner(uriLeroyMerlin.toString());
+        Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
+        extra.setLogo(uriExtraLogo.toString());
         leroyMerlin.setQuantity(3);
         leroyMerlin.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
         leroyMerlin.setPhone("(37) 99935-2949");
@@ -135,9 +139,11 @@ public class MainActivity extends AppCompatActivity
         companiesList.add(leroyMerlin);
 
         Company habbibs = new Company();
-        habbibs.setName("Habib's");
+        habbibs.setName("Habbib's");
         Uri uriHabbibs = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_habibs);
-        habbibs.setBanner(uriHabbibs);
+        habbibs.setBanner(uriHabbibs.toString());
+        Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
+        extra.setLogo(uriExtraLogo.toString());
         habbibs.setQuantity(7);
         habbibs.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
         habbibs.setPhone("(37) 99935-2949");
@@ -147,9 +153,11 @@ public class MainActivity extends AppCompatActivity
         companiesList.add(habbibs);
 
         Company ceA = new Company();
-        ceA.setName("Riachuelo");
+        ceA.setName("C&A");
         Uri uriCEA = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_riachuelo);
-        ceA.setBanner(uriCEA);
+        ceA.setBanner(uriCEA.toString());
+        Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
+        extra.setLogo(uriExtraLogo.toString());
         ceA.setQuantity(9);
         ceA.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
         ceA.setPhone("(37) 99935-2949");
@@ -161,7 +169,9 @@ public class MainActivity extends AppCompatActivity
         Company pagueMenos = new Company();
         pagueMenos.setName("Pague Menos");
         Uri uriPagueMenos = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_pague_menos);
-        pagueMenos.setBanner(uriPagueMenos);
+        pagueMenos.setBanner(uriPagueMenos.toString());
+        Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
+        extra.setLogo(uriExtraLogo.toString());
         pagueMenos.setQuantity(8);
         pagueMenos.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
         pagueMenos.setPhone("(37) 99935-2949");
@@ -173,7 +183,9 @@ public class MainActivity extends AppCompatActivity
         Company carrefour = new Company();
         carrefour.setName("Carrefour");
         Uri uriCarrefour = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_carrefour);
-        carrefour.setBanner(uriCarrefour);
+        carrefour.setBanner(uriCarrefour.toString());
+        Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
+        extra.setLogo(uriExtraLogo.toString());
         carrefour.setQuantity(4);
         carrefour.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
         carrefour.setPhone("(37) 99935-2949");
@@ -185,7 +197,9 @@ public class MainActivity extends AppCompatActivity
         Company pizzaHut = new Company();
         pizzaHut.setName("Pizza Hut");
         Uri uriPizzaHut = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_pizza_hut);
-        pizzaHut.setBanner(uriPizzaHut);
+        pizzaHut.setBanner(uriPizzaHut.toString());
+        Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
+        extra.setLogo(uriExtraLogo.toString());
         pizzaHut.setQuantity(3);
         pizzaHut.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
         pizzaHut.setPhone("(37) 99935-2949");

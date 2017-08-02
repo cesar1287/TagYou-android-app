@@ -1,9 +1,13 @@
 package comcesar1287.github.tagyou.view;
 
+import android.net.Uri;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.domain.Company;
@@ -21,7 +25,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_details);
 
-        company = (Company) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_COMPANY);
+        company = getIntent().getParcelableExtra(Utility.KEY_CONTENT_EXTRA_COMPANY);
 
         setupUI();
     }
@@ -32,7 +36,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
         if(frag == null) {
             frag = new MapViewFragment();
             Bundle bundle = new Bundle();
-            bundle.putSerializable(Utility.KEY_CONTENT_EXTRA_COMPANY, company);
+            bundle.putParcelable(Utility.KEY_CONTENT_EXTRA_COMPANY, company);
             frag.setArguments(bundle);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.map_fragment_container, frag, Utility.KEY_MAP_FRAGMENT);
@@ -45,6 +49,11 @@ public class CompanyDetailsActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        ImageView ivBanner = (ImageView) findViewById(R.id.company_details_banner);
+        Glide.with(this)
+                .load(Uri.parse(company.getLogo()))
+                .centerCrop()
+                .into(ivBanner);
         TextView tv_name = (TextView) findViewById(R.id.company_details_name);
         tv_name.setText(company.getName());
         TextView tv_description = (TextView) findViewById(R.id.company_details_description);
