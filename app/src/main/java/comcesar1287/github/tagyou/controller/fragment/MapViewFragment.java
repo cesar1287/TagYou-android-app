@@ -29,7 +29,7 @@ public class MapViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
 
-        final Company company = (Company) getArguments().getParcelable(Utility.KEY_CONTENT_EXTRA_COMPANY);
+        final Company company = getArguments().getParcelable(Utility.KEY_CONTENT_EXTRA_COMPANY);
 
         mMapView = (MapView) rootView.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);

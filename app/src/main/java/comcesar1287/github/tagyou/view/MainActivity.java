@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
 
         Company mcDonalds = new Company();
         mcDonalds.setName("Mc Donalds");
-        Uri uriMcDonalds = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_mcdonalds);
+        Uri uriMcDonalds = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_mc_donalds);
         mcDonalds.setBanner(uriMcDonalds.toString());
         mcDonalds.setQuantity(5);
         mcDonalds.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity
 
         Company leroyMerlin = new Company();
         leroyMerlin.setName("Leroy Merlin");
-        Uri uriLeroyMerlin = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_leroymerlin);
+        Uri uriLeroyMerlin = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_leroy_merlin);
         leroyMerlin.setBanner(uriLeroyMerlin.toString());
         leroyMerlin.setQuantity(3);
         leroyMerlin.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity
 
         Company ceA = new Company();
         ceA.setName("C&A");
-        Uri uriCEA = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_cea);
+        Uri uriCEA = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_riachuelo);
         ceA.setBanner(uriCEA.toString());
         ceA.setQuantity(9);
         ceA.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity
 
         Company pagueMenos = new Company();
         pagueMenos.setName("Pague Menos");
-        Uri uriPagueMenos = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_paguemenos);
+        Uri uriPagueMenos = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_pague_menos);
         pagueMenos.setBanner(uriPagueMenos.toString());
         pagueMenos.setQuantity(8);
         pagueMenos.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity
 
         Company pizzaHut = new Company();
         pizzaHut.setName("Pizza Hut");
-        Uri uriPizzaHut = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_pizzahut);
+        Uri uriPizzaHut = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_pizza_hut);
         pizzaHut.setBanner(uriPizzaHut.toString());
         pizzaHut.setQuantity(3);
         pizzaHut.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
