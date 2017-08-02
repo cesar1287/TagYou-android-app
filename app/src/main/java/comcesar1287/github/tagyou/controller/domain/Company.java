@@ -6,10 +6,18 @@ import java.io.Serializable;
 
 public class Company implements Serializable{
 
-    private String name, description, address, phone, site;
+    private String name, description, address, phone, site, logo;
     private Uri banner;
     private int quantity;
     private double latitude, longitude;
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 
     public double getLatitude() {
         return latitude;
@@ -81,5 +89,10 @@ public class Company implements Serializable{
 
     public void setBanner(Uri banner) {
         this.banner = banner;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

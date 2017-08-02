@@ -100,6 +100,8 @@ public class MainActivity extends AppCompatActivity
         extra.setName("Extra");
         Uri uriExtra = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_extra);
         extra.setBanner(uriExtra);
+        Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
+        extra.setLogo(uriExtraLogo.toString());
         extra.setQuantity(2);
         extra.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
         extra.setPhone("(37) 99935-2949");
