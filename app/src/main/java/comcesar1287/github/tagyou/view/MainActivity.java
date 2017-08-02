@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity
         companiesList = new ArrayList<>();
 
         Company extra = new Company();
-        
+
         extra.setName("Extra");
         Uri uriExtra = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_extra);
         extra.setBanner(uriExtra);
@@ -113,6 +113,11 @@ public class MainActivity extends AppCompatActivity
         Uri uriMcDonalds = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_mcdonalds);
         mcDonalds.setBanner(uriMcDonalds);
         mcDonalds.setQuantity(5);
+        mcDonalds.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
+        mcDonalds.setPhone("(37) 99935-2949");
+        mcDonalds.setSite("www.facebook.com/churrascaria100");
+        mcDonalds.setLatitude(-20.4673771);
+        mcDonalds.setLongitude(-45.4316553);
         companiesList.add(mcDonalds);
 
         Company leroyMerlin = new Company();
@@ -120,6 +125,11 @@ public class MainActivity extends AppCompatActivity
         Uri uriLeroyMerlin = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_leroymerlin);
         leroyMerlin.setBanner(uriLeroyMerlin);
         leroyMerlin.setQuantity(3);
+        leroyMerlin.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
+        leroyMerlin.setPhone("(37) 99935-2949");
+        leroyMerlin.setSite("www.facebook.com/churrascaria100");
+        leroyMerlin.setLatitude(-20.4673771);
+        leroyMerlin.setLongitude(-45.4316553);
         companiesList.add(leroyMerlin);
 
         Company habbibs = new Company();
@@ -127,6 +137,11 @@ public class MainActivity extends AppCompatActivity
         Uri uriHabbibs = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_habibs);
         habbibs.setBanner(uriHabbibs);
         habbibs.setQuantity(7);
+        habbibs.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
+        habbibs.setPhone("(37) 99935-2949");
+        habbibs.setSite("www.facebook.com/churrascaria100");
+        habbibs.setLatitude(-20.4673771);
+        habbibs.setLongitude(-45.4316553);
         companiesList.add(habbibs);
 
         Company ceA = new Company();
@@ -134,6 +149,11 @@ public class MainActivity extends AppCompatActivity
         Uri uriCEA = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_cea);
         ceA.setBanner(uriCEA);
         ceA.setQuantity(9);
+        ceA.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
+        ceA.setPhone("(37) 99935-2949");
+        ceA.setSite("www.facebook.com/churrascaria100");
+        ceA.setLatitude(-20.4673771);
+        ceA.setLongitude(-45.4316553);
         companiesList.add(ceA);
 
         Company pagueMenos = new Company();
@@ -141,6 +161,11 @@ public class MainActivity extends AppCompatActivity
         Uri uriPagueMenos = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_paguemenos);
         pagueMenos.setBanner(uriPagueMenos);
         pagueMenos.setQuantity(8);
+        pagueMenos.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
+        pagueMenos.setPhone("(37) 99935-2949");
+        pagueMenos.setSite("www.facebook.com/churrascaria100");
+        pagueMenos.setLatitude(-20.4673771);
+        pagueMenos.setLongitude(-45.4316553);
         companiesList.add(pagueMenos);
 
         Company carrefour = new Company();
@@ -148,6 +173,11 @@ public class MainActivity extends AppCompatActivity
         Uri uriCarrefour = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_carrefour);
         carrefour.setBanner(uriCarrefour);
         carrefour.setQuantity(4);
+        carrefour.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
+        carrefour.setPhone("(37) 99935-2949");
+        carrefour.setSite("www.facebook.com/churrascaria100");
+        carrefour.setLatitude(-20.4673771);
+        carrefour.setLongitude(-45.4316553);
         companiesList.add(carrefour);
 
         Company pizzaHut = new Company();
@@ -155,6 +185,11 @@ public class MainActivity extends AppCompatActivity
         Uri uriPizzaHut = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_pizzahut);
         pizzaHut.setBanner(uriPizzaHut);
         pizzaHut.setQuantity(3);
+        pizzaHut.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
+        pizzaHut.setPhone("(37) 99935-2949");
+        pizzaHut.setSite("www.facebook.com/churrascaria100");
+        pizzaHut.setLatitude(-20.4673771);
+        pizzaHut.setLongitude(-45.4316553);
         companiesList.add(pizzaHut);
 
         frag = (CompanyFragment) getSupportFragmentManager().findFragmentByTag("mainFrag");
