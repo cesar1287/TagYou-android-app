@@ -18,6 +18,8 @@ import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.adapter.CompanyAdapter;
 import comcesar1287.github.tagyou.controller.domain.Company;
 import comcesar1287.github.tagyou.controller.interfaces.RecyclerViewOnClickListenerHack;
+import comcesar1287.github.tagyou.controller.util.Utility;
+import comcesar1287.github.tagyou.view.CompanyDetailsActivity;
 import comcesar1287.github.tagyou.view.MainActivity;
 
 public class CompanyFragment extends Fragment implements RecyclerViewOnClickListenerHack {
@@ -52,10 +54,9 @@ public class CompanyFragment extends Fragment implements RecyclerViewOnClickList
 
     @Override
     public void onClickListener(View view, int position) {
-        /*Intent intent = new Intent(getActivity(), SegmentCategoryActivity.class);
-        intent.putExtra(Utility.SEGMENTO, mList.get(position).getName());
-        intent.putExtra(Utility.SEGMENTO_FIREBASE, mList.get(position).getNameFirebase());
-        startActivity(intent);*/
+        Intent intent = new Intent(getActivity(), CompanyDetailsActivity.class);
+        intent.putExtra(Utility.KEY_CONTENT_EXTRA_COMPANY, mList.get(position));
+        startActivity(intent);
     }
 
     private static class RecyclerViewTouchListener implements RecyclerView.OnItemTouchListener {

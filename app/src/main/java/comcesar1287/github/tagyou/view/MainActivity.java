@@ -96,51 +96,65 @@ public class MainActivity extends AppCompatActivity
         companiesList = new ArrayList<>();
 
         Company extra = new Company();
+        
         extra.setName("Extra");
         Uri uriExtra = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_extra);
         extra.setBanner(uriExtra);
+        extra.setQuantity(2);
+        extra.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
+        extra.setPhone("(37) 99935-2949");
+        extra.setSite("www.facebook.com/churrascaria100");
+        extra.setLatitude(-20.4673771);
+        extra.setLongitude(-45.4316553);
         companiesList.add(extra);
 
         Company mcDonalds = new Company();
         mcDonalds.setName("Mc Donalds");
         Uri uriMcDonalds = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_mcdonalds);
         mcDonalds.setBanner(uriMcDonalds);
+        mcDonalds.setQuantity(5);
         companiesList.add(mcDonalds);
 
         Company leroyMerlin = new Company();
         leroyMerlin.setName("Leroy Merlin");
         Uri uriLeroyMerlin = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_leroymerlin);
         leroyMerlin.setBanner(uriLeroyMerlin);
+        leroyMerlin.setQuantity(3);
         companiesList.add(leroyMerlin);
 
         Company habbibs = new Company();
         habbibs.setName("Habbib's");
         Uri uriHabbibs = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_habibs);
         habbibs.setBanner(uriHabbibs);
+        habbibs.setQuantity(7);
         companiesList.add(habbibs);
 
         Company ceA = new Company();
         ceA.setName("C&A");
         Uri uriCEA = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_cea);
         ceA.setBanner(uriCEA);
+        ceA.setQuantity(9);
         companiesList.add(ceA);
 
         Company pagueMenos = new Company();
         pagueMenos.setName("Pague Menos");
         Uri uriPagueMenos = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_paguemenos);
         pagueMenos.setBanner(uriPagueMenos);
+        pagueMenos.setQuantity(8);
         companiesList.add(pagueMenos);
 
         Company carrefour = new Company();
         carrefour.setName("Carrefour");
         Uri uriCarrefour = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_carrefour);
         carrefour.setBanner(uriCarrefour);
+        carrefour.setQuantity(4);
         companiesList.add(carrefour);
 
         Company pizzaHut = new Company();
         pizzaHut.setName("Pizza Hut");
         Uri uriPizzaHut = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_pizzahut);
         pizzaHut.setBanner(uriPizzaHut);
+        pizzaHut.setQuantity(3);
         companiesList.add(pizzaHut);
 
         frag = (CompanyFragment) getSupportFragmentManager().findFragmentByTag("mainFrag");

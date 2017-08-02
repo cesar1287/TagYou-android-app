@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_company_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.CompanyDetailsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/company_details_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleX="1.02"
+            android:scaleType="fitStart"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="4sp"/>
+            <!--android:src="@drawable/parceiros_0006_banner_parceiros"-->
+
+        <TextView
+            android:textColor="@color/black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:id="@+id/company_details_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/company_details_banner"
+            android:layout_marginTop="20sp"
+            android:layout_centerHorizontal="true"
+            />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/company_details_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/company_details_name"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="20sp"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="30sp"
+            android:paddingStart="30sp"
+            android:paddingRight="30sp"
+            android:paddingEnd="30sp"/>
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/company_details_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/company_details_description"
+            android:layout_marginBottom="20sp"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="30sp"
+            android:paddingStart="30sp"
+            android:paddingRight="30sp"
+            android:paddingEnd="30sp"/>
+
+        <RelativeLayout
+            android:id="@+id/map_fragment_container"
+            android:layout_width="280sp"
+            android:layout_height="150sp"
+            android:layout_below="@id/company_details_address"
+            android:layout_centerHorizontal="true">
+
+        </RelativeLayout>
+
+        <TextView
+            android:textColor="@color/black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:id="@+id/company_details_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/map_fragment_container"
+            android:layout_marginTop="20sp"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="30sp"
+            android:paddingStart="30sp"
+            android:paddingRight="30sp"
+            android:paddingEnd="30sp"/>
+
+        <TextView
+            android:textColor="@color/black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:id="@+id/company_details_site"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/company_details_phone"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="30sp"
+            android:paddingStart="30sp"
+            android:paddingRight="30sp"
+            android:paddingEnd="30sp"
+            android:layout_marginBottom="20sp"/>
+
+    </RelativeLayout>
+
+</ScrollView>

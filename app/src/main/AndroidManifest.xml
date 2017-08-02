@@ -51,14 +51,14 @@
         </activity>
         <activity
             android:name=".view.TagsFilterSegmentActivity"
-            android:theme="@style/AppTheme.NoActionBar"            />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.TagsFilterGroupsActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.TagsFilterAffinityActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".view.CompanyDetailsActivity"></activity>
     </application>
 
 </manifest>
