@@ -17,7 +17,6 @@
         app:cardElevation="8dp"
         app:cardCornerRadius="5dp">
 
-
         <ImageView
             android:id="@+id/company_banner"
             android:layout_width="170dp"
@@ -66,7 +65,7 @@
 
                 <TextView
                     android:id="@+id/person"
-                    android:text="tem afinidade"
+                    android:text="pessoas gostam"
                     android:textSize="13dp"
                     android:layout_toLeftOf="@id/number_person"
                     android:textStyle="bold"
@@ -76,7 +75,8 @@
                     android:gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_marginEnd="5dp"/>
+
                 <ImageView
                     android:layout_width="13dp"
                     android:layout_height="13dp"

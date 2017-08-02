@@ -103,31 +103,31 @@ public class MainActivity extends AppCompatActivity
 
         Company mcDonalds = new Company();
         mcDonalds.setName("Mc Donalds");
-        Uri uriMcDonalds = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_mcdonalds);
+        Uri uriMcDonalds = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_mc_donalds);
         mcDonalds.setBanner(uriMcDonalds);
         companiesList.add(mcDonalds);
 
         Company leroyMerlin = new Company();
         leroyMerlin.setName("Leroy Merlin");
-        Uri uriLeroyMerlin = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_leroymerlin);
+        Uri uriLeroyMerlin = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_leroy_merlin);
         leroyMerlin.setBanner(uriLeroyMerlin);
         companiesList.add(leroyMerlin);
 
         Company habbibs = new Company();
-        habbibs.setName("Habbib's");
+        habbibs.setName("Habib's");
         Uri uriHabbibs = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_habibs);
         habbibs.setBanner(uriHabbibs);
         companiesList.add(habbibs);
 
         Company ceA = new Company();
-        ceA.setName("C&A");
-        Uri uriCEA = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_cea);
+        ceA.setName("Riachuelo");
+        Uri uriCEA = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_riachuelo);
         ceA.setBanner(uriCEA);
         companiesList.add(ceA);
 
         Company pagueMenos = new Company();
         pagueMenos.setName("Pague Menos");
-        Uri uriPagueMenos = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_paguemenos);
+        Uri uriPagueMenos = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_pague_menos);
         pagueMenos.setBanner(uriPagueMenos);
         companiesList.add(pagueMenos);
 
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity
 
         Company pizzaHut = new Company();
         pizzaHut.setName("Pizza Hut");
-        Uri uriPizzaHut = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_pizzahut);
+        Uri uriPizzaHut = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_pizza_hut);
         pizzaHut.setBanner(uriPizzaHut);
         companiesList.add(pizzaHut);
 
