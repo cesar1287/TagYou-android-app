@@ -14,6 +14,9 @@ public class Utility {
 
     private static final int[] pesoCPF = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
 
+    public static final String KEY_CONTENT_EXTRA_COMPANY = "company";
+    public static final String KEY_MAP_FRAGMENT = "mainFrag";
+
     public static boolean isValidCPF(String cpf) {
         if ((cpf==null) || (cpf.length()!=11)) return false;
 

@@ -44,6 +44,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.MyViewHo
                 .centerCrop()
                 .into(myViewHolder.bannerCompany);
         myViewHolder.nameCompany.setText(mList.get(position).getName());
+        myViewHolder.quantity.setText(String.valueOf(mList.get(position).getQuantity()));
     }
 
     @Override
@@ -58,11 +59,13 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.MyViewHo
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener /*View.OnCreateContextMenuListener*/{
         ImageView bannerCompany;
         TextView nameCompany;
+        TextView quantity;
 
         MyViewHolder(View itemView) {
             super(itemView);
             bannerCompany = (ImageView) itemView.findViewById(R.id.company_banner);
             nameCompany = (TextView) itemView.findViewById(R.id.company_name);
+            quantity = (TextView) itemView.findViewById(R.id.number_person);
 
             itemView.setOnClickListener(this);
         }
