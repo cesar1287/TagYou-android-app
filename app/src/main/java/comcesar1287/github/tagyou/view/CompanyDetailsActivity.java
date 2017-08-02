@@ -21,7 +21,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_details);
 
-        company = (Company) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_COMPANY);
+        company = (Company) getIntent().getParcelableExtra(Utility.KEY_CONTENT_EXTRA_COMPANY);
 
         setupUI();
     }
@@ -32,7 +32,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
         if(frag == null) {
             frag = new MapViewFragment();
             Bundle bundle = new Bundle();
-            bundle.putSerializable(Utility.KEY_CONTENT_EXTRA_COMPANY, company);
+            bundle.putParcelable(Utility.KEY_CONTENT_EXTRA_COMPANY, company);
             frag.setArguments(bundle);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.map_fragment_container, frag, Utility.KEY_MAP_FRAGMENT);

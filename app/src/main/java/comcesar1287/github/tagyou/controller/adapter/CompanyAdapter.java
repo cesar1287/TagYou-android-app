@@ -1,6 +1,7 @@
 package comcesar1287.github.tagyou.controller.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.MyViewHo
     public void onBindViewHolder(MyViewHolder myViewHolder, int position) {
 
         Glide.with(c)
-                .load(mList.get((position)).getBanner())
+                .load(Uri.parse(mList.get((position)).getBanner()))
                 .centerCrop()
                 .into(myViewHolder.bannerCompany);
         myViewHolder.nameCompany.setText(mList.get(position).getName());

@@ -1,15 +1,41 @@
 package comcesar1287.github.tagyou.controller.domain;
 
-import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import java.io.Serializable;
+public class Company implements Parcelable{
 
-public class Company implements Serializable{
-
-    private String name, description, address, phone, site;
-    private Uri banner;
+    private String name, description, address, phone, site, banner;
     private int quantity;
     private double latitude, longitude;
+
+    public Company(){
+
+    }
+
+    private Company(Parcel p){
+        name = p.readString();
+        description = p.readString();
+        address = p.readString();
+        phone = p.readString();
+        site = p.readString();
+        banner = p.readString();
+        quantity = p.readInt();
+        latitude = p.readDouble();
+        longitude = p.readDouble();
+    }
+
+    public static final Parcelable.Creator<Company>
+            CREATOR = new Parcelable.Creator<Company>() {
+
+        public Company createFromParcel(Parcel in) {
+            return new Company(in);
+        }
+
+        public Company[] newArray(int size) {
+            return new Company[size];
+        }
+    };
 
     public double getLatitude() {
         return latitude;
@@ -75,11 +101,29 @@ public class Company implements Serializable{
         this.name = name;
     }
 
-    public Uri getBanner() {
+    public String getBanner() {
         return banner;
     }
 
-    public void setBanner(Uri banner) {
+    public void setBanner(String banner) {
         this.banner = banner;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(description);
+        parcel.writeString(address);
+        parcel.writeString(phone);
+        parcel.writeString(site);
+        parcel.writeString(banner);
+        parcel.writeInt(quantity);
+        parcel.writeDouble(latitude);
+        parcel.writeDouble(longitude);
     }
 }
