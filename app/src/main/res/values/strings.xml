@@ -29,6 +29,9 @@
     <string name="two">Two</string>
     <string name="three">Three</string>
 
+    <string name="phone_mask">(##)#####-####</string>
+    <string name="birth_mask">##/##/####</string>
+
     <string-array name="tags_filter_segments">
         <item>Arte</item>
         <item>Esporte</item>
