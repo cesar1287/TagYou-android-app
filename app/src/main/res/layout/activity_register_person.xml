@@ -148,6 +148,7 @@
             android:id="@+id/advance"
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:layout_below="@id/register_phone"
             android:layout_alignParentBottom="true"
             android:text="continuar"/>
 
