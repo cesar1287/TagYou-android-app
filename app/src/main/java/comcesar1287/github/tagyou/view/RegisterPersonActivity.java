@@ -3,6 +3,8 @@ package comcesar1287.github.tagyou.view;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,6 +43,10 @@ public class RegisterPersonActivity extends AppCompatActivity {
 
         FirebaseUser user = mAuth.getCurrentUser();
         finishLogin(user, database);
+
+        Spinner spinnerCountShoes = (Spinner)findViewById(R.id.register_spinner_sexo);
+        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.sexo));
+        spinnerCountShoes.setAdapter(spinnerCountShoesArrayAdapter);
     }
 
     public void finishLogin(FirebaseUser user, final String database){
