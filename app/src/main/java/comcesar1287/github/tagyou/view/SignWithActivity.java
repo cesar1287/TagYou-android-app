@@ -44,11 +44,6 @@ public class SignWithActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
 
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
-
-    private String Uid, name , email, profile_pic;
-
-    private SharedPreferences sp;
 
     private ProgressDialog dialog;
 
@@ -61,8 +56,6 @@ public class SignWithActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         verifyUserIsLogged();
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -128,11 +121,7 @@ public class SignWithActivity extends AppCompatActivity {
                 .addOnSuccessListener(SignWithActivity.this, new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-                        FirebaseUser user = mAuth.getCurrentUser();
-
-                        finishLogin(user);
+                        dialog.dismiss();
                     }
                 })
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -143,60 +132,9 @@ public class SignWithActivity extends AppCompatActivity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
-                            dialog.dismiss();
-                            startActivity(new Intent(SignWithActivity.this, TagsFilterSegmentActivity.class));
+                            startActivity(new Intent(SignWithActivity.this, CategoryRegisterActivity.class));
                             finish();
                         }
-                    }
-                });
-    }
-
-    public void finishLogin(FirebaseUser user){
-
-        Uid = user.getUid();
-        name = user.getDisplayName();
-        email = user.getEmail();
-        profile_pic = user.getPhotoUrl().toString();
-
-        mDatabase.child(FirebaseHelper.FIREBASE_DATABASE_USERS).child(Uid).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get user value
-                        User user = dataSnapshot.getValue(User.class);
-
-                        // [START_EXCLUDE]
-                        if (user == null) {
-
-                            FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, "", "", "", "", profile_pic);
-
-                            sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sp.edit();
-
-                            editor.putString("id", Uid);
-                            editor.putString("name", name);
-                            editor.putString("email", email);
-                            editor.putString("profile_pic", profile_pic);
-                            editor.apply();
-                        } else {
-
-                            sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sp.edit();
-
-                            editor.putString("id", Uid);
-                            editor.putString("name", name);
-                            editor.putString("email", email);
-                            editor.putString("profile_pic", profile_pic);
-                            editor.putString("phone", user.phone);
-                            editor.putString("birth", user.birth);
-                            editor.putString("sex", user.sex);
-                            editor.apply();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Toast.makeText(SignWithActivity.this, R.string.error_signin, Toast.LENGTH_LONG).show();
                     }
                 });
     }
