@@ -49,19 +49,32 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.TagsFilterSegmentActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".view.TagsFilterGroupsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".view.TagsFilterAffinityActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.CompanyDetailsActivity" />
-        <activity android:name=".view.RegisterPersonActivity" />
-        <activity android:name=".view.CategoryRegisterActivity" />
-        <activity android:name=".view.RegisterCompanyActivity"></activity>
+
+        <activity
+            android:name=".view.CompanyDetailsActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".view.CategoryRegisterActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".view.RegisterPersonActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".view.RegisterCompanyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

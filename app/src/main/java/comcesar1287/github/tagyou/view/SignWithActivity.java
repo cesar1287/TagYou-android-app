@@ -89,7 +89,7 @@ public class SignWithActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
             // User is signed out
-            startActivity(new Intent(SignWithActivity.this, TagsFilterSegmentActivity.class));
+            startActivity(new Intent(SignWithActivity.this, TagsFilterAffinityActivity.class));
             finish();
         }
     }
