@@ -39,6 +39,8 @@ import comcesar1287.github.tagyou.controller.fragment.CompanyFragment;
 import comcesar1287.github.tagyou.controller.fragment.PersonFragment;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
+import static android.R.attr.id;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -52,6 +54,9 @@ public class MainActivity extends AppCompatActivity
 
     NavigationView navigationView;
 
+    TabLayout tabLayout;
+    ViewPager viewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,10 +68,10 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -296,14 +301,18 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        /*// Handle navigation view item clicks here.
+        //Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_empresas) {
-            // Handle the camera action
+            TabLayout.Tab tab = tabLayout.getTabAt(0);
+            tab.select();
         } else if (id == R.id.nav_pessoas) {
-
+            TabLayout.Tab tab = tabLayout.getTabAt(1);
+            tab.select();
         } else if (id == R.id.nav_editar_preferencias) {
+
+        } else if (id == R.id.nav_editar_cadastro) {
 
         } else if (id == R.id.nav_chat) {
 
@@ -311,7 +320,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_fale_conosco) {
 
-        }*/
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
