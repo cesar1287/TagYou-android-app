@@ -114,8 +114,8 @@ public class MainActivity extends AppCompatActivity
         mcDonalds.setName("Mc Donalds");
         Uri uriMcDonalds = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_mc_donalds);
         mcDonalds.setBanner(uriMcDonalds.toString());
-        Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
-        extra.setLogo(uriExtraLogo.toString());
+        Uri uriMcLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_mc_donalds);
+        extra.setLogo(uriMcLogo.toString());
         mcDonalds.setQuantity(5);
         mcDonalds.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
         mcDonalds.setPhone("(37) 99935-2949");
@@ -128,8 +128,8 @@ public class MainActivity extends AppCompatActivity
         leroyMerlin.setName("Leroy Merlin");
         Uri uriLeroyMerlin = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_leroy_merlin);
         leroyMerlin.setBanner(uriLeroyMerlin.toString());
-        Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
-        extra.setLogo(uriExtraLogo.toString());
+        Uri uriLeroyLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_leroy_merlin);
+        extra.setLogo(uriLeroyLogo.toString());
         leroyMerlin.setQuantity(3);
         leroyMerlin.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
         leroyMerlin.setPhone("(37) 99935-2949");
@@ -142,8 +142,8 @@ public class MainActivity extends AppCompatActivity
         habbibs.setName("Habbib's");
         Uri uriHabbibs = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_habibs);
         habbibs.setBanner(uriHabbibs.toString());
-        Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
-        extra.setLogo(uriExtraLogo.toString());
+        Uri uriHabibsLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_habibs);
+        extra.setLogo(uriHabibsLogo.toString());
         habbibs.setQuantity(7);
         habbibs.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
         habbibs.setPhone("(37) 99935-2949");
@@ -156,8 +156,8 @@ public class MainActivity extends AppCompatActivity
         ceA.setName("C&A");
         Uri uriCEA = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_riachuelo);
         ceA.setBanner(uriCEA.toString());
-        Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
-        extra.setLogo(uriExtraLogo.toString());
+        Uri uriRiachueloLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_richuelo);
+        extra.setLogo(uriRiachueloLogo.toString());
         ceA.setQuantity(9);
         ceA.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
         ceA.setPhone("(37) 99935-2949");
@@ -170,8 +170,8 @@ public class MainActivity extends AppCompatActivity
         pagueMenos.setName("Pague Menos");
         Uri uriPagueMenos = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_pague_menos);
         pagueMenos.setBanner(uriPagueMenos.toString());
-        Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
-        extra.setLogo(uriExtraLogo.toString());
+        Uri uriPagueLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_pague_menos);
+        extra.setLogo(uriPagueLogo.toString());
         pagueMenos.setQuantity(8);
         pagueMenos.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
         pagueMenos.setPhone("(37) 99935-2949");
@@ -184,8 +184,8 @@ public class MainActivity extends AppCompatActivity
         carrefour.setName("Carrefour");
         Uri uriCarrefour = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_carrefour);
         carrefour.setBanner(uriCarrefour.toString());
-        Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
-        extra.setLogo(uriExtraLogo.toString());
+        Uri uriCarrefourLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_carrefour);
+        extra.setLogo(uriCarrefourLogo.toString());
         carrefour.setQuantity(4);
         carrefour.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
         carrefour.setPhone("(37) 99935-2949");
@@ -198,8 +198,8 @@ public class MainActivity extends AppCompatActivity
         pizzaHut.setName("Pizza Hut");
         Uri uriPizzaHut = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_empresa_pizza_hut);
         pizzaHut.setBanner(uriPizzaHut.toString());
-        Uri uriExtraLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_extra);
-        extra.setLogo(uriExtraLogo.toString());
+        Uri uriPizzaLogo = Uri.parse(Utility.URI_PACKAGE + R.drawable.tagyou_banner_pizza_hut);
+        extra.setLogo(uriPizzaLogo.toString());
         pizzaHut.setQuantity(3);
         pizzaHut.setDescription("Av. Guiomar García Neto, 175, Formiga - MG");
         pizzaHut.setPhone("(37) 99935-2949");
