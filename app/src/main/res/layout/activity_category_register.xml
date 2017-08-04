@@ -39,11 +39,12 @@
         android:text="Em qual das opção você se encaixa?"
         android:gravity="center"
         android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
         android:layout_below="@id/logo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:layout_marginBottom="45dp"
-        android:textColor="@color/white"/>
+        android:layout_marginBottom="45dp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

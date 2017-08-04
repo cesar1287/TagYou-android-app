@@ -10,7 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextWatcher;
 import android.view.View;
+
 import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -46,6 +49,11 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_person);
+
+        Spinner spinnerCountShoes = (Spinner)findViewById(R.id.register_spinner_sexo);
+        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.sexo));
+        spinnerCountShoes.setAdapter(spinnerCountShoesArrayAdapter);
 
         UserFacebook userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
 
@@ -164,6 +172,8 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
             Toast.makeText(this, "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
             finish();
         }
+        FirebaseUser user = mAuth.getCurrentUser();
+        finishLogin(user, database);
     }
 
     public void finishLogin(FirebaseUser user, final String database){

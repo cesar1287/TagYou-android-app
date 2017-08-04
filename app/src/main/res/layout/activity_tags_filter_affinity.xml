@@ -1,105 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorBackgroundSplash"
-    tools:context="comcesar1287.github.tagyou.view.TagsFilterAffinityActivity">
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/title_affinity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Selecione as opções você tem mais afinidade"
-        android:textSize="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"
-        android:gravity="center"
-        android:textColor="@color/white"/>
-
-    <com.adroitandroid.chipcloud.ChipCloud
-        xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/chip_cloud_affinity"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title_affinity"
-        android:layout_marginTop="15dp"
-        chipcloud:deselectTransitionMS="250"
-        chipcloud:selectTransitionMS="450"
-        chipcloud:selectMode="multi"
-        chipcloud:allCaps="true"
-        chipcloud:gravity="center"
-        chipcloud:minHorizontalSpacing="32dp"
-        chipcloud:verticalSpacing="16dp"
-        chipcloud:textSize="18sp"
-        android:paddingTop="85dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorBackgroundSplash"
+        tools:context="comcesar1287.github.tagyou.view.TagsFilterAffinityActivity">
 
-    <TextView
-        android:id="@+id/title_groups"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Selecione os grupos que você tem mais afinidade"
-        android:textSize="20dp"
-        android:layout_below="@id/chip_cloud_affinity"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"
-        android:gravity="center"
-        android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/title_affinity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecione as opções você tem mais afinidade"
+            android:textSize="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp"
+            android:gravity="center"
+            android:textColor="@color/white"/>
 
-    <com.adroitandroid.chipcloud.ChipCloud
-        xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/chip_cloud_groups"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/title_groups"
-        chipcloud:deselectTransitionMS="250"
-        chipcloud:selectTransitionMS="450"
-        chipcloud:selectMode="multi"
-        chipcloud:allCaps="true"
-        chipcloud:gravity="center"
-        chipcloud:minHorizontalSpacing="32dp"
-        chipcloud:verticalSpacing="16dp"
-        chipcloud:textSize="18sp"
-        android:paddingTop="85dp"/>
+        <com.adroitandroid.chipcloud.ChipCloud
+            xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/chip_cloud_affinity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_affinity"
+            android:layout_marginTop="15dp"
+            chipcloud:deselectTransitionMS="250"
+            chipcloud:selectTransitionMS="450"
+            chipcloud:selectMode="multi"
+            chipcloud:allCaps="true"
+            chipcloud:gravity="center"
+            chipcloud:minHorizontalSpacing="32dp"
+            chipcloud:verticalSpacing="16dp"
+            chipcloud:textSize="18sp"
+            android:paddingTop="85dp"/>
 
-    <TextView
-        android:id="@+id/title_segments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Selecione os segmentos que você tem mais afinidade"
-        android:textSize="20dp"
-        android:layout_below="@id/chip_cloud_groups"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"
-        android:gravity="center"
-        android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/title_groups"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecione os grupos que você tem mais afinidade"
+            android:textSize="20dp"
+            android:layout_below="@id/chip_cloud_affinity"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp"
+            android:gravity="center"
+            android:textColor="@color/white"/>
 
-    <com.adroitandroid.chipcloud.ChipCloud
-        xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/chip_cloud_segments"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/title_segments"
-        android:layout_marginTop="15dp"
-        chipcloud:deselectTransitionMS="250"
-        chipcloud:selectTransitionMS="450"
-        chipcloud:selectMode="multi"
-        chipcloud:allCaps="true"
-        chipcloud:gravity="staggered"
-        chipcloud:minHorizontalSpacing="32dp"
-        chipcloud:verticalSpacing="16dp"
-        chipcloud:textSize="18sp"
-        android:paddingTop="85dp"/>
+        <com.adroitandroid.chipcloud.ChipCloud
+            xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/chip_cloud_groups"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/title_groups"
+            chipcloud:deselectTransitionMS="250"
+            chipcloud:selectTransitionMS="450"
+            chipcloud:selectMode="multi"
+            chipcloud:allCaps="true"
+            chipcloud:gravity="center"
+            chipcloud:minHorizontalSpacing="32dp"
+            chipcloud:verticalSpacing="16dp"
+            chipcloud:textSize="18sp"
+            android:paddingTop="85dp"/>
 
-    <Button
-        android:id="@+id/btNextAffinity"
-        android:text="Próximo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_alignParentBottom="true"/>
+        <TextView
+            android:id="@+id/title_segments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecione os segmentos que você tem mais afinidade"
+            android:textSize="20dp"
+            android:layout_below="@id/chip_cloud_groups"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp"
+            android:gravity="center"
+            android:textColor="@color/white"/>
 
-</RelativeLayout>
+        <com.adroitandroid.chipcloud.ChipCloud
+            xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/chip_cloud_segments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_segments"
+            android:layout_marginTop="15dp"
+            chipcloud:deselectTransitionMS="250"
+            chipcloud:selectTransitionMS="450"
+            chipcloud:selectMode="multi"
+            chipcloud:allCaps="true"
+            chipcloud:gravity="staggered"
+            chipcloud:minHorizontalSpacing="32dp"
+            chipcloud:verticalSpacing="16dp"
+            chipcloud:textSize="18sp"
+            android:paddingTop="85dp"/>
+
+        <Button
+            android:id="@+id/btNextAffinity"
+            android:text="Próximo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+</ScrollView>
