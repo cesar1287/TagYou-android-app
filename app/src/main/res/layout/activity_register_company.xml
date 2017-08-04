@@ -219,7 +219,7 @@
                 android:layout_height="45dp"
                 android:textColor="@color/white"
                 android:background="@color/concrete"
-                android:text="continuar"/>
+                android:text="Salvar"/>
         </LinearLayout>
 
     </RelativeLayout>
