@@ -18,7 +18,7 @@ import comcesar1287.github.tagyou.controller.domain.User;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterPersonActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
@@ -31,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register_person);
 
         String database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
 
@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Toast.makeText(RegisterActivity.this, R.string.error_signin, Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterPersonActivity.this, R.string.error_signin, Toast.LENGTH_LONG).show();
                     }
                 });
     }

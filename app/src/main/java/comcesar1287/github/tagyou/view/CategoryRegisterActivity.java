@@ -21,7 +21,7 @@ public class CategoryRegisterActivity extends AppCompatActivity {
 
     public void registerPerson(View view) {
         database = FirebaseHelper.FIREBASE_DATABASE_USERS;
-        Intent intent = new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, RegisterPersonActivity.class);
         intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
         startActivity(intent);
     }
@@ -29,7 +29,7 @@ public class CategoryRegisterActivity extends AppCompatActivity {
 
     public void registerCompany(View view) {
         database = FirebaseHelper.FIREBASE_DATABASE_COMPANIES;
-        Intent intent = new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, RegisterCompanyActivity.class);
         intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
         startActivity(intent);
     }

@@ -59,8 +59,9 @@
             android:name=".view.TagsFilterAffinityActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.CompanyDetailsActivity" />
-        <activity android:name=".view.RegisterActivity" />
-        <activity android:name=".view.CategoryRegisterActivity"></activity>
+        <activity android:name=".view.RegisterPersonActivity" />
+        <activity android:name=".view.CategoryRegisterActivity" />
+        <activity android:name=".view.RegisterCompanyActivity"></activity>
     </application>
 
 </manifest>
