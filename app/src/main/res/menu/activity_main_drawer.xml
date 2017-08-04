@@ -15,6 +15,10 @@
             android:icon="@drawable/tagyou_icon_edit"
             android:title="Editar Preferềncias"/>
         <item
+            android:id="@+id/nav_editar_cadastro"
+            android:icon="@drawable/tagyou_icon_edit"
+            android:title="Editar Preferềncias"/>
+        <item
             android:id="@+id/nav_chat"
             android:icon="@drawable/tagyou_icon_chat"
             android:title="Chat"/>
