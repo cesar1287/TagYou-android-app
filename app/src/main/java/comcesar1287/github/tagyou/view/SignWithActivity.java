@@ -1,7 +1,9 @@
 package comcesar1287.github.tagyou.view;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,7 +43,7 @@ public class SignWithActivity extends AppCompatActivity {
 
     private ProgressDialog dialog;
 
-    UserFacebook userFacebook;
+    private UserFacebook userFacebook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +87,10 @@ public class SignWithActivity extends AppCompatActivity {
 
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
-            // User is signed out
-            startActivity(new Intent(SignWithActivity.this, TagsFilterActivity.class));
+            getUserDataFacebook();
+            Intent intent = new Intent(SignWithActivity.this, CategoryRegisterActivity.class);
+            intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATA, userFacebook);
+            startActivity(intent);
             finish();
         }
     }
@@ -96,6 +100,14 @@ public class SignWithActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void getUserDataFacebook(){
+        FirebaseUser user = mAuth.getCurrentUser();
+        userFacebook = new UserFacebook();
+        userFacebook.setName(user.getDisplayName());
+        userFacebook.setEmail(user.getEmail());
+        userFacebook.setProfilePic(user.getPhotoUrl().toString());
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
@@ -118,12 +130,7 @@ public class SignWithActivity extends AppCompatActivity {
                 .addOnSuccessListener(SignWithActivity.this, new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-
-                        userFacebook = new UserFacebook();
-                        userFacebook.setName(user.getDisplayName());
-                        userFacebook.setEmail(user.getEmail());
-                        userFacebook.setProfilePic(user.getPhotoUrl().toString());
+                        getUserDataFacebook();
                         dialog.dismiss();
                     }
                 })

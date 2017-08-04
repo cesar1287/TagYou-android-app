@@ -1,5 +1,6 @@
 package comcesar1287.github.tagyou.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -45,6 +46,8 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
     private SharedPreferences sp;
 
     private TextInputLayout etName, etEmail, etPhone, etBirth;
+
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,6 +174,13 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
             FirebaseUser user = mAuth.getCurrentUser();
             finishLogin(user, database);
             Toast.makeText(this, "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+
+            sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(getString(R.string.registry), getResources().getString(R.string.done));
+            editor.apply();
+
             startActivity(new Intent(this, TagsFilterActivity.class));
             finish();
         }

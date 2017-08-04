@@ -1,6 +1,8 @@
 package comcesar1287.github.tagyou.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,9 +21,22 @@ public class CategoryRegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
+
+        String result = sharedPreferences.getString(getString(R.string.registry), "");
+        if(!result.equals("")){
+            openTagsFilterGroupActivity();
+        }
+
         setContentView(R.layout.activity_category_register);
 
         userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
+    }
+
+    public void openTagsFilterGroupActivity(){
+        startActivity(new Intent(this, TagsFilterActivity.class));
+        finish();
     }
 
     public void registerPerson(View view) {

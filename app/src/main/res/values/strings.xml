@@ -32,4 +32,6 @@
     <string name="phone_mask">(##)#####-####</string>
     <string name="birth_mask">##/##/####</string>
 
+    <string name="registry">registro</string>
+
 </resources>
