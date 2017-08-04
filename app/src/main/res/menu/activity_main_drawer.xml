@@ -12,12 +12,12 @@
             android:title="Pessoas"/>
         <item
             android:id="@+id/nav_editar_preferencias"
-            android:icon="@drawable/tagyou_icon_edit"
+            android:icon="@drawable/tagyou_icon_edit_preferences"
             android:title="Editar Preferềncias"/>
         <item
             android:id="@+id/nav_editar_cadastro"
-            android:icon="@drawable/tagyou_icon_edit"
-            android:title="Editar Preferềncias"/>
+            android:icon="@drawable/tagyou_icon_edit_register"
+            android:title="Editar Cadastro"/>
         <item
             android:id="@+id/nav_chat"
             android:icon="@drawable/tagyou_icon_chat"
