@@ -5,4 +5,36 @@
         <item>Feminino</item>
         <item>Masculino</item>
     </string-array>
+
+    <string-array name="tags_filter_segments">
+        <item>Arte</item>
+        <item>Esporte</item>
+        <item>Negócios</item>
+        <item>Religião</item>
+        <item>Saúde</item>
+    </string-array>
+
+    <string-array name="tags_filter_groups">
+        <item>Sport</item>
+        <item>Corinthians</item>
+        <item>Católico</item>
+        <item>Evangélico</item>
+        <item>Corrida</item>
+        <item>Vegano</item>
+        <item>Consultoria</item>
+        <item>Tecnologia</item>
+        <item>Marketing</item>
+    </string-array>
+
+    <string-array name="tags_filter_affinity">
+        <item>Inspiração</item>
+        <item>Gratidão</item>
+        <item>Sabedoria</item>
+        <item>Fé</item>
+        <item>Paz</item>
+        <item>Perdão</item>
+        <item>Integridade</item>
+        <item>Amor</item>
+        <item>Generosidade</item>
+    </string-array>
 </resources>
