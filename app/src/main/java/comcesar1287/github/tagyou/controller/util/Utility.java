@@ -16,6 +16,7 @@ public class Utility {
 
     public static final String KEY_CONTENT_EXTRA_COMPANY = "company";
     public static final String KEY_CONTENT_EXTRA_DATABASE = "database";
+    public static final String KEY_CONTENT_EXTRA_DATA = "data";
     public static final String KEY_MAP_FRAGMENT = "mainFrag";
 
     public static boolean isValidCPF(String cpf) {

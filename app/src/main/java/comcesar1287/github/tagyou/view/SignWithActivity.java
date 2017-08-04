@@ -34,8 +34,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Collections;
+
 import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.domain.User;
+import comcesar1287.github.tagyou.controller.domain.UserFacebook;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
@@ -46,6 +49,8 @@ public class SignWithActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private ProgressDialog dialog;
+
+    UserFacebook userFacebook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,7 @@ public class SignWithActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_with);
 
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions(Collections.singletonList("email"));
         loginButton.registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -121,6 +127,12 @@ public class SignWithActivity extends AppCompatActivity {
                 .addOnSuccessListener(SignWithActivity.this, new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+
+                        userFacebook = new UserFacebook();
+                        userFacebook.setName(user.getDisplayName());
+                        userFacebook.setEmail(user.getEmail());
+                        userFacebook.setProfilePic(user.getPhotoUrl().toString());
                         dialog.dismiss();
                     }
                 })
@@ -132,7 +144,9 @@ public class SignWithActivity extends AppCompatActivity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
-                            startActivity(new Intent(SignWithActivity.this, CategoryRegisterActivity.class));
+                            Intent intent = new Intent(SignWithActivity.this, CategoryRegisterActivity.class);
+                            intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATA, userFacebook);
+                            startActivity(intent);
                             finish();
                         }
                     }
