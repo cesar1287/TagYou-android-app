@@ -1,5 +1,6 @@
 package comcesar1287.github.tagyou.view;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -170,6 +171,7 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
             FirebaseUser user = mAuth.getCurrentUser();
             finishLogin(user, database);
             Toast.makeText(this, "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, TagsFilterActivity.class));
             finish();
         }
         FirebaseUser user = mAuth.getCurrentUser();

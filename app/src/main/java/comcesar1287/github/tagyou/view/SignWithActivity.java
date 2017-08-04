@@ -2,8 +2,6 @@ package comcesar1287.github.tagyou.view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,18 +26,11 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.Collections;
 
 import comcesar1287.github.tagyou.R;
-import comcesar1287.github.tagyou.controller.domain.User;
 import comcesar1287.github.tagyou.controller.domain.UserFacebook;
-import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
 public class SignWithActivity extends AppCompatActivity {
@@ -95,7 +86,7 @@ public class SignWithActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
             // User is signed out
-            startActivity(new Intent(SignWithActivity.this, TagsFilterAffinityActivity.class));
+            startActivity(new Intent(SignWithActivity.this, TagsFilterActivity.class));
             finish();
         }
     }

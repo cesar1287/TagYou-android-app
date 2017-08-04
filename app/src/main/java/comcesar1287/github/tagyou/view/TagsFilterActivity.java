@@ -12,7 +12,7 @@ import com.adroitandroid.chipcloud.ChipCloud;
 
 import comcesar1287.github.tagyou.R;
 
-public class TagsFilterAffinityActivity extends AppCompatActivity implements View.OnClickListener{
+public class TagsFilterActivity extends AppCompatActivity implements View.OnClickListener{
 
     SharedPreferences sharedPreferences;
 

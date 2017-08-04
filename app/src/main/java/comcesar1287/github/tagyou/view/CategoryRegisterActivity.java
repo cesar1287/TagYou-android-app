@@ -30,6 +30,7 @@ public class CategoryRegisterActivity extends AppCompatActivity {
         intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
         intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATA, userFacebook);
         startActivity(intent);
+        finish();
     }
 
 
@@ -39,5 +40,6 @@ public class CategoryRegisterActivity extends AppCompatActivity {
         intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
         intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATA, userFacebook);
         startActivity(intent);
+        finish();
     }
 }
