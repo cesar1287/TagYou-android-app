@@ -4,22 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="comcesar1287.github.tagyou.view.CategoryRegisterActivity">
+    tools:context="comcesar1287.github.tagyou.view.CategoryRegisterActivity"
+    android:background="@color/colorBackgroundSplash">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Em qual opção você se encaixa"
-        android:textSize="20dp"
+        android:orientation="vertical"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TagYou"
+            android:textSize="40dp"
+            android:textColor="@color/colorTagYou"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/tagyou_tag"
+            android:layout_gravity="end"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Em qual das opção você se encaixa?"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_below="@id/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="45dp"
+        android:textColor="@color/white"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
+        android:layout_below="@id/title">
 
         <Button
             android:layout_width="250dp"
