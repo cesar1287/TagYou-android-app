@@ -1,12 +1,22 @@
 package comcesar1287.github.tagyou.view;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -17,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.domain.User;
+import comcesar1287.github.tagyou.controller.domain.UserFacebook;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
@@ -34,6 +45,25 @@ public class RegisterPersonActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_person);
+
+        UserFacebook userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
+
+        final ImageView ivPhoto = (ImageView) findViewById(R.id.register_photo);
+        Glide.with(this).load(Uri.parse(userFacebook.getProfilePic()))
+                .asBitmap().into(new BitmapImageViewTarget(ivPhoto) {
+            @Override
+            protected void setResource(Bitmap resource) {
+                RoundedBitmapDrawable circularBitmapDrawable =
+                        RoundedBitmapDrawableFactory.create(getResources(), resource);
+                circularBitmapDrawable.setCircular(true);
+                ivPhoto.setImageDrawable(circularBitmapDrawable);
+            }
+        });
+
+        EditText etName = (EditText) findViewById(R.id.register_edit_name);
+        etName.setText(userFacebook.getName());
+        EditText etEmail = (EditText) findViewById(R.id.register_edit_email);
+        etEmail.setText(userFacebook.getEmail());
 
         String database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
 
