@@ -35,6 +35,7 @@ import java.util.List;
 
 import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.domain.Company;
+import comcesar1287.github.tagyou.controller.domain.Person;
 import comcesar1287.github.tagyou.controller.fragment.CompanyFragment;
 import comcesar1287.github.tagyou.controller.fragment.PersonFragment;
 import comcesar1287.github.tagyou.controller.util.Utility;

@@ -11,28 +11,48 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import comcesar1287.github.tagyou.R;
-import comcesar1287.github.tagyou.controller.adapter.CompanyAdapter;
-import comcesar1287.github.tagyou.controller.domain.Company;
+import comcesar1287.github.tagyou.controller.adapter.PersonAdapter;
+import comcesar1287.github.tagyou.controller.domain.Person;
 import comcesar1287.github.tagyou.controller.interfaces.RecyclerViewOnClickListenerHack;
 import comcesar1287.github.tagyou.controller.util.Utility;
 import comcesar1287.github.tagyou.view.CompanyDetailsActivity;
-import comcesar1287.github.tagyou.view.MainActivity;
 
 public class PersonFragment extends Fragment implements RecyclerViewOnClickListenerHack {
 
     RecyclerView mRecyclerView;
-    public List<Company> mList;
-    public CompanyAdapter adapter;
+    public List<Person> mList;
+
+    ArrayList<Person> peopleList;
+
+    public PersonAdapter adapter;
+
+    private DatabaseReference mDatabase;
+
+    Query person;
+
+    ValueEventListener valueEventListener;
+    ValueEventListener singleValueEventListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_person, container, false);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mRecyclerView.setHasFixedSize(true);
@@ -41,15 +61,76 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(gridLayoutManager);
 
-        mList = ((MainActivity) getActivity()).getCompaniesList();
-        adapter = new CompanyAdapter(getActivity(), mList);
+        mList = new ArrayList<>();
+        adapter = new PersonAdapter(getActivity(), mList);
         adapter.setRecyclerViewOnClickListenerHack(this);
         mRecyclerView.setAdapter( adapter );
 
         mRecyclerView.addOnItemTouchListener(new RecyclerViewTouchListener( getActivity(), mRecyclerView, this ));
 
+        getPeopleList();
+
         return view;
 
+    }
+
+    public void loadList(){
+
+        valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                peopleList = new ArrayList<>();
+
+                Person p;
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    p = new Person();
+                    p.setProfilePic((String)postSnapshot.child("profile_pic").getValue());
+                    p.setName((String)postSnapshot.child("name").getValue());
+
+                    peopleList.add(p);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                /*dialog.dismiss();
+                Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                finish();*/
+            }
+        };
+
+        singleValueEventListener = new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                mList.clear();
+                mList.addAll(peopleList);
+                adapter.notifyDataSetChanged();
+                //dialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                /*dialog.dismiss();
+                Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                finish();*/
+            }
+        };
+
+        person.addValueEventListener(valueEventListener);
+
+        person.addListenerForSingleValueEvent(singleValueEventListener);
+    }
+
+    public List<Person> getPeopleList() {
+
+        person = mDatabase
+                .child("users")
+                .orderByChild("name");
+
+        loadList();
+
+        return peopleList;
     }
 
     @Override
