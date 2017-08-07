@@ -28,7 +28,7 @@
         <menu>
             <item
                 android:id="@+id/nav_duvidas"
-                android:title="Duvidas Frequentes"/>
+                android:title="Dúvidas Frequentes"/>
             <item
                 android:id="@+id/nav_fale_conosco"
                 android:title="Fale Conosco"/>

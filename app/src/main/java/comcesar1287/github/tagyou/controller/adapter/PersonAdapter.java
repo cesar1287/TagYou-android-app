@@ -32,7 +32,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.MyViewHold
     @Override
     public PersonAdapter.MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View v = mLayoutInflater.inflate(R.layout.item_company, viewGroup, false);
+        View v = mLayoutInflater.inflate(R.layout.item_person, viewGroup, false);
         return new MyViewHolder(v);
     }
 
@@ -44,7 +44,6 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.MyViewHold
                 .centerCrop()
                 .into(myViewHolder.bannerCompany);
         myViewHolder.nameCompany.setText(mList.get(position).getName());
-        myViewHolder.quantity.setText(String.valueOf(0));
     }
 
     @Override
