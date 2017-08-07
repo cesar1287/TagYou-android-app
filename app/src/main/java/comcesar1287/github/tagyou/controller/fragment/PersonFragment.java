@@ -29,6 +29,7 @@ import comcesar1287.github.tagyou.controller.domain.Person;
 import comcesar1287.github.tagyou.controller.interfaces.RecyclerViewOnClickListenerHack;
 import comcesar1287.github.tagyou.controller.util.Utility;
 import comcesar1287.github.tagyou.view.CompanyDetailsActivity;
+import comcesar1287.github.tagyou.view.PersonsDetailsActivity;
 
 public class PersonFragment extends Fragment implements RecyclerViewOnClickListenerHack {
 
@@ -135,7 +136,7 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
 
     @Override
     public void onClickListener(View view, int position) {
-        Intent intent = new Intent(getActivity(), CompanyDetailsActivity.class);
+        Intent intent = new Intent(getActivity(), PersonsDetailsActivity.class);
         intent.putExtra(Utility.KEY_CONTENT_EXTRA_COMPANY, mList.get(position));
         startActivity(intent);
     }

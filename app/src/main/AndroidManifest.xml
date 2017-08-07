@@ -53,9 +53,6 @@
             android:name=".view.TagsFilterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.CompanyDetailsActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".view.CategoryRegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -68,7 +65,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.ChatActivity" />
-        <activity android:name=".view.UserActivity"></activity>
+        <activity android:name=".view.UserActivity"/>
+        <activity
+            android:name=".view.CompanyDetailsActivity"
+            android:label="@string/descricao_empresarial"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".view.PersonsDetailsActivity"
+            android:label="@string/descricao_pessoal"
+            android:screenOrientation="portrait">
+        </activity>
+>>>>>>> 2fbd41816ccdfbba6ec5469beac34e300e22171b
     </application>
 
 </manifest>
