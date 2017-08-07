@@ -34,4 +34,7 @@
 
     <string name="registry">registro</string>
 
+    <string name="descricao_pessoal">Descrição Pessoal</string>
+    <string name="descricao_empresarial">Descrição Empresarial</string>
+
 </resources>
