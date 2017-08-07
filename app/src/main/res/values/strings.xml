@@ -23,7 +23,7 @@
     <string name="tags_filter_group">group</string>
     <string name="tags_filter_segment">segment</string>
     <string name="done">done</string>
-    <string name="tags_filter_affinity">affinity</string>
+    <string name="tags_filter">tags_filter</string>
 
     <string name="one">One</string>
     <string name="two">Two</string>

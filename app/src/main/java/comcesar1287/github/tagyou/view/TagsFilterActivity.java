@@ -21,17 +21,27 @@ public class TagsFilterActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
 
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
-        String result = sharedPreferences.getString(getString(R.string.tags_filter_affinity), "");
+        String result = sharedPreferences.getString(getString(R.string.tags_filter), "");
         if(!result.equals("")){
             openTagsFilterGroupActivity();
         }
 
-        setContentView(R.layout.activity_tags_filter_affinity);
+        setContentView(R.layout.activity_tags_filter);
 
-        ChipCloud chipCloud = (ChipCloud) findViewById(R.id.chip_cloud_affinity);
+        ChipCloud chipCloudAffinity = (ChipCloud) findViewById(R.id.chip_cloud_affinity);
 
-        String[] segmentsArray = getResources().getStringArray(R.array.tags_filter_affinity);
-        chipCloud.addChips(segmentsArray);
+        String[] affinityArray = getResources().getStringArray(R.array.tags_filter_affinity);
+        chipCloudAffinity.addChips(affinityArray);
+
+        ChipCloud chipCloudGroups = (ChipCloud) findViewById(R.id.chip_cloud_groups);
+
+        String[] groupsArray = getResources().getStringArray(R.array.tags_filter_groups);
+        chipCloudGroups.addChips(groupsArray);
+
+        ChipCloud chipCloudSegments = (ChipCloud) findViewById(R.id.chip_cloud_segments);
+
+        String[] segmentsArray = getResources().getStringArray(R.array.tags_filter_segments);
+        chipCloudSegments.addChips(segmentsArray);
 
         Button btNextSegments = (Button) findViewById(R.id.btNextAffinity);
         btNextSegments.setOnClickListener(this);
@@ -45,7 +55,7 @@ public class TagsFilterActivity extends AppCompatActivity implements View.OnClic
             case R.id.btNextAffinity:
 
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString(getString(R.string.tags_filter_affinity), getString(R.string.done));
+                editor.putString(getString(R.string.tags_filter), getString(R.string.done));
                 editor.apply();
 
                 openTagsFilterGroupActivity();
