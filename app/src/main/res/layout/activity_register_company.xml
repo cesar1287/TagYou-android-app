@@ -204,13 +204,23 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/advance"
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_below="@id/register_phone"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
+            android:background="@color/concrete"
             android:layout_alignParentBottom="true"
-            android:text="continuar"/>
+            android:layout_below="@id/register_phone"
+            android:layout_marginTop="15dp">
+            <Button
+                android:id="@+id/advance"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:textColor="@color/white"
+                android:background="@color/concrete"
+                android:text="Salvar"/>
+        </LinearLayout>
 
     </RelativeLayout>
 </ScrollView>

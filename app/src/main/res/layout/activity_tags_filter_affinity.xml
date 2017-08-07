@@ -32,6 +32,7 @@
             android:textSize="17dp"
             android:layout_marginLeft="7dp"
             android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
             android:layout_below="@id/title_preferences"
             android:gravity="center"
             android:textColor="@color/white"/>
@@ -57,9 +58,10 @@
             android:layout_height="wrap_content"
             android:text="Grupos"
             android:textSize="17dp"
-            android:layout_marginLeft="7dp"
-            android:layout_below="@id/chip_cloud_affinity"
             android:layout_marginTop="13dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/chip_cloud_affinity"
             android:gravity="center"
             android:textColor="@color/white"/>
 
@@ -85,6 +87,7 @@
             android:text="Segmentos"
             android:textSize="17dp"
             android:layout_marginLeft="7dp"
+            android:layout_marginBottom="10dp"
             android:layout_below="@id/chip_cloud_groups"
             android:layout_marginTop="13dp"
             android:gravity="center"
@@ -105,14 +108,24 @@
             chipcloud:verticalSpacing="16dp"
             chipcloud:textSize="18sp"/>
 
-        <Button
-            android:id="@+id/btNextAffinity"
-            android:text="Próximo"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:background="@color/concrete"
             android:layout_below="@id/chip_cloud_segments"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="15dp">
+
+            <Button
+                android:id="@+id/btNextAffinity"
+                android:text="Salvar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@color/concrete"
+                android:textColor="@color/white"
+                android:layout_alignParentBottom="true"/>
+        </LinearLayout>
 
     </RelativeLayout>
 
