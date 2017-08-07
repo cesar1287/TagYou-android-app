@@ -1,6 +1,5 @@
 package comcesar1287.github.tagyou.view;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -41,23 +40,18 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
 
     private DatabaseReference mDatabase;
 
-    private String Uid, name , email, profile_pic, database, phone, birth;
+    private String Uid, name , email, profile_pic, database, phone, birth, sex;
 
     private SharedPreferences sp;
 
     private TextInputLayout etName, etEmail, etPhone, etBirth;
 
-    private SharedPreferences sharedPreferences;
+    private Spinner spinnerSex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_person);
-
-        Spinner spinnerCountShoes = (Spinner)findViewById(R.id.register_spinner_sexo);
-        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.sexo));
-        spinnerCountShoes.setAdapter(spinnerCountShoesArrayAdapter);
 
         UserFacebook userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
 
@@ -72,6 +66,11 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
                 ivPhoto.setImageDrawable(circularBitmapDrawable);
             }
         });
+
+        spinnerSex = (Spinner)findViewById(R.id.register_spinner_sexo);
+        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.sexo));
+        spinnerSex.setAdapter(spinnerCountShoesArrayAdapter);
 
         etName = (TextInputLayout) findViewById(R.id.register_name);
         etName.getEditText().setText(userFacebook.getName());
@@ -115,7 +114,6 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
     }
 
     public void attemptLogin(){
-        String name, email, birth, phone;
 
         boolean allFieldsFilled = true;
         boolean allFilledRight = true;
@@ -124,12 +122,18 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
         email = etEmail.getEditText().getText().toString();
         birth = etBirth.getEditText().getText().toString();
         phone = etPhone.getEditText().getText().toString();
+        sex = spinnerSex.getSelectedItem().toString();
 
         if(name.equals("")){
             allFieldsFilled = false;
             etName.setError("Campo obrigatório");
         }else{
             etName.setErrorEnabled(false);
+        }
+
+        if(sex.equals("Selecione")){
+            allFieldsFilled = false;
+            Toast.makeText(this, "Campo sexo é obrigatório", Toast.LENGTH_SHORT).show();
         }
 
         if(phone.equals("")){
@@ -175,7 +179,7 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
             finishLogin(user, database);
             Toast.makeText(this, "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
 
-            sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
+            SharedPreferences sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
 
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(getString(R.string.registry), getResources().getString(R.string.done));
@@ -191,52 +195,48 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
     public void finishLogin(FirebaseUser user, final String database){
 
         Uid = user.getUid();
-        name = user.getDisplayName();
-        email = user.getEmail();
         profile_pic = user.getPhotoUrl().toString();
-        phone = etPhone.getEditText().getText().toString();
-        birth = etBirth.getEditText().getText().toString();
 
         mDatabase.child(database).child(Uid).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get user value
-                        User user = dataSnapshot.getValue(User.class);
+            new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // Get user value
+                    User user = dataSnapshot.getValue(User.class);
 
-                        // [START_EXCLUDE]
-                        if (user == null) {
+                    // [START_EXCLUDE]
+                    if (user == null) {
 
-                            FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, birth, "", phone, profile_pic);
+                        FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, birth, sex, phone, profile_pic);
 
-                            sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sp.edit();
+                        sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
 
-                            editor.putString("id", Uid);
-                            editor.putString("name", name);
-                            editor.putString("email", email);
-                            editor.putString("profile_pic", profile_pic);
-                            editor.apply();
-                        } else {
+                        editor.putString("id", Uid);
+                        editor.putString("name", name);
+                        editor.putString("email", email);
+                        editor.putString("profile_pic", profile_pic);
+                        editor.apply();
+                    } else {
 
-                            sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sp.edit();
+                        sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
 
-                            editor.putString("id", Uid);
-                            editor.putString("name", name);
-                            editor.putString("email", email);
-                            editor.putString("profile_pic", profile_pic);
-                            editor.putString("phone", user.phone);
-                            editor.putString("birth", user.birth);
-                            editor.putString("sex", user.sex);
-                            editor.apply();
-                        }
+                        editor.putString("id", Uid);
+                        editor.putString("name", name);
+                        editor.putString("email", email);
+                        editor.putString("profile_pic", profile_pic);
+                        editor.putString("phone", user.phone);
+                        editor.putString("birth", user.birth);
+                        editor.putString("sex", user.sex);
+                        editor.apply();
                     }
+                }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Toast.makeText(RegisterPersonActivity.this, R.string.error_signin, Toast.LENGTH_LONG).show();
-                    }
-                });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(RegisterPersonActivity.this, R.string.error_signin, Toast.LENGTH_LONG).show();
+                }
+            });
     }
 }
