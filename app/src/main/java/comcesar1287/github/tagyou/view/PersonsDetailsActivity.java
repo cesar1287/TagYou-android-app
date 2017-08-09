@@ -45,6 +45,15 @@ public class PersonsDetailsActivity extends AppCompatActivity {
 
         TextView tvHashtag = (TextView) findViewById(R.id.name_details_tag);
         tvHashtag.setText(person.getHashtag());
+
+        TextView tvEmail = (TextView) findViewById(R.id.email_details_person);
+        tvEmail.setText(person.getEmail());
+
+        TextView tvBirth = (TextView) findViewById(R.id.birth_details_person);
+        tvBirth.setText(person.getBirth());
+
+        TextView tvPhone = (TextView) findViewById(R.id.phone_details_person);
+        tvPhone.setText(person.getPhone());
     }
 
     @Override

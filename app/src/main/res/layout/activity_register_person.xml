@@ -104,8 +104,7 @@
             android:layout_below="@id/register_name"
             android:hint="Nascimento"
             android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            >
+            android:layout_marginRight="7dp"            >
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/register_edit_date"
