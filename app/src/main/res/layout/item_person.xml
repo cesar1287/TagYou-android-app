@@ -20,7 +20,7 @@
         <ImageView
             android:id="@+id/company_banner"
             android:layout_width="173dp"
-            android:layout_height="185dp"
+            android:layout_height="190dp"
             android:layout_gravity="center_horizontal"/>
 
         <RelativeLayout
