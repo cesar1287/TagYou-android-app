@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 public class Company implements Parcelable{
 
-    private String name, description, address, phone, site, banner, logo;
+    private String name, description, address, phone, site, banner, logo, hashtag;
     private int quantity;
     private double latitude, longitude;
 
@@ -23,6 +23,7 @@ public class Company implements Parcelable{
         quantity = p.readInt();
         latitude = p.readDouble();
         longitude = p.readDouble();
+        hashtag = p.readString();
     }
 
     public static final Parcelable.Creator<Company>
@@ -113,9 +114,18 @@ public class Company implements Parcelable{
         return banner;
     }
 
+    public String getHashtag() {
+        return hashtag;
+    }
+
+    public void setHashtag(String hashtag) {
+        this.hashtag = hashtag;
+    }
+
     public void setBanner(String banner) {
         this.banner = banner;
     }
+
     public int describeContents() {
         return 0;
     }
@@ -131,5 +141,6 @@ public class Company implements Parcelable{
         parcel.writeInt(quantity);
         parcel.writeDouble(latitude);
         parcel.writeDouble(longitude);
+        parcel.writeString(hashtag);
     }
 }

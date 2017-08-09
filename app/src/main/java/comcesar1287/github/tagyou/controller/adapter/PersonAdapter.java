@@ -44,6 +44,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.MyViewHold
                 .centerCrop()
                 .into(myViewHolder.bannerCompany);
         myViewHolder.nameCompany.setText(mList.get(position).getName());
+        myViewHolder.hashtagPerson.setText(mList.get(position).getHashtag());
     }
 
     @Override
@@ -58,13 +59,13 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.MyViewHold
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener /*View.OnCreateContextMenuListener*/{
         ImageView bannerCompany;
         TextView nameCompany;
-        TextView quantity;
+        TextView hashtagPerson;
 
         MyViewHolder(View itemView) {
             super(itemView);
             bannerCompany = (ImageView) itemView.findViewById(R.id.company_banner);
             nameCompany = (TextView) itemView.findViewById(R.id.company_name);
-            quantity = (TextView) itemView.findViewById(R.id.number_person);
+            hashtagPerson = (TextView) itemView.findViewById(R.id.company_tag);
 
             itemView.setOnClickListener(this);
         }

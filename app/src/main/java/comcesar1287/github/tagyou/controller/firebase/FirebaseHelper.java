@@ -16,4 +16,12 @@ public class FirebaseHelper {
 
         mDatabase.child(FIREBASE_DATABASE_USERS).child(userId).setValue(user);
     }
+
+    public static void writeNewCompany(DatabaseReference mDatabase, String userId, String name,
+                                    String email, String birth, String sex, String phone, String profile_pic, String hashtag) {
+
+        User user = new User(name, email, birth, phone, sex, profile_pic, hashtag);
+
+        mDatabase.child(FIREBASE_DATABASE_USERS).child(userId).setValue(user);
+    }
 }

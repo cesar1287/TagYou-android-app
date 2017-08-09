@@ -1,16 +1,13 @@
 package comcesar1287.github.tagyou.view;
 
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.support.design.widget.NavigationView;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
@@ -26,6 +23,10 @@ public class PersonsDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_persons_details);
 
+        if(getSupportActionBar()!=null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         Person person = (Person) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_COMPANY);
 
         final ImageView nav_image = (ImageView) findViewById(R.id.image_details_person);
@@ -39,9 +40,26 @@ public class PersonsDetailsActivity extends AppCompatActivity {
                 nav_image.setImageDrawable(circularBitmapDrawable);
             }
         });
-        TextView nav_nome = (TextView) findViewById(R.id.name_details_person);
-        nav_nome.setText(person.getName());
+        TextView tvName = (TextView) findViewById(R.id.name_details_person);
+        tvName.setText(person.getName());
 
+        TextView tvHashtag = (TextView) findViewById(R.id.name_details_tag);
+        tvHashtag.setText(person.getHashtag());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch (id){
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
