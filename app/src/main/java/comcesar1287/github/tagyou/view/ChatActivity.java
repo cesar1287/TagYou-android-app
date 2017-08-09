@@ -37,8 +37,8 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        mReference1 = FirebaseDatabase.getInstance().getReference();
-        mReference2 = FirebaseDatabase.getInstance().getReference();
+        mReference1 = FirebaseDatabase.getInstance().getReference().child(UserDetails.username + "_" + UserDetails.chatWith);
+        mReference2 = FirebaseDatabase.getInstance().getReference().child(UserDetails.chatWith + "_" + UserDetails.username);
 
         layout = (LinearLayout) findViewById(R.id.layout1);
         layout_2 = (RelativeLayout)findViewById(R.id.layout2);
@@ -46,16 +46,13 @@ public class ChatActivity extends AppCompatActivity {
         messageArea = (EditText)findViewById(R.id.messageArea);
         scrollView = (ScrollView)findViewById(R.id.scrollView);
 
-        mReference1.child(UserDetails.username + "_" + UserDetails.chatWith);
-        mReference2.child(UserDetails.chatWith + "_" + UserDetails.username);
-
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String messageText = messageArea.getText().toString();
 
                 if(!messageText.equals("")){
-                    Map<String, String> map = new HashMap<>();
+                    Map<String, Object> map = new HashMap<>();
                     map.put("message", messageText);
                     map.put("user", UserDetails.username);
                     mReference1.push().setValue(map);
@@ -68,7 +65,7 @@ public class ChatActivity extends AppCompatActivity {
         mReference1.addChildEventListener(new com.google.firebase.database.ChildEventListener() {
             @Override
             public void onChildAdded(com.google.firebase.database.DataSnapshot dataSnapshot, String s) {
-                Map map = dataSnapshot.getValue(Map.class);
+                Map map = (Map) dataSnapshot.getValue();
                 String message = map.get("message").toString();
                 String userName = map.get("user").toString();
 
