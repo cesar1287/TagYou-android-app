@@ -88,6 +88,9 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
                     p = new Person();
                     p.setProfilePic((String)postSnapshot.child("profile_pic").getValue());
                     p.setName((String)postSnapshot.child("name").getValue());
+                    p.setEmail((String)postSnapshot.child("email").getValue());
+                    p.setBirth((String)postSnapshot.child("birth").getValue());
+                    p.setPhone((String)postSnapshot.child("phone").getValue());
 
                     peopleList.add(p);
                 }

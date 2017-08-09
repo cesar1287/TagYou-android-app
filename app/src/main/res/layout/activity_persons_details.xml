@@ -131,7 +131,7 @@
                     android:text="Nascimento"
                     android:textColor="@color/black"/>
                 <TextView
-                    android:id="@+id/city_details_person"
+                    android:id="@+id/birth_details_person"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="05/01/1995"/>

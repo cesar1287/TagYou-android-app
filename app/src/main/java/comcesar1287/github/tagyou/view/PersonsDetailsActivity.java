@@ -39,8 +39,17 @@ public class PersonsDetailsActivity extends AppCompatActivity {
                 nav_image.setImageDrawable(circularBitmapDrawable);
             }
         });
-        TextView nav_nome = (TextView) findViewById(R.id.name_details_person);
-        nav_nome.setText(person.getName());
+        TextView tvName = (TextView) findViewById(R.id.name_details_person);
+        tvName.setText(person.getName());
+
+        TextView tvEmail = (TextView) findViewById(R.id.email_details_person);
+        tvEmail.setText(person.getEmail());
+
+        TextView tvBirth = (TextView) findViewById(R.id.birth_details_person);
+        tvBirth.setText(person.getBirth());
+
+        TextView tvPhone = (TextView) findViewById(R.id.phone_details_person);
+        tvPhone.setText(person.getPhone());
 
     }
 
