@@ -102,7 +102,7 @@ public class ChatActivity extends AppCompatActivity {
     public void addMessageBox(String message, int type){
         TextView textView = new TextView(ChatActivity.this);
         textView.setText(message);
-        textView.setPadding(40, 40, 50, 55);
+        textView.setPadding(40, 25, 50, 55);
         textView.setMaxWidth(500);
 
 
