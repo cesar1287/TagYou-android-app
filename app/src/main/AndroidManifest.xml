@@ -64,7 +64,9 @@
             android:name=".view.RegisterCompanyActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.ChatActivity" />
+        <activity
+            android:name=".view.ChatActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".view.UserActivity"/>
         <activity
             android:name=".view.CompanyDetailsActivity"

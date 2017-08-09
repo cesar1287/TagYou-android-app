@@ -102,17 +102,19 @@ public class ChatActivity extends AppCompatActivity {
     public void addMessageBox(String message, int type){
         TextView textView = new TextView(ChatActivity.this);
         textView.setText(message);
+        textView.setPadding(40, 20, 35, 40);
+
 
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp2.weight = 1.0f;
 
         if(type == 1) {
             lp2.gravity = Gravity.START;
-            textView.setBackgroundResource(R.drawable.img_chat_receive);
+            textView.setBackgroundResource(R.drawable.chat1);
         }
         else{
             lp2.gravity = Gravity.END;
-            textView.setBackgroundResource(R.drawable.img_chat_send);
+            textView.setBackgroundResource(R.drawable.chat2);
         }
         textView.setLayoutParams(lp2);
         layout.addView(textView);
