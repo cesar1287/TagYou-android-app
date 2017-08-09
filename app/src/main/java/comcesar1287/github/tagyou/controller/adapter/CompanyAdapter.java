@@ -41,7 +41,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.MyViewHo
     public void onBindViewHolder(MyViewHolder myViewHolder, int position) {
 
         Glide.with(c)
-                .load(Uri.parse(mList.get((position)).getBanner()))
+                .load(mList.get((position)).getLogo())
                 .centerCrop()
                 .into(myViewHolder.bannerCompany);
         myViewHolder.nameCompany.setText(mList.get(position).getName());

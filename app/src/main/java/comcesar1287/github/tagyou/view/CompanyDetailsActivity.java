@@ -1,9 +1,9 @@
 package comcesar1287.github.tagyou.view;
 
-import android.net.Uri;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,13 +45,12 @@ public class CompanyDetailsActivity extends AppCompatActivity {
 
         if(getSupportActionBar()!=null) {
             getSupportActionBar().setTitle(company.getName());
-            getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         ImageView ivBanner = (ImageView) findViewById(R.id.company_details_banner);
         Glide.with(this)
-                .load(Uri.parse(company.getLogo()))
+                .load(company.getBanner())
                 .centerCrop()
                 .into(ivBanner);
         TextView tv_name = (TextView) findViewById(R.id.company_details_name);
@@ -64,5 +63,20 @@ public class CompanyDetailsActivity extends AppCompatActivity {
         tv_phone.setText(company.getPhone());
         TextView tv_site = (TextView) findViewById(R.id.company_details_site);
         tv_site.setText(company.getSite());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch (id){
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

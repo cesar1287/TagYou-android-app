@@ -37,6 +37,10 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        if(getSupportActionBar()!=null){
+            getSupportActionBar().setTitle(UserDetails.chatWithName);
+        }
+
         mReference1 = FirebaseDatabase.getInstance().getReference().child(UserDetails.username + "_" + UserDetails.chatWith);
         mReference2 = FirebaseDatabase.getInstance().getReference().child(UserDetails.chatWith + "_" + UserDetails.username);
 
@@ -70,10 +74,10 @@ public class ChatActivity extends AppCompatActivity {
                 String userName = map.get("user").toString();
 
                 if(userName.equals(UserDetails.username)){
-                    addMessageBox("You:-\n" + message, 1);
+                    addMessageBox("Você:-\n" + message, 1);
                 }
                 else{
-                    addMessageBox(UserDetails.chatWith + ":-\n" + message, 2);
+                    addMessageBox(UserDetails.chatWithName + ":-\n" + message, 2);
                 }
             }
 

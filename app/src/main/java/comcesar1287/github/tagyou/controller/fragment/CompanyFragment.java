@@ -12,6 +12,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import comcesar1287.github.tagyou.R;
@@ -20,7 +28,6 @@ import comcesar1287.github.tagyou.controller.domain.Company;
 import comcesar1287.github.tagyou.controller.interfaces.RecyclerViewOnClickListenerHack;
 import comcesar1287.github.tagyou.controller.util.Utility;
 import comcesar1287.github.tagyou.view.CompanyDetailsActivity;
-import comcesar1287.github.tagyou.view.MainActivity;
 
 public class CompanyFragment extends Fragment implements RecyclerViewOnClickListenerHack {
 
@@ -28,11 +35,22 @@ public class CompanyFragment extends Fragment implements RecyclerViewOnClickList
     public List<Company> mList;
     public CompanyAdapter adapter;
 
+    ArrayList<Company> companiesList;
+
+    private DatabaseReference mDatabase;
+
+    Query company;
+
+    ValueEventListener valueEventListener;
+    ValueEventListener singleValueEventListener;
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_company, container, false);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mRecyclerView.setHasFixedSize(true);
@@ -41,12 +59,14 @@ public class CompanyFragment extends Fragment implements RecyclerViewOnClickList
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(gridLayoutManager);
 
-        mList = ((MainActivity) getActivity()).getCompaniesList();
+        mList = new ArrayList<>();
         adapter = new CompanyAdapter(getActivity(), mList);
         adapter.setRecyclerViewOnClickListenerHack(this);
         mRecyclerView.setAdapter( adapter );
 
         mRecyclerView.addOnItemTouchListener(new RecyclerViewTouchListener( getActivity(), mRecyclerView, this ));
+
+        getCompaniesList();
 
         return view;
 
@@ -57,6 +77,75 @@ public class CompanyFragment extends Fragment implements RecyclerViewOnClickList
         Intent intent = new Intent(getActivity(), CompanyDetailsActivity.class);
         intent.putExtra(Utility.KEY_CONTENT_EXTRA_COMPANY, mList.get(position));
         startActivity(intent);
+    }
+
+    public void loadList(){
+
+        valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                companiesList = new ArrayList<>();
+
+                Company p;
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    p = new Company();
+                    p.setAddress((String)postSnapshot.child("address").getValue());
+                    p.setBanner((String)postSnapshot.child("banner").getValue());
+                    p.setDescription((String)postSnapshot.child("description").getValue());
+                    p.setEmail((String)postSnapshot.child("email").getValue());
+                    p.setHashtag((String)postSnapshot.child("hashtag").getValue());
+                    p.setLatitude((Double) postSnapshot.child("latitude").getValue());
+                    p.setLogo((String)postSnapshot.child("logo").getValue());
+                    p.setLongitude((Double) postSnapshot.child("longitude").getValue());
+                    p.setName((String)postSnapshot.child("name").getValue());
+                    p.setPhone((String)postSnapshot.child("phone").getValue());
+                    p.setQuantity((Long) postSnapshot.child("quantity").getValue());
+                    p.setSite((String)postSnapshot.child("site").getValue());
+
+                    companiesList.add(p);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                /*dialog.dismiss();
+                Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                finish();*/
+            }
+        };
+
+        singleValueEventListener = new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                mList.clear();
+                mList.addAll(companiesList);
+                adapter.notifyDataSetChanged();
+                //dialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                /*dialog.dismiss();
+                Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                finish();*/
+            }
+        };
+
+        company.addValueEventListener(valueEventListener);
+
+        company.addListenerForSingleValueEvent(singleValueEventListener);
+    }
+
+    public List<Company> getCompaniesList() {
+
+        company = mDatabase
+                .child("companies")
+                .orderByChild("name");
+
+        loadList();
+
+        return companiesList;
     }
 
     private static class RecyclerViewTouchListener implements RecyclerView.OnItemTouchListener {

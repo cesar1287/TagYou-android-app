@@ -5,8 +5,8 @@ import android.os.Parcelable;
 
 public class Company implements Parcelable{
 
-    private String name, description, email,address, phone, site, banner, logo, hashtag;
-    private int quantity;
+    private String name, description, email, address, phone, site, banner, logo, hashtag;
+    private long quantity;
     private double latitude, longitude;
 
     public Company(){
@@ -21,10 +21,11 @@ public class Company implements Parcelable{
         phone = p.readString();
         site = p.readString();
         banner = p.readString();
-        quantity = p.readInt();
+        quantity = p.readLong();
         latitude = p.readDouble();
         longitude = p.readDouble();
         hashtag = p.readString();
+        logo = p.readString();
     }
 
     public static final Parcelable.Creator<Company>
@@ -103,11 +104,11 @@ public class Company implements Parcelable{
         this.site = site;
     }
 
-    public int getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
 
@@ -148,9 +149,10 @@ public class Company implements Parcelable{
         parcel.writeString(phone);
         parcel.writeString(site);
         parcel.writeString(banner);
-        parcel.writeInt(quantity);
+        parcel.writeLong(quantity);
         parcel.writeDouble(latitude);
         parcel.writeDouble(longitude);
         parcel.writeString(hashtag);
+        parcel.writeString(logo);
     }
 }

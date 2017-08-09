@@ -20,6 +20,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.domain.UserDetails;
@@ -27,7 +28,8 @@ import comcesar1287.github.tagyou.controller.domain.UserDetails;
 public class UserActivity extends AppCompatActivity {
     ListView usersList;
     TextView noUsersText;
-    ArrayList<String> users;
+    HashMap<String, String> users;
+    ArrayList<String> usersNames;
     int totalUsers = 0;
     ProgressDialog pd;
 
@@ -51,6 +53,7 @@ public class UserActivity extends AppCompatActivity {
             return;
         } else {
             UserDetails.username = mFirebaseUser.getUid();
+            UserDetails.name = mFirebaseUser.getDisplayName();
         }
 
         setContentView(R.layout.activity_user);
@@ -64,13 +67,14 @@ public class UserActivity extends AppCompatActivity {
         loadList();
 
         pd = new ProgressDialog(UserActivity.this);
-        pd.setMessage("Loading...");
+        pd.setMessage("Carregando...");
         pd.show();
 
         usersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UserDetails.chatWith = users.get(position);
+                UserDetails.chatWithName = usersNames.get(position);
+                UserDetails.chatWith = users.get(usersNames.get(position));
                 startActivity(new Intent(UserActivity.this, ChatActivity.class));
             }
         });
@@ -78,14 +82,16 @@ public class UserActivity extends AppCompatActivity {
 
     public void loadList(){
 
-        users = new ArrayList<>();
+        users = new HashMap<>();
+        usersNames = new ArrayList<>();
 
         valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     if(!UserDetails.username.equals(postSnapshot.getKey())) {
-                        users.add(postSnapshot.getKey());
+                        users.put((String)postSnapshot.child("name").getValue(), postSnapshot.getKey());
+                        usersNames.add((String)postSnapshot.child("name").getValue());
                     }
                     totalUsers++;
                 }
@@ -107,7 +113,7 @@ public class UserActivity extends AppCompatActivity {
                 else{
                     noUsersText.setVisibility(View.GONE);
                     usersList.setVisibility(View.VISIBLE);
-                    usersList.setAdapter(new ArrayAdapter<>(UserActivity.this, android.R.layout.simple_list_item_1, users));
+                    usersList.setAdapter(new ArrayAdapter<>(UserActivity.this, android.R.layout.simple_list_item_1, usersNames));
                 }
 
                 pd.dismiss();
