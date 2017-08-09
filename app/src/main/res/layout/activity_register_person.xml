@@ -59,11 +59,29 @@
             android:layout_below="@+id/title"/>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/register_name"
+            android:id="@+id/register_tag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/TextLabel"
             android:layout_below="@id/register_photo"
+            android:hint="Insira sua #"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/register_edit_tag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/register_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/TextLabel"
+            android:layout_below="@id/register_tag"
             android:hint="Nome"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp">
