@@ -40,11 +40,11 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
 
     private DatabaseReference mDatabase;
 
-    private String Uid, name , email, profile_pic, database, phone, birth, sex;
+    private String Uid, name , email, profile_pic, database, phone, birth, sex, hashtag;
 
     private SharedPreferences sp;
 
-    private TextInputLayout etName, etEmail, etPhone, etBirth;
+    private TextInputLayout etName, etEmail, etPhone, etBirth, etHashtag;
 
     private Spinner spinnerSex;
 
@@ -81,6 +81,8 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
         etBirth = (TextInputLayout) findViewById(R.id.register_date);
 
         etPhone = (TextInputLayout) findViewById(R.id.register_phone);
+
+        etHashtag = (TextInputLayout) findViewById(R.id.register_hashtag);
 
         Button advance = (Button) findViewById(R.id.advance);
         advance.setOnClickListener(this);
@@ -123,6 +125,14 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
         birth = etBirth.getEditText().getText().toString();
         phone = etPhone.getEditText().getText().toString();
         sex = spinnerSex.getSelectedItem().toString();
+        hashtag = etHashtag.getEditText().getText().toString();
+
+        if(hashtag.equals("")){
+            allFieldsFilled = false;
+            etHashtag.setError("Campo obrigatório");
+        }else{
+            etHashtag.setErrorEnabled(false);
+        }
 
         if(name.equals("")){
             allFieldsFilled = false;
@@ -188,8 +198,6 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
             startActivity(new Intent(this, TagsFilterActivity.class));
             finish();
         }
-        FirebaseUser user = mAuth.getCurrentUser();
-        finishLogin(user, database);
     }
 
     public void finishLogin(FirebaseUser user, final String database){
@@ -207,7 +215,7 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
                     // [START_EXCLUDE]
                     if (user == null) {
 
-                        FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, birth, sex, phone, profile_pic);
+                        FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, birth, sex, phone, profile_pic, hashtag);
 
                         sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
                         SharedPreferences.Editor editor = sp.edit();
@@ -216,6 +224,7 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
                         editor.putString("name", name);
                         editor.putString("email", email);
                         editor.putString("profile_pic", profile_pic);
+                        editor.putString("hashtag", hashtag);
                         editor.apply();
                     } else {
 
@@ -229,6 +238,7 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
                         editor.putString("phone", user.phone);
                         editor.putString("birth", user.birth);
                         editor.putString("sex", user.sex);
+                        editor.putString("hashtag", hashtag);
                         editor.apply();
                     }
                 }
