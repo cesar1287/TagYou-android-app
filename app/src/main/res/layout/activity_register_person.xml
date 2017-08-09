@@ -59,7 +59,7 @@
             android:layout_below="@+id/title"/>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/register_tag"
+            android:id="@+id/register_hashtag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/TextLabel"
@@ -69,10 +69,11 @@
             android:layout_marginRight="7dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/register_edit_tag"
+                android:id="@+id/register_edit_hashtag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"/>
+                android:inputType="textNoSuggestions"
+                android:digits="0123456789qwertzuiopasdfghjklyxcvbnm"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -81,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/TextLabel"
-            android:layout_below="@id/register_tag"
+            android:layout_below="@id/register_hashtag"
             android:hint="Nome"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp">
