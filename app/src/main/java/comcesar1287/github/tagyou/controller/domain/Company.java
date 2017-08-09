@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 public class Company implements Parcelable{
 
-    private String name, description, address, phone, site, banner, logo, hashtag;
+    private String name, description, email,address, phone, site, banner, logo, hashtag;
     private int quantity;
     private double latitude, longitude;
 
@@ -16,6 +16,7 @@ public class Company implements Parcelable{
     private Company(Parcel p){
         name = p.readString();
         description = p.readString();
+        email = p.readString();
         address = p.readString();
         phone = p.readString();
         site = p.readString();
@@ -68,6 +69,14 @@ public class Company implements Parcelable{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAddress() {
@@ -134,6 +143,7 @@ public class Company implements Parcelable{
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(name);
         parcel.writeString(description);
+        parcel.writeString(email);
         parcel.writeString(address);
         parcel.writeString(phone);
         parcel.writeString(site);

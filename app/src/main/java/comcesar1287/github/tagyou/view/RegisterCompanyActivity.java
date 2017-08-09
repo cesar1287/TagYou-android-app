@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import comcesar1287.github.tagyou.R;
+import comcesar1287.github.tagyou.controller.domain.CompanyFirebase;
 import comcesar1287.github.tagyou.controller.domain.User;
 import comcesar1287.github.tagyou.controller.domain.UserFacebook;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
@@ -37,7 +38,7 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
 
     private DatabaseReference mDatabase;
 
-    private String Uid, name , email, profile_pic, database, phone, description, address, site, banner,
+    private String Uid, name , email, database, phone, description, address, site, banner,
             logo, hashtag, city, street, number;
 
     private int quantity;
@@ -207,21 +208,23 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
     public void finishLogin(FirebaseUser user, final String database){
 
         Uid = user.getUid();
-        profile_pic = user.getPhotoUrl().toString();
+        logo = user.getPhotoUrl().toString();
+        address = street+", "+number+", "+city;
 
         mDatabase.child(database).child(Uid).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Get user value
-                        User user = dataSnapshot.getValue(User.class);
+                        CompanyFirebase companyFirebase = dataSnapshot.getValue(CompanyFirebase.class);
 
                         // [START_EXCLUDE]
-                        if (user == null) {
+                        if (companyFirebase == null) {
 
-                            //FirebaseHelper.writeNewCompany(mDatabase, Uid, name, email, birth, sex, phone, profile_pic, hashtag);
+                            FirebaseHelper.writeNewCompany(mDatabase, Uid, name, description, email ,address, phone, "" ,
+                                    "", logo, (int)(Math.random()*10), 0.0, 0.0, hashtag);
 
-                            sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
+                            /*sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
                             SharedPreferences.Editor editor = sp.edit();
 
                             editor.putString("id", Uid);
@@ -229,10 +232,10 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
                             editor.putString("email", email);
                             editor.putString("profile_pic", profile_pic);
                             editor.putString("hashtag", hashtag);
-                            editor.apply();
+                            editor.apply();*/
                         } else {
 
-                            sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
+                            /*sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
                             SharedPreferences.Editor editor = sp.edit();
 
                             editor.putString("id", Uid);
@@ -243,7 +246,7 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
                             editor.putString("birth", user.birth);
                             editor.putString("sex", user.sex);
                             editor.putString("hashtag", hashtag);
-                            editor.apply();
+                            editor.apply();*/
                         }
                     }
 
