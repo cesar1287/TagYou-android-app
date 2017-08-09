@@ -1,5 +1,6 @@
 package comcesar1287.github.tagyou.controller.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,6 +45,8 @@ public class CompanyFragment extends Fragment implements RecyclerViewOnClickList
     ValueEventListener valueEventListener;
     ValueEventListener singleValueEventListener;
 
+    private ProgressDialog dialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
@@ -65,6 +68,8 @@ public class CompanyFragment extends Fragment implements RecyclerViewOnClickList
         mRecyclerView.setAdapter( adapter );
 
         mRecyclerView.addOnItemTouchListener(new RecyclerViewTouchListener( getActivity(), mRecyclerView, this ));
+
+        dialog = ProgressDialog.show(getActivity(),"", "Carregando empresas...", true, false);
 
         getCompaniesList();
 
@@ -109,9 +114,9 @@ public class CompanyFragment extends Fragment implements RecyclerViewOnClickList
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                /*dialog.dismiss();
-                Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
-                finish();*/
+                dialog.dismiss();
+                //Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                //finish();
             }
         };
 
@@ -121,14 +126,14 @@ public class CompanyFragment extends Fragment implements RecyclerViewOnClickList
                 mList.clear();
                 mList.addAll(companiesList);
                 adapter.notifyDataSetChanged();
-                //dialog.dismiss();
+                dialog.dismiss();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                /*dialog.dismiss();
-                Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
-                finish();*/
+                dialog.dismiss();
+                //Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                //finish();
             }
         };
 

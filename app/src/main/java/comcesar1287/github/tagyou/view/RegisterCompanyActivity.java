@@ -222,7 +222,7 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
                         if (companyFirebase == null) {
 
                             FirebaseHelper.writeNewCompany(mDatabase, Uid, name, description, email ,address, phone, "" ,
-                                    "", logo, (int)(Math.random()*10), 0.0, 0.0, hashtag);
+                                    "", logo, (int)(Math.random()*10), 40.233, -40.223, hashtag);
 
                             /*sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
                             SharedPreferences.Editor editor = sp.edit();
