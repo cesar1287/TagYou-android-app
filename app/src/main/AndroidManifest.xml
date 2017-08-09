@@ -76,7 +76,6 @@
             android:label="@string/descricao_pessoal"
             android:screenOrientation="portrait">
         </activity>
->>>>>>> 2fbd41816ccdfbba6ec5469beac34e300e22171b
     </application>
 
 </manifest>
