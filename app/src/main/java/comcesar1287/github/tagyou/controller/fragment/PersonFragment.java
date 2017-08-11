@@ -1,6 +1,5 @@
 package comcesar1287.github.tagyou.controller.fragment;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +27,6 @@ import comcesar1287.github.tagyou.controller.adapter.PersonAdapter;
 import comcesar1287.github.tagyou.controller.domain.Person;
 import comcesar1287.github.tagyou.controller.interfaces.RecyclerViewOnClickListenerHack;
 import comcesar1287.github.tagyou.controller.util.Utility;
-import comcesar1287.github.tagyou.view.CompanyDetailsActivity;
 import comcesar1287.github.tagyou.view.PersonsDetailsActivity;
 
 public class PersonFragment extends Fragment implements RecyclerViewOnClickListenerHack {
@@ -47,8 +44,6 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
 
     ValueEventListener valueEventListener;
     ValueEventListener singleValueEventListener;
-
-    private ProgressDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -71,8 +66,6 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
         mRecyclerView.setAdapter( adapter );
 
         mRecyclerView.addOnItemTouchListener(new RecyclerViewTouchListener( getActivity(), mRecyclerView, this ));
-
-        dialog = ProgressDialog.show(getActivity(),"", "Carregando pessoas...", true, false);
 
         getPeopleList();
 
@@ -104,9 +97,9 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                dialog.dismiss();
-                //Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
-                //finish();
+                /*dialog.dismiss();
+                Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                finish();*/
             }
         };
 
@@ -116,14 +109,14 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
                 mList.clear();
                 mList.addAll(peopleList);
                 adapter.notifyDataSetChanged();
-                dialog.dismiss();
+                //dialog.dismiss();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                dialog.dismiss();
-                //Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
-                //finish();
+                /*dialog.dismiss();
+                Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                finish();*/
             }
         };
 
