@@ -1,5 +1,6 @@
 package comcesar1287.github.tagyou.view;
 
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -13,6 +14,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.adroitandroid.chipcloud.FlowLayout;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -114,6 +116,7 @@ public class ChatActivity extends AppCompatActivity {
         final int hour = currentTime.get(Calendar.HOUR_OF_DAY);
         final int minute = currentTime.get(Calendar.MINUTE);
 
+
         String time = (hour + ":" + minute);
 
         return time;
@@ -128,14 +131,15 @@ public class ChatActivity extends AppCompatActivity {
         textView.setPadding(40, 20, 40, 20);
         textView.setMaxWidth(500);
 
-        String teste = hora();
+        String time = hora();
         TextView textView1 = new TextView(ChatActivity.this);
-        textView1.setText(teste);
+        textView1.setText(time);
+        textView1.setPadding(35, 0, 35, 5);
 
-        RelativeLayout linear= new RelativeLayout(ChatActivity.this);
+        LinearLayout linear = new LinearLayout(ChatActivity.this);
         linear.addView(textView);
         linear.addView(textView1);
-
+        linear.setOrientation(LinearLayout.VERTICAL);
 
 
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
