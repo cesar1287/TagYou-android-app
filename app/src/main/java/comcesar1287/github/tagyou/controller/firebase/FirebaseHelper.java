@@ -10,6 +10,7 @@ public class FirebaseHelper {
 
     public static final String FIREBASE_DATABASE_USERS = "users";
     public static final String FIREBASE_DATABASE_COMPANIES = "companies";
+    public static final String FIREBASE_DATABASE_TAGS = "tags";
 
     public static void writeNewUser(DatabaseReference mDatabase, String userId, String name,
                                     String email, String birth, String sex, String phone, String profile_pic, String hashtag) {
