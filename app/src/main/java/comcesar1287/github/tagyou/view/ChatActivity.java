@@ -106,7 +106,7 @@ public class ChatActivity extends AppCompatActivity {
     public void addMessageBox(String message, int type){
         TextView textView = new TextView(ChatActivity.this);
         textView.setText(message);
-        textView.setPadding(40, 25, 50, 55);
+        textView.setPadding(40, 20, 40, 20);
         textView.setMaxWidth(500);
 
 
@@ -115,11 +115,11 @@ public class ChatActivity extends AppCompatActivity {
 
         if(type == 1) {
             lp2.gravity = Gravity.START;
-            textView.setBackgroundResource(R.drawable.chat10);
+            textView.setBackgroundResource(R.drawable.balloon_incoming_normal);
         }
         else{
             lp2.gravity = Gravity.END;
-            textView.setBackgroundResource(R.drawable.chat20);
+            textView.setBackgroundResource(R.drawable.balloon_outgoing_normal);
         }
         textView.setLayoutParams(lp2);
         layout.addView(textView);

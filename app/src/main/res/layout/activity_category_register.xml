@@ -36,7 +36,7 @@
         android:id="@id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Em qual das opção você se encaixa?"
+        android:text="Como você deseja fazer login?"
         android:gravity="center"
         android:textSize="20dp"
         android:textStyle="bold"
