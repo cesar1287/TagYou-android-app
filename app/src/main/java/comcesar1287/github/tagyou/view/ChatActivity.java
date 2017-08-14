@@ -57,8 +57,6 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String messageText = messageArea.getText().toString();
-                String time = hora();
-                messageText = (messageText +"\n\n"+ time);
 
                 if(!messageText.equals("")){
                     Map<String, Object> map = new HashMap<>();
@@ -130,20 +128,32 @@ public class ChatActivity extends AppCompatActivity {
         textView.setPadding(40, 20, 40, 20);
         textView.setMaxWidth(500);
 
+        String teste = hora();
+        TextView textView1 = new TextView(ChatActivity.this);
+        textView1.setText(teste);
+
+        RelativeLayout linear= new RelativeLayout(ChatActivity.this);
+        linear.addView(textView);
+        linear.addView(textView1);
+
+
 
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp2.weight = 1.0f;
 
         if(type == 1) {
             lp2.gravity = Gravity.START;
-            textView.setBackgroundResource(R.drawable.balloon_incoming_normal);
+            linear.setBackgroundResource(R.drawable.balloon_incoming_normal);
+
         }
+
         else{
             lp2.gravity = Gravity.END;
-            textView.setBackgroundResource(R.drawable.balloon_outgoing_normal);
+            linear.setBackgroundResource(R.drawable.balloon_outgoing_normal);
         }
-        textView.setLayoutParams(lp2);
-        layout.addView(textView);
+
+        linear.setLayoutParams(lp2);
+        layout.addView(linear);
         scrollView.fullScroll(View.FOCUS_DOWN);
     }
 }
