@@ -11,11 +11,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,6 +57,8 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String messageText = messageArea.getText().toString();
+                String time = hora();
+                messageText = (messageText +"\n\n"+ time);
 
                 if(!messageText.equals("")){
                     Map<String, Object> map = new HashMap<>();
@@ -67,6 +72,8 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         mReference1.addChildEventListener(new com.google.firebase.database.ChildEventListener() {
+
+
             @Override
             public void onChildAdded(com.google.firebase.database.DataSnapshot dataSnapshot, String s) {
                 Map map = (Map) dataSnapshot.getValue();
@@ -103,10 +110,24 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
+
+    public String hora(){
+        Calendar currentTime = Calendar.getInstance();
+        final int hour = currentTime.get(Calendar.HOUR_OF_DAY);
+        final int minute = currentTime.get(Calendar.MINUTE);
+
+        String time = (hour + ":" + minute);
+
+        return time;
+    }
+
+
+
+
     public void addMessageBox(String message, int type){
         TextView textView = new TextView(ChatActivity.this);
         textView.setText(message);
-        textView.setPadding(40, 25, 50, 55);
+        textView.setPadding(40, 20, 40, 20);
         textView.setMaxWidth(500);
 
 
@@ -115,11 +136,11 @@ public class ChatActivity extends AppCompatActivity {
 
         if(type == 1) {
             lp2.gravity = Gravity.START;
-            textView.setBackgroundResource(R.drawable.chat10);
+            textView.setBackgroundResource(R.drawable.balloon_incoming_normal);
         }
         else{
             lp2.gravity = Gravity.END;
-            textView.setBackgroundResource(R.drawable.chat20);
+            textView.setBackgroundResource(R.drawable.balloon_outgoing_normal);
         }
         textView.setLayoutParams(lp2);
         layout.addView(textView);
