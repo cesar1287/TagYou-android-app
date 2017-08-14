@@ -2,6 +2,7 @@ package comcesar1287.github.tagyou.view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -55,6 +56,8 @@ public class SignWithActivity extends AppCompatActivity {
 
     private boolean isRegistryComplete = false;
 
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +69,6 @@ public class SignWithActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        //verifyUserIsLogged();
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -97,16 +98,10 @@ public class SignWithActivity extends AppCompatActivity {
                 });
     }
 
-    public void verifyUserIsLogged(){
-
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user != null) {
-            getUserDataFacebook();
-            Intent intent = new Intent(SignWithActivity.this, CategoryRegisterActivity.class);
-            intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATA, userFacebook);
-            startActivity(intent);
-            finish();
-        }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, CategoryRegisterActivity.class));
     }
 
     public void checkIfUserRegistryIsComplete(){
@@ -190,7 +185,11 @@ public class SignWithActivity extends AppCompatActivity {
                 .addOnSuccessListener(SignWithActivity.this, new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        //TODO
+                        sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("name", mAuth.getCurrentUser().getDisplayName());
+                        editor.putString("profile_pic", mAuth.getCurrentUser().getPhotoUrl().toString());
+                        editor.apply();
                     }
                 })
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

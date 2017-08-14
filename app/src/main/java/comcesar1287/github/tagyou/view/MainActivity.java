@@ -29,6 +29,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,8 +52,6 @@ public class MainActivity extends AppCompatActivity
 
     String name, profilePic;
 
-    ArrayList<Company> companiesList;
-
     NavigationView navigationView;
 
     TabLayout tabLayout;
@@ -62,9 +61,11 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
-
         mAuth = FirebaseAuth.getInstance();
+
+        verifyUserIsLogged();
+
+        setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -85,6 +86,16 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         setupUI();
+    }
+
+    public void verifyUserIsLogged(){
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null) {
+            Intent intent = new Intent(this, CategoryRegisterActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -148,7 +159,7 @@ public class MainActivity extends AppCompatActivity
     public void signOut(View view){
         LoginManager.getInstance().logOut();
         mAuth.signOut();
-        startActivity(new Intent(this, SignWithActivity.class));
+        startActivity(new Intent(this, CategoryRegisterActivity.class));
         finish();
     }
 
@@ -211,9 +222,5 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public List<Company> getCompaniesList() {
-        return companiesList;
     }
 }
