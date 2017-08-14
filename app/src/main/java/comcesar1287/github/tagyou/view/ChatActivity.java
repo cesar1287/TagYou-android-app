@@ -11,11 +11,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,6 +57,8 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String messageText = messageArea.getText().toString();
+                String time = hora();
+                messageText = (messageText +"\n\n"+ time);
 
                 if(!messageText.equals("")){
                     Map<String, Object> map = new HashMap<>();
@@ -67,6 +72,8 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         mReference1.addChildEventListener(new com.google.firebase.database.ChildEventListener() {
+
+
             @Override
             public void onChildAdded(com.google.firebase.database.DataSnapshot dataSnapshot, String s) {
                 Map map = (Map) dataSnapshot.getValue();
@@ -102,6 +109,20 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    public String hora(){
+        Calendar currentTime = Calendar.getInstance();
+        final int hour = currentTime.get(Calendar.HOUR_OF_DAY);
+        final int minute = currentTime.get(Calendar.MINUTE);
+
+        String time = (hour + ":" + minute);
+
+        return time;
+    }
+
+
+
 
     public void addMessageBox(String message, int type){
         TextView textView = new TextView(ChatActivity.this);
