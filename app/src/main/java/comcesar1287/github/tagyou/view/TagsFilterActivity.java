@@ -1,23 +1,32 @@
 package comcesar1287.github.tagyou.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.adroitandroid.chipcloud.ChipCloud;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import comcesar1287.github.tagyou.R;
+import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 
 public class TagsFilterActivity extends AppCompatActivity implements View.OnClickListener{
 
     ChipCloud chipCloudAffinity;
+
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_tags_filter);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         chipCloudAffinity = (ChipCloud) findViewById(R.id.chip_cloud_affinity);
 
@@ -44,6 +53,11 @@ public class TagsFilterActivity extends AppCompatActivity implements View.OnClic
 
         switch (id){
             case R.id.btNextAffinity:
+                mDatabase.child(FirebaseHelper.FIREBASE_DATABASE_TAGS)
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child("teste")
+                        .setValue("teste");
+                startActivity(new Intent(this, MainActivity.class));
                 break;
         }
     }
