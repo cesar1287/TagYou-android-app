@@ -10,7 +10,8 @@
         android:layout_height="35dp"
         android:weightSum="1"
         android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorBackgroundSplash">
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -23,7 +24,8 @@
                 android:text="AFINIDADE"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -37,7 +39,8 @@
                 android:text="GRUPO"
                 android:textStyle="bold"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -51,7 +54,8 @@
                 android:text="SEGMENTO"
                 android:textStyle="bold"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"/>
         </RelativeLayout>
     </LinearLayout>
 

@@ -62,7 +62,7 @@
                     android:textStyle="bold"
                     android:layout_centerVertical="true"
                     android:layout_below="@id/company_name"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="3dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginRight="10dp"
