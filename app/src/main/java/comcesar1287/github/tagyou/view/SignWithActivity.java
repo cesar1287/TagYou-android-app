@@ -142,7 +142,7 @@ public class SignWithActivity extends AppCompatActivity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(SignWithActivity.this, CategoryRegisterActivity.class);
+                            Intent intent = new Intent(SignWithActivity.this, TagsFilterActivity.class);
                             intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATA, userFacebook);
                             startActivity(intent);
                             finish();

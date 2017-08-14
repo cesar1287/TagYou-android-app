@@ -35,7 +35,7 @@ public class CategoryRegisterActivity extends AppCompatActivity {
     }
 
     public void openTagsFilterGroupActivity(){
-        startActivity(new Intent(this, TagsFilterActivity.class));
+        startActivity(new Intent(this, SignWithActivity.class));
         finish();
     }
 
