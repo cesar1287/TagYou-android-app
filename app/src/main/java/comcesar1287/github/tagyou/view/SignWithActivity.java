@@ -1,9 +1,7 @@
 package comcesar1287.github.tagyou.view;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,11 +26,17 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Collections;
 
 import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.domain.UserFacebook;
+import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
 public class SignWithActivity extends AppCompatActivity {
@@ -45,15 +49,25 @@ public class SignWithActivity extends AppCompatActivity {
 
     private UserFacebook userFacebook;
 
+    private DatabaseReference mDatabase;
+
+    private String database;
+
+    private boolean isRegistryComplete = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
+        database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
+
         mAuth = FirebaseAuth.getInstance();
 
-        verifyUserIsLogged();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        //verifyUserIsLogged();
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -95,6 +109,52 @@ public class SignWithActivity extends AppCompatActivity {
         }
     }
 
+    public void checkIfUserRegistryIsComplete(){
+
+        mDatabase.child(database).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot child: dataSnapshot.getChildren()) {
+                    if(child.getKey().equals(mAuth.getCurrentUser().getUid())){
+                        isRegistryComplete = true;
+                    }
+                }
+
+                if(!isRegistryComplete) {
+                    getUserDataFacebook();
+                }
+
+                dialog.dismiss();
+
+                Intent intent;
+                if(isRegistryComplete){
+                    intent = new Intent(SignWithActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    if(database.equals(FirebaseHelper.FIREBASE_DATABASE_USERS)) {
+                        intent = new Intent(SignWithActivity.this, RegisterPersonActivity.class);
+                        intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
+                        intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATA, userFacebook);
+                        startActivity(intent);
+                        finish();
+                    }else{
+                        intent = new Intent(SignWithActivity.this, RegisterCompanyActivity.class);
+                        intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
+                        intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATA, userFacebook);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //TODO
+            }
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -130,8 +190,7 @@ public class SignWithActivity extends AppCompatActivity {
                 .addOnSuccessListener(SignWithActivity.this, new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        getUserDataFacebook();
-                        dialog.dismiss();
+                        //TODO
                     }
                 })
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -142,10 +201,7 @@ public class SignWithActivity extends AppCompatActivity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(SignWithActivity.this, TagsFilterActivity.class);
-                            intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATA, userFacebook);
-                            startActivity(intent);
-                            finish();
+                            checkIfUserRegistryIsComplete();
                         }
                     }
                 });

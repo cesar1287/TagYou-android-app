@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TagYou"
-            android:textSize="40dp"
+            android:textSize="40sp"
             android:textColor="@color/colorTagYou"
             android:textStyle="bold"
             android:layout_gravity="center"/>
@@ -38,7 +37,7 @@
         android:layout_height="wrap_content"
         android:text="Em qual das opção você se encaixa?"
         android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:layout_below="@id/logo"
@@ -54,17 +53,17 @@
         android:layout_below="@id/title">
 
         <Button
+            android:id="@+id/btCategoryPerson"
             android:layout_width="250dp"
             android:layout_height="45dp"
             android:layout_marginBottom="15dp"
-            android:text="Pessoa"
-            android:onClick="registerPerson"/>
+            android:text="Pessoa" />
 
         <Button
+            android:id="@+id/btCategoryCompany"
             android:layout_width="250dp"
             android:layout_height="45dp"
-            android:text="Empresa"
-            android:onClick="registerCompany"/>
+            android:text="Empresa" />
     </LinearLayout>
 
 </RelativeLayout>

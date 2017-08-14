@@ -54,6 +54,7 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_register_person);
 
         UserFacebook userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
+        database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
 
         final ImageView ivPhoto = (ImageView) findViewById(R.id.register_photo);
         Glide.with(this).load(Uri.parse(userFacebook.getProfilePic()))
@@ -86,8 +87,6 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
 
         Button advance = (Button) findViewById(R.id.advance);
         advance.setOnClickListener(this);
-
-        database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -189,13 +188,7 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
             finishLogin(user, database);
             Toast.makeText(this, "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
 
-            SharedPreferences sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(getString(R.string.registry), getResources().getString(R.string.done));
-            editor.apply();
-
-            startActivity(new Intent(this, TagsFilterActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         }
     }
