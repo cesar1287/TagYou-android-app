@@ -1,6 +1,5 @@
 package comcesar1287.github.tagyou.view;
 
-import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -12,14 +11,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
-import com.adroitandroid.chipcloud.FlowLayout;
+
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,11 +57,13 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String messageText = messageArea.getText().toString();
+                String time = hora();
 
                 if(!messageText.equals("")){
                     Map<String, Object> map = new HashMap<>();
                     map.put("message", messageText);
                     map.put("user", UserDetails.username);
+                    map.put("timeCurrent", time);
                     mReference1.push().setValue(map);
                     mReference2.push().setValue(map);
                     messageArea.setText("");
@@ -79,12 +79,13 @@ public class ChatActivity extends AppCompatActivity {
                 Map map = (Map) dataSnapshot.getValue();
                 String message = map.get("message").toString();
                 String userName = map.get("user").toString();
+                String time = map.get("timeCurrent").toString();
 
                 if(userName.equals(UserDetails.username)){
-                    addMessageBox("Você:-\n" + message, 1);
+                    addMessageBox("Você:-\n" + message, 1, time );
                 }
                 else{
-                    addMessageBox(UserDetails.chatWithName + ":-\n" + message, 2);
+                    addMessageBox(UserDetails.chatWithName + ":-\n" + message, 2, time);
                 }
             }
 
@@ -125,13 +126,13 @@ public class ChatActivity extends AppCompatActivity {
 
 
 
-    public void addMessageBox(String message, int type){
+    public void addMessageBox(String message, int type, String time){
         TextView textView = new TextView(ChatActivity.this);
         textView.setText(message);
         textView.setPadding(40, 20, 40, 20);
         textView.setMaxWidth(500);
 
-        String time = hora();
+
         TextView textView1 = new TextView(ChatActivity.this);
         textView1.setText(time);
         textView1.setPadding(35, 0, 35, 5);
