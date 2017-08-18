@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:theme="@style/TextLabel"
             android:layout_below="@id/register_photo"
-            android:hint="Insira o código de indicação"
+            android:hint="@string/hint_indication"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp">
 

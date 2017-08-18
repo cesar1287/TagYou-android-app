@@ -126,13 +126,6 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
         sex = spinnerSex.getSelectedItem().toString();
         hashtag = etHashtag.getEditText().getText().toString();
 
-        if(hashtag.equals("")){
-            allFieldsFilled = false;
-            etHashtag.setError("Campo obrigatório");
-        }else{
-            etHashtag.setErrorEnabled(false);
-        }
-
         if(name.equals("")){
             allFieldsFilled = false;
             etName.setError("Campo obrigatório");

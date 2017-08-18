@@ -1,6 +1,5 @@
 package comcesar1287.github.tagyou.view;
 
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
