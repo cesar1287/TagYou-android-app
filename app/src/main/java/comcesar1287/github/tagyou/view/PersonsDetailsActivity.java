@@ -43,9 +43,6 @@ public class PersonsDetailsActivity extends AppCompatActivity {
         TextView tvName = (TextView) findViewById(R.id.name_details_person);
         tvName.setText(person.getName());
 
-        TextView tvHashtag = (TextView) findViewById(R.id.name_details_tag);
-        tvHashtag.setText(person.getHashtag());
-
         TextView tvEmail = (TextView) findViewById(R.id.email_details_person);
         tvEmail.setText(person.getEmail());
 
