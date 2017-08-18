@@ -124,8 +124,6 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-
-
     public void addMessageBox(String message, int type, String time){
         TextView textView = new TextView(ChatActivity.this);
         textView.setText(message);

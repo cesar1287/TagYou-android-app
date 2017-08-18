@@ -214,6 +214,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_chat) {
             startActivity(new Intent(this, UserActivity.class));
+        } else if (id == R.id.nav_indication) {
+            startActivity(new Intent(this, IndicationPersonActivity.class));
         } else if (id == R.id.nav_duvidas) {
 
         } else if (id == R.id.nav_fale_conosco) {

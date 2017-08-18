@@ -38,4 +38,10 @@
     <string name="descricao_pessoal">Descrição Pessoal</string>
     <string name="descricao_empresarial">Descrição Empresarial</string>
 
+    <string name="indication_person">Indique um Amigo</string>
+    <string name="title_indication_person">Faça uma indicação e compartilhe os benefícios do TagYou...</string>
+    <string name="text_indication_person">Indique um amigo para que ele aproveite as melhores promoções da região, ou
+        indique uma empresa para ele aproveitar esse maravilhosa ferramenta de marketing.</string>
+    <string name="indication_button_whatapp">Whatsapp</string>
+
 </resources>

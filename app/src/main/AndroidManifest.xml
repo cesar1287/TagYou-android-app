@@ -84,7 +84,11 @@
             android:name=".view.PersonsDetailsActivity"
             android:label="@string/descricao_pessoal"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".view.IndicationPersonActivity"></activity>
+        <activity
+            android:name=".view.IndicationPersonActivity"
+            android:label="@string/indication_person"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>
