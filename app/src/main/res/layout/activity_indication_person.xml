@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -39,7 +38,7 @@
         android:layout_centerHorizontal="true"/>
 
     <TextView
-        android:id="@+id/code_indication"
+        android:id="@+id/code_indication_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Compartinhe o código abaixo"
@@ -50,13 +49,14 @@
         android:layout_below="@id/image_share"/>
 
     <TextView
+        android:id="@+id/code_indication"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@drawable/border"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_below="@id/code_indication"
+        android:layout_below="@id/code_indication_text"
         android:text="YHDSHDHSDH"
         android:gravity="center"
         android:textSize="25dp"/>
