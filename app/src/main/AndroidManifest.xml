@@ -32,10 +32,9 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDODPf87mzDEZnnbkTHqlvjQY96LLpvPRs"/>
+            android:value="AIzaSyDODPf87mzDEZnnbkTHqlvjQY96LLpvPRs" />
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -70,23 +69,22 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.ChatActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".view.UserActivity"/>
+            android:parentActivityName=".view.UserActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.UserActivity"
-            android:screenOrientation="portrait"
             android:label="Usuários"
-            android:parentActivityName=".view.MainActivity"/>
+            android:parentActivityName=".view.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.CompanyDetailsActivity"
             android:label="@string/descricao_empresarial"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".view.PersonsDetailsActivity"
             android:label="@string/descricao_pessoal"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".view.IndicationPersonActivity"></activity>
     </application>
 
 </manifest>

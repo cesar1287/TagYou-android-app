@@ -22,6 +22,10 @@
             android:id="@+id/nav_chat"
             android:icon="@drawable/tagyou_icon_chat"
             android:title="Chat"/>
+        <item
+            android:id="@+id/nav_indication"
+            android:icon="@drawable/tagyou_icon_indication_person"
+            android:title="Indique um Amigo"/>
     </group>
 
     <item android:title="Contato e Dúvidas">
