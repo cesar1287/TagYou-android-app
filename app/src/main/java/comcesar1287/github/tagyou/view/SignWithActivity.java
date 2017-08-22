@@ -259,6 +259,7 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
                                 sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
+                                editor.putString(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
                                 editor.putString("id", Uid);
                                 editor.putString("name", name);
                                 editor.putString("email", email);
@@ -269,6 +270,7 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
                                 sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
+                                editor.putString(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
                                 editor.putString("id", Uid);
                                 editor.putString("name", name);
                                 editor.putString("email", email);

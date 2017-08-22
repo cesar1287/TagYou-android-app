@@ -53,7 +53,7 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_company);
 
-        UserFacebook userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
+        /*UserFacebook userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
 
         final ImageView ivPhoto = (ImageView) findViewById(R.id.register_photo);
         Glide.with(this).load(Uri.parse(userFacebook.getProfilePic()))
@@ -89,7 +89,7 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        setupFieldMasks();
+        setupFieldMasks();*/
     }
 
     @Override

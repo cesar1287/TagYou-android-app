@@ -53,7 +53,7 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_person);
 
-        UserFacebook userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
+        /*UserFacebook userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
         database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
 
         final ImageView ivPhoto = (ImageView) findViewById(R.id.register_photo);
@@ -92,7 +92,7 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        setupFieldMasks();
+        setupFieldMasks();*/
     }
 
     @Override

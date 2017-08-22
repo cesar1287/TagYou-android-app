@@ -68,7 +68,12 @@ public class MainActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_main);
 
+        sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
+
         database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
+        if(database==null){
+            database = sharedPreferences.getString(Utility.KEY_CONTENT_EXTRA_DATABASE, "");
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -139,8 +144,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setupUI() {
-
-        sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
         name = sharedPreferences.getString("name","Carregando...");
         profilePic = sharedPreferences.getString("profile_pic","Carregando...");
 
@@ -161,6 +164,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void signOut(View view){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
         LoginManager.getInstance().logOut();
         mAuth.signOut();
         startActivity(new Intent(this, CategoryRegisterActivity.class));
