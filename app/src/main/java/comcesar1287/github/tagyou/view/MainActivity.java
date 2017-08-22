@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity
             TabLayout.Tab tab = tabLayout.getTabAt(1);
             tab.select();
         } else if (id == R.id.nav_editar_preferencias) {
-
+            startActivity(new Intent(this, TagsFilterActivity.class));
         } else if (id == R.id.nav_editar_cadastro) {
             if(database.equals(FirebaseHelper.FIREBASE_DATABASE_USERS)){
                 startActivity(new Intent(this, EditPersonActivity.class));
