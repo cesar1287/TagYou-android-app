@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,7 +43,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     SharedPreferences sp;
 
-    TextInputLayout etName, etEmail, etPassword;
+    EditText etName, etEmail, etPassword;
 
     private ProgressDialog dialog;
 
@@ -59,9 +60,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         mAuth = FirebaseAuth.getInstance();
 
-        etName = (TextInputLayout) findViewById(R.id.sign_up_name);
-        etEmail = (TextInputLayout) findViewById(R.id.sign_up_email);
-        etPassword = (TextInputLayout) findViewById(R.id.sign_up_password);
+        etName = (EditText) findViewById(R.id.sign_up_name);
+        etEmail = (EditText) findViewById(R.id.sign_up_email);
+        etPassword = (EditText) findViewById(R.id.sign_up_password);
 
         btCreate = (Button) findViewById(R.id.sign_up_button_register);
     }
