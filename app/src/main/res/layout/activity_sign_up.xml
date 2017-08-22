@@ -12,12 +12,11 @@
         android:layout_height="wrap_content"
         android:theme="@style/TextLabel"
         android:layout_below="@id/register_photo"
-        android:hint="@string/hint_indication"
+        android:hint="Nome"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/sign_edit_up_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textNoSuggestions"
@@ -31,12 +30,11 @@
         android:layout_height="wrap_content"
         android:theme="@style/TextLabel"
         android:layout_below="@id/sign_up_name"
-        android:hint="Nome"
+        android:hint="Email"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/sign_edit_up_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"/>
@@ -50,12 +48,11 @@
         android:layout_height="wrap_content"
         android:theme="@style/TextLabel"
         android:layout_below="@id/sign_up_email"
-        android:hint="Nascimento"
+        android:hint="Senha"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"            >
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/sign_edit_up_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#fff"
