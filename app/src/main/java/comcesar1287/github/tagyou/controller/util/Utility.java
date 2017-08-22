@@ -19,12 +19,9 @@ public class Utility {
     public static final String KEY_CONTENT_EXTRA_DATA = "data";
     public static final String KEY_MAP_FRAGMENT = "mainFrag";
 
-    public static boolean isValidCPF(String cpf) {
-        if ((cpf==null) || (cpf.length()!=11)) return false;
+    public static boolean verifyEmptyField(String name, String email, String pass){
 
-        Integer digito1 = calcularDigito(cpf.substring(0,9), pesoCPF);
-        Integer digito2 = calcularDigito(cpf.substring(0,9) + digito1, pesoCPF);
-        return cpf.equals(cpf.substring(0,9) + digito1.toString() + digito2.toString());
+        return (name.isEmpty() || email.isEmpty() || pass.isEmpty());
     }
 
     private static int calcularDigito(String str, int[] peso) {

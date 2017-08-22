@@ -210,6 +210,7 @@ public class SignWithActivity extends AppCompatActivity {
     public void login_button_register(View view) {
         Intent intent;
         intent = new Intent(SignWithActivity.this, SignUpActivity.class);
+        intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
         startActivity(intent);
     }
 }
