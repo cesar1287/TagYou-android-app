@@ -128,13 +128,13 @@ public class SignWithActivity extends AppCompatActivity {
                     finish();
                 }else{
                     if(database.equals(FirebaseHelper.FIREBASE_DATABASE_USERS)) {
-                        intent = new Intent(SignWithActivity.this, RegisterPersonActivity.class);
+                        intent = new Intent(SignWithActivity.this, EditPersonActivity.class);
                         intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
                         intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATA, userFacebook);
                         startActivity(intent);
                         finish();
                     }else{
-                        intent = new Intent(SignWithActivity.this, RegisterCompanyActivity.class);
+                        intent = new Intent(SignWithActivity.this, EditCompanyActivity.class);
                         intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
                         intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATA, userFacebook);
                         startActivity(intent);
