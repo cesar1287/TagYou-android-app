@@ -89,7 +89,7 @@
             android:label="@string/indication_person"
             android:parentActivityName=".view.MainActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".view.RegisterEmailSenhaActivity"></activity>
+        <activity android:name=".view.SignUpActivity"></activity>
     </application>
 
 </manifest>

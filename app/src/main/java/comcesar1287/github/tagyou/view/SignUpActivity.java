@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import comcesar1287.github.tagyou.R;
 
-public class RegisterEmailSenhaActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_email_senha);
+        setContentView(R.layout.activity_sign_up);
     }
 }
