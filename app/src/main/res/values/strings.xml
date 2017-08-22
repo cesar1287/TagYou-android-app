@@ -67,4 +67,6 @@
     <string name="login_ou">-------------------------ou-------------------------</string>
 
     <string name="creating_user">Criando o usuário, por favor aguarde…</string>
+    <string name="creating_button">Cadastrar</string>
+
 </resources>
