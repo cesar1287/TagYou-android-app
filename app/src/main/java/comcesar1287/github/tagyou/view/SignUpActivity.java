@@ -3,11 +3,11 @@ package comcesar1287.github.tagyou.view;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import comcesar1287.github.tagyou.R;
+import comcesar1287.github.tagyou.controller.domain.CompanyFirebase;
 import comcesar1287.github.tagyou.controller.domain.User;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
@@ -41,7 +42,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     SharedPreferences sp;
 
-    EditText etName, etEmail, etPassword;
+    TextInputLayout etName, etEmail, etPassword;
 
     private ProgressDialog dialog;
 
@@ -58,11 +59,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         mAuth = FirebaseAuth.getInstance();
 
-        etName = (EditText) findViewById(R.id.sign_up_etName);
-        etEmail = (EditText) findViewById(R.id.sign_up_etEmail);
-        etPassword = (EditText) findViewById(R.id.sign_up_etPassword);
+        etName = (TextInputLayout) findViewById(R.id.sign_up_name);
+        etEmail = (TextInputLayout) findViewById(R.id.sign_up_email);
+        etPassword = (TextInputLayout) findViewById(R.id.sign_up_password);
 
-        btCreate = (Button) findViewById(R.id.bt_create_user);
+        btCreate = (Button) findViewById(R.id.sign_up_button_register);
     }
 
     @Override
@@ -70,10 +71,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         int id = view.getId();
 
         switch(id){
-            case R.id.bt_create_user:
-                name = etName.getText().toString();
-                email = etEmail.getText().toString();
-                password = etPassword.getText().toString();
+            case R.id.sign_up_button_register:
+                name = etName.getEditText().getText().toString();
+                email = etEmail.getEditText().getText().toString();
+                password = etPassword.getEditText().getText().toString();
                 createUser();
                 break;
         }
@@ -89,22 +90,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         public void onFailure(@NonNull Exception e) {
                             dialog.dismiss();
                             if (e instanceof FirebaseAuthWeakPasswordException) {
-                                Toast.makeText(SignUpActivity.this,
-                                        getResources().getString(R.string.error_password_too_small),
-                                        Toast.LENGTH_SHORT).show();
-                                etPassword.setText("");
+                                etPassword.setError(getResources().getString(R.string.error_password_too_small));
+                                etPassword.getEditText().setText("");
                                 etPassword.requestFocus();
                             } else if (e instanceof FirebaseAuthInvalidCredentialsException) {
-                                Toast.makeText(SignUpActivity.this,
-                                        getResources().getString(R.string.error_invalid_email),
-                                        Toast.LENGTH_SHORT).show();
-                                etEmail.setText("");
+                                etEmail.setError(getResources().getString(R.string.error_invalid_email));
+                                etEmail.getEditText().setText("");
                                 etEmail.requestFocus();
                             } else if (e instanceof FirebaseAuthUserCollisionException) {
-                                Toast.makeText(SignUpActivity.this,
-                                        getResources().getString(R.string.error_failed_signin_email_exists),
-                                        Toast.LENGTH_LONG).show();
-                                etEmail.setText("");
+                                etEmail.setError(getResources().getString(R.string.error_failed_signin_email_exists));
+                                etEmail.getEditText().setText("");
                                 etEmail.requestFocus();
                             } else {
                                 Toast.makeText(SignUpActivity.this,
@@ -116,6 +111,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
+                            etEmail.setErrorEnabled(false);
+                            etPassword.setErrorEnabled(false);
                             Toast.makeText(SignUpActivity.this,
                                     getResources().getString(R.string.user_created_successfully),
                                     Toast.LENGTH_SHORT).show();
@@ -153,30 +150,42 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get user value
-                        User user = dataSnapshot.getValue(User.class);
+                        if (database.equals(FirebaseHelper.FIREBASE_DATABASE_USERS)) {
+                            // Get user value
+                            User user = dataSnapshot.getValue(User.class);
 
-                        // [START_EXCLUDE]
-                        if (user == null) {
+                            // [START_EXCLUDE]
+                            if (user == null) {
 
-                            FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, "", "", "", "", "");
+                                FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, "", "", "", "", "");
 
-                            sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sp.edit();
+                                sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sp.edit();
 
-                            editor.putString("id", Uid);
-                            editor.putString("name", name);
-                            editor.putString("email", email);
-                            editor.apply();
-                        } else {
+                                editor.putString("id", Uid);
+                                editor.putString("name", name);
+                                editor.putString("email", email);
+                                editor.apply();
+                            } else {
 
-                            sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sp.edit();
+                                sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sp.edit();
 
-                            editor.putString("id", Uid);
-                            editor.putString("name", name);
-                            editor.putString("email", email);
-                            editor.apply();
+                                editor.putString("id", Uid);
+                                editor.putString("name", name);
+                                editor.putString("email", email);
+                                editor.apply();
+                            }
+                        }else{
+                            // Get user value
+                            CompanyFirebase companyFirebase = dataSnapshot.getValue(CompanyFirebase.class);
+
+                            // [START_EXCLUDE]
+                            if (companyFirebase == null) {
+
+                                FirebaseHelper.writeNewCompany(mDatabase, Uid, name, "", email, "", "", "",
+                                        "", "", (int) (Math.random() * 10), 40.233, -40.223, "");
+                            }
                         }
                     }
 

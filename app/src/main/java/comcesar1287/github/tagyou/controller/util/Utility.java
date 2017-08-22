@@ -24,6 +24,11 @@ public class Utility {
         return (name.isEmpty() || email.isEmpty() || pass.isEmpty());
     }
 
+    public static boolean verifyEmptyField(String email, String pass){
+
+        return (email.isEmpty() || pass.isEmpty());
+    }
+
     private static int calcularDigito(String str, int[] peso) {
         int soma = 0;
         for (int indice=str.length()-1, digito; indice >= 0; indice-- ) {
