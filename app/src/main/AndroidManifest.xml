@@ -54,19 +54,22 @@
         </activity>
         <activity
             android:name=".view.TagsFilterActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.CategoryRegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.RegisterPersonActivity"
+            android:name=".view.EditPersonActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/edit_person"
+            android:parentActivityName=".view.MainActivity"/>
         <activity
-            android:name=".view.RegisterCompanyActivity"
+            android:name=".view.EditCompanyActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".view.MainActivity"
+            android:label="@string/edit_company"/>
         <activity
             android:name=".view.ChatActivity"
             android:parentActivityName=".view.UserActivity"
@@ -79,16 +82,21 @@
         <activity
             android:name=".view.CompanyDetailsActivity"
             android:label="@string/descricao_empresarial"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.PersonsDetailsActivity"
             android:label="@string/descricao_pessoal"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.IndicationPersonActivity"
-            android:parentActivityName=".view.MainActivity"
             android:label="@string/indication_person"
+            android:parentActivityName=".view.MainActivity"
             android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".view.SignUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

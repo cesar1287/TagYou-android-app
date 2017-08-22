@@ -34,7 +34,7 @@ import comcesar1287.github.tagyou.controller.domain.UserFacebook;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
-public class RegisterPersonActivity extends AppCompatActivity implements View.OnClickListener{
+public class EditPersonActivity extends AppCompatActivity implements View.OnClickListener{
 
     private FirebaseAuth mAuth;
 
@@ -51,9 +51,9 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_person);
+        setContentView(R.layout.activity_edit_person);
 
-        UserFacebook userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
+        /*UserFacebook userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
         database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
 
         final ImageView ivPhoto = (ImageView) findViewById(R.id.register_photo);
@@ -92,7 +92,7 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        setupFieldMasks();
+        setupFieldMasks();*/
     }
 
     @Override
@@ -125,13 +125,6 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
         phone = etPhone.getEditText().getText().toString();
         sex = spinnerSex.getSelectedItem().toString();
         hashtag = etHashtag.getEditText().getText().toString();
-
-        if(hashtag.equals("")){
-            allFieldsFilled = false;
-            etHashtag.setError("Campo obrigatório");
-        }else{
-            etHashtag.setErrorEnabled(false);
-        }
 
         if(name.equals("")){
             allFieldsFilled = false;
@@ -238,7 +231,7 @@ public class RegisterPersonActivity extends AppCompatActivity implements View.On
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(RegisterPersonActivity.this, R.string.error_signin, Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditPersonActivity.this, R.string.error_signin, Toast.LENGTH_LONG).show();
                 }
             });
     }

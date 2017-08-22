@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="comcesar1287.github.tagyou.view.CategoryRegisterActivity"
-    android:background="@color/colorBackgroundSplash">
+    android:background="@drawable/smartcity">
 
     <LinearLayout
         android:id="@+id/logo"
@@ -12,21 +12,21 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="45dp"
         android:layout_marginBottom="50dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TagYou"
-            android:textSize="40sp"
-            android:textColor="@color/colorTagYou"
-            android:textStyle="bold"
-            android:layout_gravity="center"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_title"
+        android:textSize="65dp"
+        android:textColor="@color/colorTagYou"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/tagyou_tag"
             android:layout_gravity="end"/>
     </LinearLayout>
@@ -35,14 +35,14 @@
         android:id="@id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Como você deseja fazer login?"
+        android:text="@string/categoty_text"
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:layout_below="@id/logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="45dp"/>
 
     <LinearLayout
@@ -54,16 +54,18 @@
 
         <Button
             android:id="@+id/btCategoryPerson"
-            android:layout_width="250dp"
-            android:layout_height="45dp"
-            android:layout_marginBottom="15dp"
-            android:text="Pessoa" />
+            android:layout_width="270dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button"
+            android:text="@string/categoty_pessoa" />
 
         <Button
             android:id="@+id/btCategoryCompany"
-            android:layout_width="250dp"
-            android:layout_height="45dp"
-            android:text="Empresa" />
+            android:layout_width="270dp"
+            android:layout_height="40dp"
+            android:text="@string/categoty_empresa"
+            android:background="@drawable/button"/>
     </LinearLayout>
 
 </RelativeLayout>

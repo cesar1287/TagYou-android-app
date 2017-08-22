@@ -27,12 +27,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.domain.CompanyFirebase;
-import comcesar1287.github.tagyou.controller.domain.User;
 import comcesar1287.github.tagyou.controller.domain.UserFacebook;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
-public class RegisterCompanyActivity extends AppCompatActivity implements View.OnClickListener{
+public class EditCompanyActivity extends AppCompatActivity implements View.OnClickListener{
 
     private FirebaseAuth mAuth;
 
@@ -52,9 +51,9 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_company);
+        setContentView(R.layout.activity_edit_company);
 
-        UserFacebook userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
+        /*UserFacebook userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
 
         final ImageView ivPhoto = (ImageView) findViewById(R.id.register_photo);
         Glide.with(this).load(Uri.parse(userFacebook.getProfilePic()))
@@ -90,7 +89,7 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        setupFieldMasks();
+        setupFieldMasks();*/
     }
 
     @Override
@@ -122,13 +121,6 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
         city = etCity.getEditText().getText().toString();
         street = etStreet.getEditText().getText().toString();
         number = etNumber.getEditText().getText().toString();
-
-        if(hashtag.equals("")){
-            allFieldsFilled = false;
-            etHashtag.setError("Campo obrigatório");
-        }else{
-            etHashtag.setErrorEnabled(false);
-        }
 
         if(name.equals("")){
             allFieldsFilled = false;
@@ -252,7 +244,7 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Toast.makeText(RegisterCompanyActivity.this, R.string.error_signin, Toast.LENGTH_LONG).show();
+                        Toast.makeText(EditCompanyActivity.this, R.string.error_signin, Toast.LENGTH_LONG).show();
                     }
                 });
     }
