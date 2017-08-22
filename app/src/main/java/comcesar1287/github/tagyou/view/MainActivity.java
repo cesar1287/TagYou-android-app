@@ -37,6 +37,7 @@ import java.util.List;
 import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.domain.Company;
 import comcesar1287.github.tagyou.controller.domain.Person;
+import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.fragment.CompanyFragment;
 import comcesar1287.github.tagyou.controller.fragment.PersonFragment;
 import comcesar1287.github.tagyou.controller.util.Utility;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity
 
     private FirebaseAuth mAuth;
 
-    String name, profilePic;
+    String name, profilePic, database;
 
     NavigationView navigationView;
 
@@ -66,6 +67,8 @@ public class MainActivity extends AppCompatActivity
         verifyUserIsLogged();
 
         setContentView(R.layout.activity_main);
+
+        database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -211,7 +214,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_editar_preferencias) {
 
         } else if (id == R.id.nav_editar_cadastro) {
-
+            if(database.equals(FirebaseHelper.FIREBASE_DATABASE_USERS)){
+                startActivity(new Intent(this, EditPersonActivity.class));
+            }else{
+                startActivity(new Intent(this, EditCompanyActivity.class));
+            }
         } else if (id == R.id.nav_chat) {
             startActivity(new Intent(this, UserActivity.class));
         } else if (id == R.id.nav_indication) {
