@@ -240,7 +240,9 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
         Uid = user.getUid();
         name = user.getDisplayName();
         email = user.getEmail();
-        profile_pic = user.getPhotoUrl().toString();
+        if(profile_pic!=null) {
+            profile_pic = user.getPhotoUrl().toString();
+        }
 
         mDatabase.child(database).child(Uid).addListenerForSingleValueEvent(
                 new ValueEventListener() {

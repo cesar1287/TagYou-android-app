@@ -93,19 +93,19 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             if (e instanceof FirebaseAuthWeakPasswordException) {
                                 Toast.makeText(SignUpActivity.this,
                                         getResources().getString(R.string.error_password_too_small),
-                                        Toast.LENGTH_SHORT);
+                                        Toast.LENGTH_SHORT).show();
                                 etPassword.setText("");
                                 etPassword.requestFocus();
                             } else if (e instanceof FirebaseAuthInvalidCredentialsException) {
                                 Toast.makeText(SignUpActivity.this,
                                         getResources().getString(R.string.error_invalid_email),
-                                        Toast.LENGTH_SHORT);
+                                        Toast.LENGTH_SHORT).show();
                                 etEmail.setText("");
                                 etEmail.requestFocus();
                             } else if (e instanceof FirebaseAuthUserCollisionException) {
                                 Toast.makeText(SignUpActivity.this,
                                         getResources().getString(R.string.error_failed_signin_email_exists),
-                                        Toast.LENGTH_SHORT);
+                                        Toast.LENGTH_LONG).show();
                                 etEmail.setText("");
                                 etEmail.requestFocus();
                             } else {
