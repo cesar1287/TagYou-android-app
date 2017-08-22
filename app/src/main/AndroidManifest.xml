@@ -79,17 +79,17 @@
         <activity
             android:name=".view.CompanyDetailsActivity"
             android:label="@string/descricao_empresarial"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.PersonsDetailsActivity"
             android:label="@string/descricao_pessoal"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.IndicationPersonActivity"
-            android:parentActivityName=".view.MainActivity"
             android:label="@string/indication_person"
-            android:screenOrientation="portrait">
-        </activity>
+            android:parentActivityName=".view.MainActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".view.RegisterEmailSenhaActivity"></activity>
     </application>
 
 </manifest>

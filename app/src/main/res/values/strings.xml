@@ -44,4 +44,12 @@
         indique uma empresa para ele aproveitar esse maravilhosa ferramenta de marketing.</string>
     <string name="indication_button_whatapp">Whatsapp</string>
 
+    <string name="login_title">TagYou</string>
+    <string name="login_email">Email</string>
+    <string name="login_senha">Senha</string>
+    <string name="login_faca_seu_cadastro">Não é membro? Faça seu cadastro</string>
+    <string name="login_botton_entrar">Entrar</string>
+    <string name="login_ou">------------------------------ou------------------------------</string>
+
+
 </resources>

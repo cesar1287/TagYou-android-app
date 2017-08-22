@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -204,5 +205,11 @@ public class SignWithActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void login_button_register(View view) {
+        Intent intent;
+        intent = new Intent(SignWithActivity.this, RegisterEmailSenhaActivity.class);
+        startActivity(intent);
     }
 }
