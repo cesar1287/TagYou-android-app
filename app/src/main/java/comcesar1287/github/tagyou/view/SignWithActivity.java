@@ -163,7 +163,9 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
                             // signed in user can be handled in the listener.
                             if (task.isSuccessful()) {
                                 dialog.dismiss();
-                                startActivity(new Intent(SignWithActivity.this, MainActivity.class));
+                                Intent intent = new Intent(SignWithActivity.this, MainActivity.class);
+                                intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
+                                startActivity(intent);
                                 finish();
                             }
                         }
@@ -224,7 +226,9 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
                             dialog.dismiss();
-                            startActivity(new Intent(SignWithActivity.this, MainActivity.class));
+                            Intent intent = new Intent(SignWithActivity.this, MainActivity.class);
+                            intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
+                            startActivity(intent);
                             finish();
                         }
                     }
