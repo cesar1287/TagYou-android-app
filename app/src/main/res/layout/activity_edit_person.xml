@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/colorBackgroundSplash"
-        tools:context="comcesar1287.github.tagyou.view.RegisterPersonActivity">
+        tools:context="comcesar1287.github.tagyou.view.EditPersonActivity">
 
         <LinearLayout
             android:id="@+id/logo"
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:theme="@style/TextLabel"
             android:layout_below="@id/register_photo"
-            android:hint="Insira o código de indicão"
+            android:hint="@string/hint_indication"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp">
 

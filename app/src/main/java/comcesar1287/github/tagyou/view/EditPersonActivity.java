@@ -11,7 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextWatcher;
 import android.view.View;
+
 import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -26,35 +29,32 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import comcesar1287.github.tagyou.R;
-import comcesar1287.github.tagyou.controller.domain.CompanyFirebase;
 import comcesar1287.github.tagyou.controller.domain.User;
 import comcesar1287.github.tagyou.controller.domain.UserFacebook;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
-public class RegisterCompanyActivity extends AppCompatActivity implements View.OnClickListener{
+public class EditPersonActivity extends AppCompatActivity implements View.OnClickListener{
 
     private FirebaseAuth mAuth;
 
     private DatabaseReference mDatabase;
 
-    private String Uid, name , email, database, phone, description, address, site, banner,
-            logo, hashtag, city, street, number;
-
-    private int quantity;
-
-    private double latitude, longitude;
+    private String Uid, name , email, profile_pic, database, phone, birth, sex, hashtag;
 
     private SharedPreferences sp;
 
-    private TextInputLayout etName, etEmail, etHashtag, etDescription, etCity, etStreet, etNumber, etPhone;
+    private TextInputLayout etName, etEmail, etPhone, etBirth, etHashtag;
+
+    private Spinner spinnerSex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_company);
+        setContentView(R.layout.activity_edit_person);
 
         UserFacebook userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
+        database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
 
         final ImageView ivPhoto = (ImageView) findViewById(R.id.register_photo);
         Glide.with(this).load(Uri.parse(userFacebook.getProfilePic()))
@@ -68,23 +68,25 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
             }
         });
 
+        spinnerSex = (Spinner)findViewById(R.id.register_spinner_sexo);
+        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.sexo));
+        spinnerSex.setAdapter(spinnerCountShoesArrayAdapter);
+
         etName = (TextInputLayout) findViewById(R.id.register_name);
         etName.getEditText().setText(userFacebook.getName());
 
         etEmail = (TextInputLayout) findViewById(R.id.register_email);
         etEmail.getEditText().setText(userFacebook.getEmail());
 
-        etHashtag = (TextInputLayout) findViewById(R.id.register_hashtag);
-        etDescription = (TextInputLayout) findViewById(R.id.register_description);
-        etCity = (TextInputLayout) findViewById(R.id.register_city);
-        etStreet = (TextInputLayout) findViewById(R.id.register_street);
-        etNumber = (TextInputLayout) findViewById(R.id.register_number);
+        etBirth = (TextInputLayout) findViewById(R.id.register_date);
+
         etPhone = (TextInputLayout) findViewById(R.id.register_phone);
+
+        etHashtag = (TextInputLayout) findViewById(R.id.register_hashtag);
 
         Button advance = (Button) findViewById(R.id.advance);
         advance.setOnClickListener(this);
-
-        database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -107,6 +109,9 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
     public void setupFieldMasks(){
         TextWatcher phoneMask = Utility.insertMask(getResources().getString(R.string.phone_mask), etPhone.getEditText());
         etPhone.getEditText().addTextChangedListener(phoneMask);
+
+        TextWatcher birthMask = Utility.insertMask(getResources().getString(R.string.birth_mask), etBirth.getEditText());
+        etBirth.getEditText().addTextChangedListener(birthMask);
     }
 
     public void attemptLogin(){
@@ -116,25 +121,21 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
 
         name = etName.getEditText().getText().toString();
         email = etEmail.getEditText().getText().toString();
+        birth = etBirth.getEditText().getText().toString();
         phone = etPhone.getEditText().getText().toString();
+        sex = spinnerSex.getSelectedItem().toString();
         hashtag = etHashtag.getEditText().getText().toString();
-        description = etDescription.getEditText().getText().toString();
-        city = etCity.getEditText().getText().toString();
-        street = etStreet.getEditText().getText().toString();
-        number = etNumber.getEditText().getText().toString();
-
-        if(hashtag.equals("")){
-            allFieldsFilled = false;
-            etHashtag.setError("Campo obrigatório");
-        }else{
-            etHashtag.setErrorEnabled(false);
-        }
 
         if(name.equals("")){
             allFieldsFilled = false;
             etName.setError("Campo obrigatório");
         }else{
             etName.setErrorEnabled(false);
+        }
+
+        if(sex.equals("Selecione")){
+            allFieldsFilled = false;
+            Toast.makeText(this, "Campo sexo é obrigatório", Toast.LENGTH_SHORT).show();
         }
 
         if(phone.equals("")){
@@ -151,32 +152,11 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
             etEmail.setErrorEnabled(false);
         }
 
-        if(description.equals("")){
+        if(birth.equals("")){
             allFieldsFilled = false;
-            etDescription.setError("Campo obrigatório");
+            etBirth.setError("Campo obrigatório");
         }else{
-            etDescription.setErrorEnabled(false);
-        }
-
-        if(city.equals("")){
-            allFieldsFilled = false;
-            etCity.setError("Campo obrigatório");
-        }else{
-            etCity.setErrorEnabled(false);
-        }
-
-        if(street.equals("")){
-            allFieldsFilled = false;
-            etStreet.setError("Campo obrigatório");
-        }else{
-            etStreet.setErrorEnabled(false);
-        }
-
-        if(number.equals("")){
-            allFieldsFilled = false;
-            etNumber.setError("Campo obrigatório");
-        }else{
-            etNumber.setErrorEnabled(false);
+            etBirth.setErrorEnabled(false);
         }
 
         if(allFieldsFilled) {
@@ -187,6 +167,13 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
             } else {
                 etPhone.setErrorEnabled(false);
             }
+
+            if (birth.length() < 10) {
+                allFilledRight = false;
+                etBirth.setError("Data de nascimento inválida");
+            } else {
+                etBirth.setErrorEnabled(false);
+            }
         }
 
         if(allFieldsFilled && allFilledRight) {
@@ -194,13 +181,7 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
             finishLogin(user, database);
             Toast.makeText(this, "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
 
-            SharedPreferences sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(getString(R.string.registry), getResources().getString(R.string.done));
-            editor.apply();
-
-            startActivity(new Intent(this, TagsFilterActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         }
     }
@@ -208,52 +189,50 @@ public class RegisterCompanyActivity extends AppCompatActivity implements View.O
     public void finishLogin(FirebaseUser user, final String database){
 
         Uid = user.getUid();
-        logo = user.getPhotoUrl().toString();
-        address = street+", "+number+", "+city;
+        profile_pic = user.getPhotoUrl().toString();
 
         mDatabase.child(database).child(Uid).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get user value
-                        CompanyFirebase companyFirebase = dataSnapshot.getValue(CompanyFirebase.class);
+            new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // Get user value
+                    User user = dataSnapshot.getValue(User.class);
 
-                        // [START_EXCLUDE]
-                        if (companyFirebase == null) {
+                    // [START_EXCLUDE]
+                    if (user == null) {
 
-                            FirebaseHelper.writeNewCompany(mDatabase, Uid, name, description, email ,address, phone, "" ,
-                                    "", logo, (int)(Math.random()*10), 40.233, -40.223, hashtag);
+                        FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, birth, sex, phone, profile_pic, hashtag);
 
-                            /*sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sp.edit();
+                        sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
 
-                            editor.putString("id", Uid);
-                            editor.putString("name", name);
-                            editor.putString("email", email);
-                            editor.putString("profile_pic", profile_pic);
-                            editor.putString("hashtag", hashtag);
-                            editor.apply();*/
-                        } else {
+                        editor.putString("id", Uid);
+                        editor.putString("name", name);
+                        editor.putString("email", email);
+                        editor.putString("profile_pic", profile_pic);
+                        editor.putString("hashtag", hashtag);
+                        editor.apply();
+                    } else {
 
-                            /*sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sp.edit();
+                        sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
 
-                            editor.putString("id", Uid);
-                            editor.putString("name", name);
-                            editor.putString("email", email);
-                            editor.putString("profile_pic", profile_pic);
-                            editor.putString("phone", user.phone);
-                            editor.putString("birth", user.birth);
-                            editor.putString("sex", user.sex);
-                            editor.putString("hashtag", hashtag);
-                            editor.apply();*/
-                        }
+                        editor.putString("id", Uid);
+                        editor.putString("name", name);
+                        editor.putString("email", email);
+                        editor.putString("profile_pic", profile_pic);
+                        editor.putString("phone", user.phone);
+                        editor.putString("birth", user.birth);
+                        editor.putString("sex", user.sex);
+                        editor.putString("hashtag", hashtag);
+                        editor.apply();
                     }
+                }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Toast.makeText(RegisterCompanyActivity.this, R.string.error_signin, Toast.LENGTH_LONG).show();
-                    }
-                });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(EditPersonActivity.this, R.string.error_signin, Toast.LENGTH_LONG).show();
+                }
+            });
     }
 }

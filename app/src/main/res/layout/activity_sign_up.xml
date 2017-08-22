@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="comcesar1287.github.tagyou.view.RegisterEmailSenhaActivity">
+    tools:context="comcesar1287.github.tagyou.view.SignUpActivity">
 
 </android.support.constraint.ConstraintLayout>

@@ -17,6 +17,11 @@
     <string name="error_failed_signin_email_exists">Falha ao entrar\n\nEsse e-mail já está sendo usado em nosso sistema e dispositivo.\nTente novamente com outro método de login.</string>
     <string name="error_unknown_error">Erro desconhecido, tente novamente e contate o administrador.</string>
     <string name="error_signin">Algo deu errado ao fazer login, tente novamente.</string>
+    <string name="error_password_too_small">Sua senha precisa ter pelo menos 6 caracteres, digite novamente.</string>
+    <string name="error_invalid_email">Email inválido, digite novamente.</string>
+    <string name="error_all_fields_required">Todos os campos são obrigatórios, tente novamente.</string>
+
+    <string name="user_created_successfully">Usuário criado com sucesso.</string>
 
     <string name="processing_login">Processando login, por favor aguarde…</string>
 
@@ -44,6 +49,7 @@
         indique uma empresa para ele aproveitar esse maravilhosa ferramenta de marketing.</string>
     <string name="indication_button_whatapp">Whatsapp</string>
 
+
     <string name="categoty_title">TagYou</string>
     <string name="categoty_text">Como você deseja fazer login?</string>
     <string name="categoty_pessoa">Pessoa</string>
@@ -51,6 +57,8 @@
 
 
 
+
+    <string name="hint_indication">Insira o código de indicação</string>
     <string name="login_title">TagYou</string>
     <string name="login_email">Email</string>
     <string name="login_senha">Senha</string>
@@ -58,5 +66,5 @@
     <string name="login_botton_entrar">Entrar</string>
     <string name="login_ou">-------------------------ou-------------------------</string>
 
-
+    <string name="creating_user">Criando o usuário, por favor aguarde…</string>
 </resources>
