@@ -69,12 +69,6 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
-        etEmail = (EditText) findViewById(R.id.email_login);
-        etPassword = (EditText) findViewById(R.id.senha_login);
-
-        Button btLogin = (Button) findViewById(R.id.sign_with_login);
-        btLogin.setOnClickListener(this);
-
         database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
 
         mAuth = FirebaseAuth.getInstance();
@@ -84,6 +78,12 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
         callbackManager = CallbackManager.Factory.create();
 
         setContentView(R.layout.activity_sign_with);
+
+        etEmail = (EditText) findViewById(R.id.email_login);
+        etPassword = (EditText) findViewById(R.id.senha_login);
+
+        Button btLogin = (Button) findViewById(R.id.sign_with_login);
+        btLogin.setOnClickListener(this);
 
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions(Collections.singletonList("email"));

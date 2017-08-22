@@ -71,4 +71,7 @@
     <string name="creating_user">Criando o usuário, por favor aguarde…</string>
     <string name="creating_button">Cadastrar</string>
 
+    <string name="edit_person">Editar Cadastro</string>
+    <string name="edit_company">Editar Cadastro</string>
+
 </resources>
