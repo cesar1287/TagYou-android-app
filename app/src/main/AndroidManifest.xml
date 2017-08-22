@@ -89,7 +89,11 @@
             android:label="@string/indication_person"
             android:parentActivityName=".view.MainActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".view.SignUpActivity"></activity>
+        <activity
+            android:name=".view.SignUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
