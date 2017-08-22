@@ -49,15 +49,11 @@
     <string name="text_indication_person">Indique um amigo para que ele aproveite as melhores promoções da região, ou
         indique uma empresa para ele aproveitar esse maravilhosa ferramenta de marketing.</string>
     <string name="indication_button_whatapp">Whatsapp</string>
-
-
+    
     <string name="categoty_title">TagYou</string>
     <string name="categoty_text">Como você deseja fazer login?</string>
     <string name="categoty_pessoa">Pessoa</string>
     <string name="categoty_empresa">Empresa</string>
-
-
-
 
     <string name="hint_indication">Insira o código de indicação</string>
     <string name="login_title">TagYou</string>
@@ -71,7 +67,7 @@
     <string name="creating_user">Criando o usuário, por favor aguarde…</string>
     <string name="creating_button">Finalizar Cadastro</string>
 
-    <string name="edit_person">Editar Cadastro</string>
-    <string name="edit_company">Editar Cadastro</string>
+    <string name="edit_person">Editar Cadastro Pessoa</string>
+    <string name="edit_company">Editar Cadastro Empresa</string>
 
 </resources>
