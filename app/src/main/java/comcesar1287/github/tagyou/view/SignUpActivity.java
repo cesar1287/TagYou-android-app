@@ -64,6 +64,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         etPassword = (EditText) findViewById(R.id.sign_up_password);
 
         btCreate = (Button) findViewById(R.id.sign_up_button_register);
+        btCreate.setOnClickListener(this);
     }
 
     @Override
