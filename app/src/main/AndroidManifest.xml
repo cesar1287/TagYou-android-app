@@ -54,7 +54,8 @@
         </activity>
         <activity
             android:name=".view.TagsFilterActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.CategoryRegisterActivity"
             android:screenOrientation="portrait"
@@ -62,12 +63,12 @@
         <activity
             android:name=".view.EditPersonActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/edit_person"/>
+            android:label="@string/edit_person"
+            android:parentActivityName=".view.MainActivity"/>
         <activity
             android:name=".view.EditCompanyActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".view.MainActivity"
             android:label="@string/edit_company"/>
         <activity
             android:name=".view.ChatActivity"
