@@ -68,6 +68,7 @@
         android:background="@color/concrete"
         android:text="@string/indication_button_whatapp"
         android:textColor="@color/white"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:onClick="teste"/>
 
 </RelativeLayout>

@@ -70,4 +70,6 @@
     <string name="edit_person">Editar Cadastro Pessoa</string>
     <string name="edit_company">Editar Cadastro Empresa</string>
 
+    <string name="contact_title">Fale Conosco</string>
+
 </resources>

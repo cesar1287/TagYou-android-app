@@ -54,22 +54,22 @@
         </activity>
         <activity
             android:name=".view.TagsFilterActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.CategoryRegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.EditPersonActivity"
-            android:screenOrientation="portrait"
             android:label="@string/edit_person"
-            android:parentActivityName=".view.MainActivity"/>
+            android:parentActivityName=".view.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.EditCompanyActivity"
-            android:screenOrientation="portrait"
+            android:label="@string/edit_company"
             android:parentActivityName=".view.MainActivity"
-            android:label="@string/edit_company"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.ChatActivity"
             android:parentActivityName=".view.UserActivity"
@@ -91,12 +91,16 @@
             android:name=".view.IndicationPersonActivity"
             android:label="@string/indication_person"
             android:parentActivityName=".view.MainActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".view.SignUpActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".view.ContactUsActivity"
+            android:label="@string/contact_title"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".view.MainActivity">
         </activity>
     </application>
 

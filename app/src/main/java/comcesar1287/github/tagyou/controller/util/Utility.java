@@ -1,8 +1,15 @@
 package comcesar1287.github.tagyou.controller.util;
 
+import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.net.Uri;
+import android.telephony.PhoneNumberUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Utility {
 
@@ -18,6 +25,7 @@ public class Utility {
     public static final String KEY_CONTENT_EXTRA_DATABASE = "database";
     public static final String KEY_CONTENT_EXTRA_DATA = "data";
     public static final String KEY_MAP_FRAGMENT = "mainFrag";
+    public static final String TAGYOU_PHONE = "(85)00000–0000";
 
     public static boolean verifyEmptyField(String name, String email, String pass){
 
@@ -43,6 +51,14 @@ public class Utility {
         return s.replaceAll("[.]", "").replaceAll("[-]", "")
                 .replaceAll("[/]", "").replaceAll("[(]", "")
                 .replaceAll("[)]", "");
+    }
+
+    public static void callPhone(Activity activity, String phone){
+
+        Uri uri = Uri.parse("tel:" + phone);
+        Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+
+        activity.startActivity(intent);
     }
 
     public static TextWatcher insertMask(final String mask, final EditText ediTxt) {
@@ -85,4 +101,6 @@ public class Utility {
             }
         };
     }
+
+
 }
