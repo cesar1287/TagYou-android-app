@@ -47,18 +47,15 @@ import static android.R.attr.id;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    SharedPreferences sharedPreferences;
-
     private FirebaseAuth mAuth;
 
-    FirebaseUser user;
+    private FirebaseUser user;
 
-    String name, profilePic, database;
+    private String database;
 
-    NavigationView navigationView;
+    private NavigationView navigationView;
 
-    TabLayout tabLayout;
-    ViewPager viewPager;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +69,7 @@ public class MainActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_main);
 
-        sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
 
         database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
         if(database==null){
@@ -82,7 +79,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -148,30 +145,29 @@ public class MainActivity extends AppCompatActivity
     private void setupUI() {
         View hView = navigationView.getHeaderView(0);
 
-        if(user.getPhotoUrl()!=null) {
-            profilePic = user.getPhotoUrl().toString();
-            final ImageView nav_image = (ImageView) hView.findViewById(R.id.imageView);
-            Glide.with(this).load(profilePic)
-                    .asBitmap().into(new BitmapImageViewTarget(nav_image) {
-                @Override
-                protected void setResource(Bitmap resource) {
-                    RoundedBitmapDrawable circularBitmapDrawable =
-                            RoundedBitmapDrawableFactory.create(getResources(), resource);
-                    circularBitmapDrawable.setCircular(true);
-                    nav_image.setImageDrawable(circularBitmapDrawable);
-                }
-            });
-        }
+        if(user != null) {
+            if (user.getPhotoUrl() != null) {
+                String profilePic = user.getPhotoUrl().toString();
+                final ImageView nav_image = (ImageView) hView.findViewById(R.id.imageView);
+                Glide.with(this).load(profilePic)
+                        .asBitmap().into(new BitmapImageViewTarget(nav_image) {
+                    @Override
+                    protected void setResource(Bitmap resource) {
+                        RoundedBitmapDrawable circularBitmapDrawable =
+                                RoundedBitmapDrawableFactory.create(getResources(), resource);
+                        circularBitmapDrawable.setCircular(true);
+                        nav_image.setImageDrawable(circularBitmapDrawable);
+                    }
+                });
+            }
 
-        name = user.getDisplayName();
-        TextView nav_nome = (TextView)hView.findViewById(R.id.header_name);
-        nav_nome.setText(name);
+            String name = user.getDisplayName();
+            TextView nav_nome = (TextView) hView.findViewById(R.id.header_name);
+            nav_nome.setText(name);
+        }
     }
 
     public void signOut(View view){
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
         LoginManager.getInstance().logOut();
         mAuth.signOut();
         startActivity(new Intent(this, CategoryRegisterActivity.class));

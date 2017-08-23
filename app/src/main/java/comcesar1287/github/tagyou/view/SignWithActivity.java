@@ -26,6 +26,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -128,8 +129,12 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
                     .addOnFailureListener(SignWithActivity.this, new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            if(e instanceof FirebaseAuthInvalidCredentialsException) {
-                                dialog.dismiss();
+                            dialog.dismiss();
+                            if(e instanceof FirebaseAuthInvalidUserException){
+                                Toast.makeText(SignWithActivity.this,
+                                        getResources().getString(R.string.error_invalid_user),
+                                        Toast.LENGTH_SHORT).show();
+                            }else if(e instanceof FirebaseAuthInvalidCredentialsException) {
                                 Toast.makeText(SignWithActivity.this,
                                         getResources().getString(R.string.error_user_password_incorrect),
                                         Toast.LENGTH_SHORT).show();
