@@ -1,7 +1,7 @@
 package comcesar1287.github.tagyou.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.design.widget.TextInputLayout;
@@ -26,11 +26,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import comcesar1287.github.tagyou.R;
+import comcesar1287.github.tagyou.controller.domain.Person;
 import comcesar1287.github.tagyou.controller.domain.User;
-import comcesar1287.github.tagyou.controller.domain.UserFacebook;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
@@ -40,24 +41,113 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
 
     private DatabaseReference mDatabase;
 
-    private String Uid, name , email, profile_pic, database, phone, birth, sex, hashtag;
+    Query personQuery;
 
-    private SharedPreferences sp;
+    ValueEventListener valueEventListener;
+    ValueEventListener singleValueEventListener;
+
+    private String name;
+    private String email;
+    private String phone;
+    private String birth;
+    private String sex;
+    private String hashtag;
+
+    ImageView ivPhoto;
 
     private TextInputLayout etName, etEmail, etPhone, etBirth, etHashtag;
 
     private Spinner spinnerSex;
+
+    private ProgressDialog dialog;
+
+    Person person;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_person);
 
-        /*UserFacebook userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
-        database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        final ImageView ivPhoto = (ImageView) findViewById(R.id.register_photo);
-        Glide.with(this).load(Uri.parse(userFacebook.getProfilePic()))
+        dialog = ProgressDialog.show(this,"", "Carregando dados do usuário...", true, false);
+
+        personQuery = mDatabase
+                .child(FirebaseHelper.FIREBASE_DATABASE_USERS)
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        loadPerson();
+
+        ivPhoto = (ImageView) findViewById(R.id.register_photo);
+
+        spinnerSex = (Spinner)findViewById(R.id.register_spinner_sexo);
+        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.sexo));
+        spinnerSex.setAdapter(spinnerCountShoesArrayAdapter);
+
+        etName = (TextInputLayout) findViewById(R.id.register_name);
+        etEmail = (TextInputLayout) findViewById(R.id.register_email);
+        etBirth = (TextInputLayout) findViewById(R.id.register_date);
+        etPhone = (TextInputLayout) findViewById(R.id.register_phone);
+        etHashtag = (TextInputLayout) findViewById(R.id.register_hashtag);
+
+        Button advance = (Button) findViewById(R.id.advance);
+        advance.setOnClickListener(this);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        setupFieldMasks();
+    }
+
+    private void loadPerson() {
+
+        valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+
+                person = new Person();
+                person.setName(user.name);
+                person.setEmail(user.email);
+                person.setProfilePic(user.profile_pic);
+                person.setPhone(user.phone);
+                person.setBirth(user.birth);
+                person.setHashtag(user.hashtag);
+                person.setSex(user.sex);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                dialog.dismiss();
+                //Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                finish();
+            }
+        };
+
+        singleValueEventListener = new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dialog.dismiss();
+                loadInformationInForm();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                dialog.dismiss();
+                //Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                finish();
+            }
+        };
+
+        personQuery.addValueEventListener(valueEventListener);
+
+        personQuery.addListenerForSingleValueEvent(singleValueEventListener);
+    }
+
+    private void loadInformationInForm() {
+
+        Glide.with(this).load(Uri.parse(person.getProfilePic()))
                 .asBitmap().into(new BitmapImageViewTarget(ivPhoto) {
             @Override
             protected void setResource(Bitmap resource) {
@@ -68,31 +158,22 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
-        spinnerSex = (Spinner)findViewById(R.id.register_spinner_sexo);
-        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.sexo));
-        spinnerSex.setAdapter(spinnerCountShoesArrayAdapter);
+        etName.getEditText().setText(person.getName());
+        etEmail.getEditText().setText(person.getEmail());
+        etBirth.getEditText().setText(person.getBirth());
+        etPhone.getEditText().setText(person.getPhone());
 
-        etName = (TextInputLayout) findViewById(R.id.register_name);
-        etName.getEditText().setText(userFacebook.getName());
-
-        etEmail = (TextInputLayout) findViewById(R.id.register_email);
-        etEmail.getEditText().setText(userFacebook.getEmail());
-
-        etBirth = (TextInputLayout) findViewById(R.id.register_date);
-
-        etPhone = (TextInputLayout) findViewById(R.id.register_phone);
-
-        etHashtag = (TextInputLayout) findViewById(R.id.register_hashtag);
-
-        Button advance = (Button) findViewById(R.id.advance);
-        advance.setOnClickListener(this);
-
-        mAuth = FirebaseAuth.getInstance();
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        setupFieldMasks();*/
+        switch (person.getSex()) {
+            case "Feminino":
+                spinnerSex.setSelection(1);
+                break;
+            case "Masculino":
+                spinnerSex.setSelection(2);
+                break;
+            default:
+                spinnerSex.setSelection(0);
+                break;
+        }
     }
 
     @Override
@@ -178,61 +259,19 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
 
         if(allFieldsFilled && allFilledRight) {
             FirebaseUser user = mAuth.getCurrentUser();
-            finishLogin(user, database);
-            Toast.makeText(this, "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+            finishLogin(user);
+            Toast.makeText(this, "Editado com sucesso", Toast.LENGTH_SHORT).show();
 
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
     }
 
-    public void finishLogin(FirebaseUser user, final String database){
+    public void finishLogin(FirebaseUser user){
 
-        Uid = user.getUid();
-        profile_pic = user.getPhotoUrl().toString();
+        String uid = user.getUid();
+        String profile_pic = user.getPhotoUrl().toString();
 
-        mDatabase.child(database).child(Uid).addListenerForSingleValueEvent(
-            new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    // Get user value
-                    User user = dataSnapshot.getValue(User.class);
-
-                    // [START_EXCLUDE]
-                    if (user == null) {
-
-                        FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, birth, sex, phone, profile_pic, hashtag);
-
-                        sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sp.edit();
-
-                        editor.putString("id", Uid);
-                        editor.putString("name", name);
-                        editor.putString("email", email);
-                        editor.putString("profile_pic", profile_pic);
-                        editor.putString("hashtag", hashtag);
-                        editor.apply();
-                    } else {
-
-                        sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sp.edit();
-
-                        editor.putString("id", Uid);
-                        editor.putString("name", name);
-                        editor.putString("email", email);
-                        editor.putString("profile_pic", profile_pic);
-                        editor.putString("phone", user.phone);
-                        editor.putString("birth", user.birth);
-                        editor.putString("sex", user.sex);
-                        editor.putString("hashtag", hashtag);
-                        editor.apply();
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(EditPersonActivity.this, R.string.error_signin, Toast.LENGTH_LONG).show();
-                }
-            });
+        FirebaseHelper.writeNewUser(mDatabase, uid, name, email, birth, sex, phone, profile_pic, hashtag);
     }
 }

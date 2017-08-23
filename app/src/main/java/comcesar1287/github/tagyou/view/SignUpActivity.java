@@ -1,7 +1,9 @@
 package comcesar1287.github.tagyou.view;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -155,6 +157,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
+                        editor.apply();
+
                         if (database.equals(FirebaseHelper.FIREBASE_DATABASE_USERS)) {
                             // Get user value
                             User user = dataSnapshot.getValue(User.class);
@@ -163,29 +170,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             if (user == null) {
 
                                 FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, "", "", "", "", "");
-
-                                sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sp.edit();
-
-                                editor.putString(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
-                                editor.putString("id", Uid);
-                                editor.putString("name", name);
-                                editor.putString("email", email);
-                                editor.apply();
-                            } else {
-
-                                sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sp.edit();
-
-                                editor.putString(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
-                                editor.putString("id", Uid);
-                                editor.putString("name", name);
-                                editor.putString("email", email);
-                                editor.putString("profile_pic", user.profile_pic);
-                                editor.putString("phone", user.phone);
-                                editor.putString("birth", user.birth);
-                                editor.putString("sex", user.sex);
-                                editor.apply();
                             }
                         }else{
                             // Get user value
