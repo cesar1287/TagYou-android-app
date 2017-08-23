@@ -104,24 +104,6 @@
             android:layout_alignParentBottom="true"
             android:onClick="callEagora">
 
-            <ImageView
-                android:id="@+id/contactImage"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="7dp"
-                android:src="@drawable/tagyou_icon_contact"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/contactImage"
-                android:layout_marginLeft="27dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_horizontal"
-                android:text="8589988885"
-                android:textSize="11sp" />
         </RelativeLayout>
 
     </RelativeLayout>

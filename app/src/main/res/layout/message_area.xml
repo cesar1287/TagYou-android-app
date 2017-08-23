@@ -12,10 +12,10 @@
         android:layout_weight="1"
         android:textColorHint="#CFD8DC"
         android:textColor="#CFD8DC"
-        android:hint=" Digite aqui..."
+        android:hint="@string/message_area_text"
+        android:paddingLeft="8dp"
         android:id="@+id/messageArea"
-        android:maxHeight="80dp"
-        />
+        android:maxHeight="80dp"/>
 
     <ImageView
         android:layout_width="match_parent"
