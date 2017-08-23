@@ -36,30 +36,20 @@ public class IndicationPersonActivity extends AppCompatActivity {
 
     public void teste(View view) {
         String text = textCode();
-
         indicationCode(text);
     }
 
     public void indicationCode(String textCode) {
 
-        PackageManager pm=getPackageManager();
-        try {
-            Intent waIntent = new Intent(Intent.ACTION_SEND);
-            waIntent.setType("text/plain");
-            String text = textCode;
 
-            PackageInfo info=pm.getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA);
-            //Check if package exists or not. If not then code
-            //in catch block will be called
-            waIntent.setPackage("com.whatsapp");
+        Intent sendIntent = new Intent("android.intent.action.MAIN");
+        sendIntent.setAction(Intent.ACTION_SEND);
 
-            waIntent.putExtra(Intent.EXTRA_TEXT, text);
-            startActivity(Intent.createChooser(waIntent, "Share with"));
+        sendIntent.setType("text/plain");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, textCode);
+        sendIntent.setPackage("com.whatsapp");
+        startActivity(sendIntent);
 
-        } catch (PackageManager.NameNotFoundException e) {
-            Toast.makeText(this, "WhatsApp not Installed", Toast.LENGTH_SHORT)
-                    .show();
-        }
     }
 
     public String textCode(){
