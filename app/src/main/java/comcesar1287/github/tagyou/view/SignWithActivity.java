@@ -2,7 +2,6 @@ package comcesar1287.github.tagyou.view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,8 +14,6 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -45,7 +42,7 @@ import comcesar1287.github.tagyou.controller.domain.User;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
-public class SignWithActivity extends AppCompatActivity implements View.OnClickListener{
+public class SignWithActivity extends AppCompatActivity implements View.OnClickListener, FacebookCallback<LoginResult>{
 
     private CallbackManager callbackManager;
 
@@ -57,8 +54,6 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
 
     private String database;
 
-    private SharedPreferences sharedPreferences;
-
     private String Uid, name , email, profile_pic, password;
 
     private EditText etEmail, etPassword;
@@ -66,8 +61,6 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
 
         database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
 
@@ -87,26 +80,25 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
 
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions(Collections.singletonList("email"));
-        loginButton.registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        dialog = ProgressDialog.show(SignWithActivity.this,"",
-                                SignWithActivity.this.getResources().getString(R.string.processing_login), true, false);
+        loginButton.registerCallback(callbackManager, this);
+    }
 
-                        handleFacebookAccessToken(loginResult.getAccessToken());
-                    }
+    @Override
+    public void onSuccess(LoginResult loginResult) {
+        dialog = ProgressDialog.show(SignWithActivity.this,"",
+                SignWithActivity.this.getResources().getString(R.string.processing_login), true, false);
 
-                    @Override
-                    public void onCancel() {
-                        Toast.makeText(SignWithActivity.this, R.string.error_facebook_login_canceled, Toast.LENGTH_SHORT).show();
-                    }
+        handleFacebookAccessToken(loginResult.getAccessToken());
+    }
 
-                    @Override
-                    public void onError(FacebookException exception) {
-                        Toast.makeText(SignWithActivity.this, R.string.error_facebook_login_unknown_error, Toast.LENGTH_SHORT).show();
-                    }
-                });
+    @Override
+    public void onCancel() {
+        Toast.makeText(SignWithActivity.this, R.string.error_facebook_login_canceled, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onError(FacebookException error) {
+        Toast.makeText(SignWithActivity.this, R.string.error_facebook_login_unknown_error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -118,6 +110,12 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
                 email = etEmail.getText().toString();
                 password = etPassword.getText().toString();
                 attemptLogin();
+                break;
+            case R.id.sign_with_register:
+                Intent intent;
+                intent = new Intent(SignWithActivity.this, SignUpActivity.class);
+                intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
+                startActivity(intent);
                 break;
         }
     }
@@ -249,46 +247,20 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (database.equals(FirebaseHelper.FIREBASE_DATABASE_USERS)) {
-
                             // Get user value
                             User user = dataSnapshot.getValue(User.class);
 
                             // [START_EXCLUDE]
                             if (user == null) {
-
                                 FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, "", "", "", profile_pic, "");
-
-                                sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                                editor.putString(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
-                                editor.putString("id", Uid);
-                                editor.putString("name", name);
-                                editor.putString("email", email);
-                                editor.putString("profile_pic", profile_pic);
-                                editor.apply();
-                            } else {
-
-                                sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                                editor.putString(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
-                                editor.putString("id", Uid);
-                                editor.putString("name", name);
-                                editor.putString("email", email);
-                                editor.putString("profile_pic", profile_pic);
-                                editor.putString("phone", user.phone);
-                                editor.putString("birth", user.birth);
-                                editor.putString("sex", user.sex);
-                                editor.apply();
                             }
-                        }else {
-                            // Get user value
+
+                        }else{
+                            // Get company value
                             CompanyFirebase companyFirebase = dataSnapshot.getValue(CompanyFirebase.class);
 
                             // [START_EXCLUDE]
                             if (companyFirebase == null) {
-
                                 FirebaseHelper.writeNewCompany(mDatabase, Uid, name, "", email, "", "", "",
                                         "", profile_pic, (int) (Math.random() * 10), 40.233, -40.223, "");
                             }
@@ -302,12 +274,5 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
-    }
-
-    public void login_button_register(View view) {
-        Intent intent;
-        intent = new Intent(SignWithActivity.this, SignUpActivity.class);
-        intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
-        startActivity(intent);
     }
 }

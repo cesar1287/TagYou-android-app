@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity
 
     private FirebaseAuth mAuth;
 
+    FirebaseUser user;
+
     String name, profilePic, database;
 
     NavigationView navigationView;
@@ -63,6 +65,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         mAuth = FirebaseAuth.getInstance();
+
+        user = mAuth.getCurrentUser();
 
         verifyUserIsLogged();
 
@@ -97,8 +101,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void verifyUserIsLogged(){
-
-        FirebaseUser user = mAuth.getCurrentUser();
         if (user == null) {
             LoginManager.getInstance().logOut();
             Intent intent = new Intent(this, CategoryRegisterActivity.class);
@@ -144,21 +146,24 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setupUI() {
-        name = sharedPreferences.getString("name","Carregando...");
-        profilePic = sharedPreferences.getString("profile_pic","Carregando...");
+        View hView = navigationView.getHeaderView(0);
 
-        View hView =  navigationView.getHeaderView(0);
-        final ImageView nav_image = (ImageView)hView.findViewById(R.id.imageView);
-        Glide.with(this).load(profilePic)
-                .asBitmap().into(new BitmapImageViewTarget(nav_image) {
-            @Override
-            protected void setResource(Bitmap resource) {
-                RoundedBitmapDrawable circularBitmapDrawable =
-                        RoundedBitmapDrawableFactory.create(getResources(), resource);
-                circularBitmapDrawable.setCircular(true);
-                nav_image.setImageDrawable(circularBitmapDrawable);
-            }
-        });
+        if(user.getPhotoUrl()!=null) {
+            profilePic = user.getPhotoUrl().toString();
+            final ImageView nav_image = (ImageView) hView.findViewById(R.id.imageView);
+            Glide.with(this).load(profilePic)
+                    .asBitmap().into(new BitmapImageViewTarget(nav_image) {
+                @Override
+                protected void setResource(Bitmap resource) {
+                    RoundedBitmapDrawable circularBitmapDrawable =
+                            RoundedBitmapDrawableFactory.create(getResources(), resource);
+                    circularBitmapDrawable.setCircular(true);
+                    nav_image.setImageDrawable(circularBitmapDrawable);
+                }
+            });
+        }
+
+        name = user.getDisplayName();
         TextView nav_nome = (TextView)hView.findViewById(R.id.header_name);
         nav_nome.setText(name);
     }

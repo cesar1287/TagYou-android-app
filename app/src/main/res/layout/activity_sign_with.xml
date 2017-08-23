@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_title"
-            android:textSize="65dp"
+            android:textSize="65sp"
             android:textColor="@color/colorTagYou"
             android:textStyle="bold"
             android:layout_gravity="center"/>
@@ -49,7 +49,7 @@
             android:paddingLeft="8dp"
             android:hint="@string/login_email"
             android:inputType="textEmailAddress"
-            android:textSize="15dp" />
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/senha_login"
@@ -59,7 +59,7 @@
             android:paddingLeft="8dp"
             android:hint="@string/login_senha"
             android:inputType="textPassword"
-            android:textSize="15dp"/>
+            android:textSize="15sp"/>
     </LinearLayout>
 
 
@@ -73,6 +73,7 @@
         android:background="@drawable/button"/>
 
     <Button
+        android:id="@+id/sign_with_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_faca_seu_cadastro"
@@ -80,14 +81,13 @@
         android:background="@null"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:layout_gravity="center_horizontal"
-        android:onClick="login_button_register"/>
+        android:layout_gravity="center_horizontal"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_ou"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_gravity="center"
         android:textColor="@color/white"
         android:layout_marginBottom="35dp"/>
