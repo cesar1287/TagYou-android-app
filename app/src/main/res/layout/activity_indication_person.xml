@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_indication_person"
-        android:textSize="28dp"
+        android:textSize="28sp"
         android:textColor="@color/black"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="7dp"
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_indication_person"
-        android:textSize="19dp"
+        android:textSize="19sp"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"
@@ -59,7 +59,7 @@
         android:layout_below="@id/code_indication_text"
         android:text="YHDSHDHSDH"
         android:gravity="center"
-        android:textSize="25dp"/>
+        android:textSize="25sp"/>
 
     <Button
         android:id="@+id/button_indication_whatsapp"

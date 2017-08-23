@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="@string/creating_text"
             android:textColor="@color/white"
-            android:textSize="29dp"
+            android:textSize="29sp"
             android:gravity="center"/>
 
         <EditText
@@ -29,7 +29,7 @@
             android:layout_below="@id/sign_up_text"
             android:padding="10dp"
             android:hint="Nome"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:inputType="textPersonName"
             android:layout_marginTop="20dp"
             android:background="@drawable/edit_text">
@@ -42,7 +42,7 @@
             android:layout_height="45dp"
             android:layout_below="@id/sign_up_name"
             android:hint="Email"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:inputType="textEmailAddress"
             android:padding="10dp"
             android:layout_marginTop="7dp"
@@ -56,7 +56,7 @@
             android:layout_height="45dp"
             android:layout_below="@id/sign_up_email"
             android:hint="Senha"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:inputType="textPassword"
             android:layout_marginTop="7dp"
             android:padding="10dp"

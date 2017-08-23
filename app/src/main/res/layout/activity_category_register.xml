@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_title"
-        android:textSize="65dp"
+        android:textSize="65sp"
         android:textColor="@color/colorTagYou"
         android:textStyle="bold"
         android:layout_gravity="center"/>

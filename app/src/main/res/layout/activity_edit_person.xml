@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TagYou"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="@color/colorTagYou"
                 android:textStyle="bold"
                 android:layout_gravity="center"/>
