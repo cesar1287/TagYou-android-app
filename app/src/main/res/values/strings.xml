@@ -55,6 +55,7 @@
     <string name="categoty_pessoa">Pessoa</string>
     <string name="categoty_empresa">Empresa</string>
 
+    <string name="edit_person">Editar Cadastro Pessoa</string>
     <string name="edit_person_name">Nome</string>
     <string name="edit_person_date">Nascimento</string>
     <string name="edit_person_sex">Sexo</string>

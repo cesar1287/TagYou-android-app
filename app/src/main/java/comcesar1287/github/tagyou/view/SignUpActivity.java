@@ -86,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void createUser(){
         if(!Utility.verifyEmptyField(name, email, password)) {
             dialog = ProgressDialog.show(SignUpActivity.this,"",
-                    SignUpActivity.this.getResources().getString(R.string.creating_user), true, false);
+                    SignUpActivity.this.getResources().getString(R.string.sign_up_user), true, false);
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
                         @Override
