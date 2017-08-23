@@ -103,8 +103,8 @@ public class ContactUsActivity extends AppCompatActivity {
         sb.append("Mensagem: ").append(mensagemRemetente).append("\n");
 
         Intent email = new Intent(Intent.ACTION_SEND);
-        email.putExtra(Intent.EXTRA_EMAIL, new String[] {"contato.eagora@outlook.com"});
-        email.putExtra(Intent.EXTRA_SUBJECT, "Fale Conosco - Eagora");
+        email.putExtra(Intent.EXTRA_EMAIL, new String[] {"contato.tagyou@gmail.com"});
+        email.putExtra(Intent.EXTRA_SUBJECT, "Fale Conosco - TagYou");
         email.putExtra(Intent.EXTRA_TEXT, sb.toString());
         email.setType("plain/text");
         startActivity(Intent.createChooser(email, "Enviando Email..."));
