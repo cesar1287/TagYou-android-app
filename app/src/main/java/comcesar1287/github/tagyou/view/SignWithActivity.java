@@ -79,6 +79,9 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
         Button btLogin = (Button) findViewById(R.id.sign_with_login);
         btLogin.setOnClickListener(this);
 
+        Button btRegister = (Button) findViewById(R.id.sign_with_register);
+        btRegister.setOnClickListener(this);
+
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions(Collections.singletonList("email"));
         loginButton.registerCallback(callbackManager, this);
