@@ -42,8 +42,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     String Uid, name , email, password, database;
 
-    SharedPreferences sp;
-
     EditText etName, etEmail, etPassword;
 
     private ProgressDialog dialog;
@@ -157,11 +155,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                        SharedPreferences.Editor editor = sp.edit();
-                        editor.putString(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
-                        editor.apply();
-
                         if (database.equals(FirebaseHelper.FIREBASE_DATABASE_USERS)) {
                             // Get user value
                             User user = dataSnapshot.getValue(User.class);

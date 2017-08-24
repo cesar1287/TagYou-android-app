@@ -45,8 +45,6 @@ import comcesar1287.github.tagyou.controller.fragment.CompanyFragment;
 import comcesar1287.github.tagyou.controller.fragment.PersonFragment;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
-import static android.R.attr.id;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

@@ -2,6 +2,8 @@ package comcesar1287.github.tagyou.view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -58,6 +60,8 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
     private String Uid, name , email, profile_pic, password;
 
     private EditText etEmail, etPassword;
+
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -254,6 +258,10 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
+                        editor.apply();
                         if (database.equals(FirebaseHelper.FIREBASE_DATABASE_USERS)) {
                             // Get user value
                             User user = dataSnapshot.getValue(User.class);
