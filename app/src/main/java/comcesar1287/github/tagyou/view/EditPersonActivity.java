@@ -46,12 +46,7 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
     ValueEventListener valueEventListener;
     ValueEventListener singleValueEventListener;
 
-    private String name;
-    private String email;
-    private String phone;
-    private String birth;
-    private String sex;
-    private String hashtag;
+    private String name, email, phone, birth, sex, hashtag;
 
     ImageView ivPhoto;
 

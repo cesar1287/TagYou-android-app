@@ -1,9 +1,6 @@
 package comcesar1287.github.tagyou.view;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
