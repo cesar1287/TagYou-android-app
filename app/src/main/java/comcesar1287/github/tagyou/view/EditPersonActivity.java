@@ -177,7 +177,7 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
         int id = view.getId();
         switch (id){
             case R.id.advance:
-                attemptLogin();
+                editCadastre();
                 break;
         }
     }
@@ -190,7 +190,7 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
         etBirth.getEditText().addTextChangedListener(birthMask);
     }
 
-    public void attemptLogin(){
+    public void editCadastre(){
 
         boolean allFieldsFilled = true;
         boolean allFilledRight = true;
@@ -209,17 +209,17 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
             etName.setErrorEnabled(false);
         }
 
-        if(sex.equals("Selecione")){
-            allFieldsFilled = false;
-            Toast.makeText(this, "Campo sexo é obrigatório", Toast.LENGTH_SHORT).show();
-        }
+//        if(sex.equals("Selecione")){
+//            allFieldsFilled = false;
+//            Toast.makeText(this, "Campo sexo é obrigatório", Toast.LENGTH_SHORT).show();
+//        }
 
-        if(phone.equals("")){
-            allFieldsFilled = false;
-            etPhone.setError("Campo obrigatório");
-        }else{
-            etPhone.setErrorEnabled(false);
-        }
+//        if(phone.equals("")){
+//            allFieldsFilled = false;
+//            etPhone.setError("Campo obrigatório");
+//        }else{
+//            etPhone.setErrorEnabled(false);
+//        }
 
         if(email.equals("")){
             allFieldsFilled = false;
@@ -228,29 +228,29 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
             etEmail.setErrorEnabled(false);
         }
 
-        if(birth.equals("")){
-            allFieldsFilled = false;
-            etBirth.setError("Campo obrigatório");
-        }else{
-            etBirth.setErrorEnabled(false);
-        }
+//        if(birth.equals("")){
+//            allFieldsFilled = false;
+//            etBirth.setError("Campo obrigatório");
+//        }else{
+//            etBirth.setErrorEnabled(false);
+//        }
 
-        if(allFieldsFilled) {
-
-            if (phone.length() < 14) {
-                allFilledRight = false;
-                etPhone.setError("Telefone inválido");
-            } else {
-                etPhone.setErrorEnabled(false);
-            }
-
-            if (birth.length() < 10) {
-                allFilledRight = false;
-                etBirth.setError("Data de nascimento inválida");
-            } else {
-                etBirth.setErrorEnabled(false);
-            }
-        }
+//        if(allFieldsFilled) {
+//
+//            if (phone.length() < 14) {
+//                allFilledRight = false;
+//                etPhone.setError("Telefone inválido");
+//            } else {
+//                etPhone.setErrorEnabled(false);
+//            }
+//
+//            if (birth.length() < 10) {
+//                allFilledRight = false;
+//                etBirth.setError("Data de nascimento inválida");
+//            } else {
+//                etBirth.setErrorEnabled(false);
+//            }
+//        }
 
         if(allFieldsFilled && allFilledRight) {
             FirebaseUser user = mAuth.getCurrentUser();

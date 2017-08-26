@@ -38,7 +38,7 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
 
     private DatabaseReference mDatabase;
 
-    private String Uid, name , email, database, phone, description, address, site, banner,
+    private String Uid, name , email, phone, description, address, site, banner,
             logo, hashtag, city, street, number;
 
     private int quantity;
@@ -85,13 +85,22 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
         Button advance = (Button) findViewById(R.id.advance);
         advance.setOnClickListener(this);
 
-        database = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_DATABASE);
-
         mAuth = FirebaseAuth.getInstance();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         setupFieldMasks();
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        int id = view.getId();
+        switch (id){
+            case R.id.advance:
+                editCadastre();
+                break;
+        }
     }
 
     private void loadCompany() {
@@ -166,23 +175,12 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
         etPhone.getEditText().setText(company.getPhone());
     }
 
-    @Override
-    public void onClick(View view) {
-
-        int id = view.getId();
-        switch (id){
-            case R.id.advance:
-                attemptLogin();
-                break;
-        }
-    }
-
     public void setupFieldMasks(){
         TextWatcher phoneMask = Utility.insertMask(getResources().getString(R.string.phone_mask), etPhone.getEditText());
         etPhone.getEditText().addTextChangedListener(phoneMask);
     }
 
-    public void attemptLogin(){
+    public void editCadastre(){
 
         boolean allFieldsFilled = true;
         boolean allFilledRight = true;
@@ -203,12 +201,12 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
             etName.setErrorEnabled(false);
         }
 
-        if(phone.equals("")){
-            allFieldsFilled = false;
-            etPhone.setError("Campo obrigatório");
-        }else{
-            etPhone.setErrorEnabled(false);
-        }
+//        if(phone.equals("")){
+//            allFieldsFilled = false;
+//            etPhone.setError("Campo obrigatório");
+//        }else{
+//            etPhone.setErrorEnabled(false);
+//        }
 
         if(email.equals("")){
             allFieldsFilled = false;
@@ -217,43 +215,43 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
             etEmail.setErrorEnabled(false);
         }
 
-        if(description.equals("")){
-            allFieldsFilled = false;
-            etDescription.setError("Campo obrigatório");
-        }else{
-            etDescription.setErrorEnabled(false);
-        }
+//        if(description.equals("")){
+//            allFieldsFilled = false;
+//            etDescription.setError("Campo obrigatório");
+//        }else{
+//            etDescription.setErrorEnabled(false);
+//        }
 
-        if(city.equals("")){
-            allFieldsFilled = false;
-            etCity.setError("Campo obrigatório");
-        }else{
-            etCity.setErrorEnabled(false);
-        }
+//        if(city.equals("")){
+//            allFieldsFilled = false;
+//            etCity.setError("Campo obrigatório");
+//        }else{
+//            etCity.setErrorEnabled(false);
+//        }
+//
+//        if(street.equals("")){
+//            allFieldsFilled = false;
+//            etStreet.setError("Campo obrigatório");
+//        }else{
+//            etStreet.setErrorEnabled(false);
+//        }
+//
+//        if(number.equals("")){
+//            allFieldsFilled = false;
+//            etNumber.setError("Campo obrigatório");
+//        }else{
+//            etNumber.setErrorEnabled(false);
+//        }
 
-        if(street.equals("")){
-            allFieldsFilled = false;
-            etStreet.setError("Campo obrigatório");
-        }else{
-            etStreet.setErrorEnabled(false);
-        }
-
-        if(number.equals("")){
-            allFieldsFilled = false;
-            etNumber.setError("Campo obrigatório");
-        }else{
-            etNumber.setErrorEnabled(false);
-        }
-
-        if(allFieldsFilled) {
-
-            if (phone.length() < 14) {
-                allFilledRight = false;
-                etPhone.setError("Telefone inválido");
-            } else {
-                etPhone.setErrorEnabled(false);
-            }
-        }
+//        if(allFieldsFilled) {
+//
+//            if (phone.length() < 14) {
+//                allFilledRight = false;
+//                etPhone.setError("Telefone inválido");
+//            } else {
+//                etPhone.setErrorEnabled(false);
+//            }
+//        }
 
         if(allFieldsFilled && allFilledRight) {
             FirebaseUser user = mAuth.getCurrentUser();
