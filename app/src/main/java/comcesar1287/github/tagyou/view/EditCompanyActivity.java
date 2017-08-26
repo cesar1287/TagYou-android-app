@@ -1,7 +1,7 @@
 package comcesar1287.github.tagyou.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.design.widget.TextInputLayout;
@@ -23,11 +23,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import comcesar1287.github.tagyou.R;
+import comcesar1287.github.tagyou.controller.domain.Company;
 import comcesar1287.github.tagyou.controller.domain.CompanyFirebase;
-import comcesar1287.github.tagyou.controller.domain.UserFacebook;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
@@ -44,35 +45,36 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
 
     private double latitude, longitude;
 
-    private SharedPreferences sp;
+    private Query companyQuery;
+
+    ValueEventListener valueEventListener, singleValueEventListener;
 
     private TextInputLayout etName, etEmail, etHashtag, etDescription, etCity, etStreet, etNumber, etPhone;
+
+    private ImageView ivPhoto;
+
+    private ProgressDialog dialog;
+
+    private Company company;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_company);
 
-        /*UserFacebook userFacebook = (UserFacebook) getIntent().getSerializableExtra(Utility.KEY_CONTENT_EXTRA_DATA);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        final ImageView ivPhoto = (ImageView) findViewById(R.id.register_photo);
-        Glide.with(this).load(Uri.parse(userFacebook.getProfilePic()))
-                .asBitmap().into(new BitmapImageViewTarget(ivPhoto) {
-            @Override
-            protected void setResource(Bitmap resource) {
-                RoundedBitmapDrawable circularBitmapDrawable =
-                        RoundedBitmapDrawableFactory.create(getResources(), resource);
-                circularBitmapDrawable.setCircular(true);
-                ivPhoto.setImageDrawable(circularBitmapDrawable);
-            }
-        });
+        dialog = ProgressDialog.show(this,"", "Carregando dados do empresa...", true, false);
 
+        companyQuery = mDatabase
+                .child(FirebaseHelper.FIREBASE_DATABASE_COMPANIES)
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        loadCompany();
+
+        ivPhoto = (ImageView) findViewById(R.id.register_photo);
         etName = (TextInputLayout) findViewById(R.id.register_name);
-        etName.getEditText().setText(userFacebook.getName());
-
         etEmail = (TextInputLayout) findViewById(R.id.register_email);
-        etEmail.getEditText().setText(userFacebook.getEmail());
-
         etHashtag = (TextInputLayout) findViewById(R.id.register_hashtag);
         etDescription = (TextInputLayout) findViewById(R.id.register_description);
         etCity = (TextInputLayout) findViewById(R.id.register_city);
@@ -89,7 +91,79 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        setupFieldMasks();*/
+        setupFieldMasks();
+    }
+
+    private void loadCompany() {
+
+        valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                CompanyFirebase companyFirebase = dataSnapshot.getValue(CompanyFirebase.class);
+
+                company = new Company();
+                company.setName(companyFirebase.name);
+                company.setDescription(companyFirebase.description);
+                company.setEmail(companyFirebase.email);
+                company.setAddress(companyFirebase.address);
+                company.setPhone(companyFirebase.phone);
+                company.setSite(companyFirebase.site);
+                company.setBanner(companyFirebase.banner);
+                company.setLogo(companyFirebase.logo);
+                company.setHashtag(companyFirebase.hashtag);
+                company.setQuantity(companyFirebase.quantity);
+                company.setLatitude(companyFirebase.latitude);
+                company.setLongitude(companyFirebase.longitude);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                dialog.dismiss();
+                //Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                finish();
+            }
+        };
+
+        singleValueEventListener = new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dialog.dismiss();
+                loadInformationInForm();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                dialog.dismiss();
+                //Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                finish();
+            }
+        };
+
+        companyQuery.addValueEventListener(valueEventListener);
+
+        companyQuery.addListenerForSingleValueEvent(singleValueEventListener);
+    }
+
+    private void loadInformationInForm() {
+
+        Glide.with(this).load(Uri.parse(company.getLogo()))
+                .asBitmap().into(new BitmapImageViewTarget(ivPhoto) {
+            @Override
+            protected void setResource(Bitmap resource) {
+                RoundedBitmapDrawable circularBitmapDrawable =
+                        RoundedBitmapDrawableFactory.create(getResources(), resource);
+                circularBitmapDrawable.setCircular(true);
+                ivPhoto.setImageDrawable(circularBitmapDrawable);
+            }
+        });
+
+        etName.getEditText().setText(company.getName());
+        etEmail.getEditText().setText(company.getEmail());
+        etHashtag.getEditText().setText(company.getHashtag());
+        etDescription.getEditText().setText(company.getDescription());
+        //etCity.getEditText().setText(company.get);
+        //etStreet = (TextInputLayout) findViewById(R.id.register_street);
+        //etNumber = (TextInputLayout) findViewById(R.id.register_number);
+        etPhone.getEditText().setText(company.getPhone());
     }
 
     @Override
@@ -183,69 +257,21 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
 
         if(allFieldsFilled && allFilledRight) {
             FirebaseUser user = mAuth.getCurrentUser();
-            finishLogin(user, database);
-            Toast.makeText(this, "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
-
-            SharedPreferences sharedPreferences = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(getString(R.string.registry), getResources().getString(R.string.done));
-            editor.apply();
+            finishLogin(user);
+            Toast.makeText(this, "Editado com sucesso", Toast.LENGTH_SHORT).show();
 
             startActivity(new Intent(this, TagsFilterActivity.class));
             finish();
         }
     }
 
-    public void finishLogin(FirebaseUser user, final String database){
+    public void finishLogin(FirebaseUser user){
 
         Uid = user.getUid();
         logo = user.getPhotoUrl().toString();
         address = street+", "+number+", "+city;
 
-        mDatabase.child(database).child(Uid).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get user value
-                        CompanyFirebase companyFirebase = dataSnapshot.getValue(CompanyFirebase.class);
-
-                        // [START_EXCLUDE]
-                        if (companyFirebase == null) {
-
-                            FirebaseHelper.writeNewCompany(mDatabase, Uid, name, description, email ,address, phone, "" ,
-                                    "", logo, (int)(Math.random()*10), 40.233, -40.223, hashtag);
-
-                            /*sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sp.edit();
-
-                            editor.putString("id", Uid);
-                            editor.putString("name", name);
-                            editor.putString("email", email);
-                            editor.putString("profile_pic", profile_pic);
-                            editor.putString("hashtag", hashtag);
-                            editor.apply();*/
-                        } else {
-
-                            /*sp = getSharedPreferences(Utility.LOGIN_SHARED_PREF_NAME, MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sp.edit();
-
-                            editor.putString("id", Uid);
-                            editor.putString("name", name);
-                            editor.putString("email", email);
-                            editor.putString("profile_pic", profile_pic);
-                            editor.putString("phone", user.phone);
-                            editor.putString("birth", user.birth);
-                            editor.putString("sex", user.sex);
-                            editor.putString("hashtag", hashtag);
-                            editor.apply();*/
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Toast.makeText(EditCompanyActivity.this, R.string.error_signin, Toast.LENGTH_LONG).show();
-                    }
-                });
+        FirebaseHelper.writeNewCompany(mDatabase, Uid, name, description, email ,address, phone, "" ,
+                "", logo, (int)(Math.random()*10), 40.233, -40.223, hashtag);
     }
 }
