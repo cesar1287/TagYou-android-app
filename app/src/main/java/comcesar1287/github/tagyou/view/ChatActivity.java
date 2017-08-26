@@ -13,6 +13,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,7 +27,7 @@ import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.domain.UserDetails;
 
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity implements View.OnClickListener, com.google.firebase.database.ChildEventListener{
     LinearLayout layout;
     RelativeLayout layout_2;
     ImageView sendButton;
@@ -49,13 +50,22 @@ public class ChatActivity extends AppCompatActivity {
 
         layout = (LinearLayout) findViewById(R.id.layout1);
         layout_2 = (RelativeLayout)findViewById(R.id.layout2);
+
         sendButton = (ImageView)findViewById(R.id.sendButton);
+        sendButton.setOnClickListener(this);
+
         messageArea = (EditText)findViewById(R.id.messageArea);
         scrollView = (ScrollView)findViewById(R.id.scrollView);
 
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mReference1.addChildEventListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        switch (id){
+            case R.id.sendButton:
                 String messageText = messageArea.getText().toString();
                 String time = hora();
 
@@ -68,47 +78,43 @@ public class ChatActivity extends AppCompatActivity {
                     mReference2.push().setValue(map);
                     messageArea.setText("");
                 }
-            }
-        });
+                break;
+        }
+    }
 
-        mReference1.addChildEventListener(new com.google.firebase.database.ChildEventListener() {
+    @Override
+    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+        Map map = (Map) dataSnapshot.getValue();
+        String message = map.get("message").toString();
+        String userName = map.get("user").toString();
+        String time = map.get("timeCurrent").toString();
 
+        if(userName.equals(UserDetails.username)){
+            addMessageBox("Você:-\n" + message, 1, time );
+        }
+        else{
+            addMessageBox(UserDetails.chatWithName + ":-\n" + message, 2, time);
+        }
+    }
 
-            @Override
-            public void onChildAdded(com.google.firebase.database.DataSnapshot dataSnapshot, String s) {
-                Map map = (Map) dataSnapshot.getValue();
-                String message = map.get("message").toString();
-                String userName = map.get("user").toString();
-                String time = map.get("timeCurrent").toString();
+    @Override
+    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-                if(userName.equals(UserDetails.username)){
-                    addMessageBox("Você:-\n" + message, 1, time );
-                }
-                else{
-                    addMessageBox(UserDetails.chatWithName + ":-\n" + message, 2, time);
-                }
-            }
+    }
 
-            @Override
-            public void onChildChanged(com.google.firebase.database.DataSnapshot dataSnapshot, String s) {
+    @Override
+    public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-            }
+    }
 
-            @Override
-            public void onChildRemoved(com.google.firebase.database.DataSnapshot dataSnapshot) {
+    @Override
+    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
-            }
+    }
 
-            @Override
-            public void onChildMoved(com.google.firebase.database.DataSnapshot dataSnapshot, String s) {
+    @Override
+    public void onCancelled(DatabaseError databaseError) {
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 
 
@@ -117,10 +123,7 @@ public class ChatActivity extends AppCompatActivity {
         final int hour = currentTime.get(Calendar.HOUR_OF_DAY);
         final int minute = currentTime.get(Calendar.MINUTE);
 
-
-        String time = (hour + ":" + minute);
-
-        return time;
+        return (hour + ":" + minute);
     }
 
 

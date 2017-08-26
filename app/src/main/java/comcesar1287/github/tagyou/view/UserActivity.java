@@ -25,7 +25,7 @@ import java.util.HashMap;
 import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.domain.UserDetails;
 
-public class UserActivity extends AppCompatActivity {
+public class UserActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     ListView usersList;
     TextView noUsersText;
     HashMap<String, String> users;
@@ -70,14 +70,14 @@ public class UserActivity extends AppCompatActivity {
         pd.setMessage("Carregando...");
         pd.show();
 
-        usersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UserDetails.chatWithName = usersNames.get(position);
-                UserDetails.chatWith = users.get(usersNames.get(position));
-                startActivity(new Intent(UserActivity.this, ChatActivity.class));
-            }
-        });
+        usersList.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        UserDetails.chatWithName = usersNames.get(i);
+        UserDetails.chatWith = users.get(usersNames.get(i));
+        startActivity(new Intent(UserActivity.this, ChatActivity.class));
     }
 
     public void loadList(){
