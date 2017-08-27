@@ -22,8 +22,11 @@
     <string name="error_all_fields_required">Todos os campos são obrigatórios, tente novamente.</string>
     <string name="error_user_password_incorrect">Usuário e/ou senha incorreto(s).</string>
     <string name="error_invalid_user">Usuário não cadastrado.</string>
+    <string name="error_failed_send_email_confirmation">Falha ao enviar o email de confirmação, por favor, tente novamente</string>
+    <string name="error_email_not_confirmed">Email não confirmado, por favor, verifique seu email cadastrado e tente novamente</string>
 
-    <string name="user_created_successfully">Usuário criado com sucesso.</string>
+    <string name="send_email_confirmation">Email de verificação enviado com sucesso para</string>
+    <string name="user_created_successfully">Usuário criado com sucesso. Enviando email de confirmação da conta…</string>
 
     <string name="processing_login">Processando login, por favor aguarde…</string>
 
@@ -102,11 +105,9 @@
 
     <string name="item_company_persons">Pessoas gostam</string>
 
-    <string name="message_area_text">Digite aqui...</string>
+    <string name="message_area_text">Digite aqui…</string>
 
     <string name="nav_header_exit">Sair</string>
 
-
     <string name="contact_title">Fale Conosco</string>
-
 </resources>

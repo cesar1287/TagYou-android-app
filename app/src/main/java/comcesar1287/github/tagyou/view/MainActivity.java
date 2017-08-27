@@ -15,6 +15,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -23,12 +24,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,6 +103,14 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, CategoryRegisterActivity.class);
             startActivity(intent);
             finish();
+        }else{
+            for (UserInfo userTestProvider: FirebaseAuth.getInstance().getCurrentUser().getProviderData()) {
+                if (userTestProvider.getProviderId().equals("password") && !user.isEmailVerified()) {
+                    Intent intent = new Intent(this, CategoryRegisterActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
         }
     }
 

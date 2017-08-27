@@ -112,20 +112,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             }
                         }
                     })
-                    .addOnSuccessListener(SignUpActivity.this, new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            Toast.makeText(SignUpActivity.this,
-                                    getResources().getString(R.string.user_created_successfully),
-                                    Toast.LENGTH_SHORT).show();
-
-                            FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-                            FirebaseUser user = mAuth.getCurrentUser();
-
-                            finishLogin(user, database);
-                        }
-                    })
                     .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -135,7 +121,39 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             // signed in user can be handled in the listener.
                             dialog.dismiss();
                             if (task.isSuccessful()) {
-                                finish();
+                                Toast.makeText(SignUpActivity.this,
+                                        getResources().getString(R.string.user_created_successfully),
+                                        Toast.LENGTH_LONG).show();
+
+                                final FirebaseUser user = mAuth.getCurrentUser();
+
+                                if(user!=null) {
+                                    user.sendEmailVerification()
+                                            .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Toast.makeText(SignUpActivity.this,
+                                                                getString(R.string.send_email_confirmation) + " " + user.getEmail(),
+                                                                Toast.LENGTH_LONG).show();
+                                                        finishLogin(user, database);
+                                                        finish();
+                                                    } else {
+                                                        Toast.makeText(SignUpActivity.this,
+                                                                R.string.error_failed_send_email_confirmation,
+                                                                Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            })
+                                            .addOnFailureListener(SignUpActivity.this, new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(SignUpActivity.this,
+                                                            R.string.error_failed_send_email_confirmation,
+                                                            Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
                             }
                         }
                     });
@@ -144,7 +162,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void finishLogin(FirebaseUser user, final String database){
+    public void finishLogin(final FirebaseUser user, final String database){
 
         Uid = user.getUid();
 

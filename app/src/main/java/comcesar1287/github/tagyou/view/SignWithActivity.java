@@ -152,18 +152,6 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
                             }
                         }
                     })
-                    .addOnSuccessListener(SignWithActivity.this, new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-                            FirebaseUser user = mAuth.getCurrentUser();
-
-                            finishLogin(user, database);
-
-                            finish();
-                        }
-                    })
                     .addOnCompleteListener(SignWithActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -172,11 +160,21 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
                             // the auth state listener will be notified and logic to handle the
                             // signed in user can be handled in the listener.
                             if (task.isSuccessful()) {
-                                dialog.dismiss();
-                                Intent intent = new Intent(SignWithActivity.this, MainActivity.class);
-                                intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
-                                startActivity(intent);
-                                finish();
+                                FirebaseUser user = mAuth.getCurrentUser();
+
+                                if(user !=null && user.isEmailVerified()) {
+                                    dialog.dismiss();
+                                    finishLogin(user, database);
+                                    Intent intent = new Intent(SignWithActivity.this, MainActivity.class);
+                                    intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
+                                    startActivity(intent);
+                                    finish();
+                                }else {
+                                    dialog.dismiss();
+                                    Toast.makeText(SignWithActivity.this,
+                                            R.string.error_email_not_confirmed,
+                                            Toast.LENGTH_LONG).show();
+                                }
                             }
                         }
                     });
