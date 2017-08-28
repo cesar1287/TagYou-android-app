@@ -87,6 +87,8 @@
     <string name="sign_up_name">Nome</string>
     <string name="sign_up_email">Email</string>
     <string name="sign_up_password">Senha</string>
+    <string name="sign_up_code_indication">Código de Indicação</string>
+    <string name="sign_up_text_photo">Insira sua foto de perfil</string>
     <string name="sign_up_button">Finalizar Cadastro</string>
 
     <string name="hint_indication">Insira o código de indicação</string>
