@@ -100,7 +100,7 @@
     <string name="login_botton_entrar">Entrar</string>
     <string name="login_ou">-------------------------ou-------------------------</string>
 
-    <string name="forgot_password_title">Insira seu email e recupere a sua senha</string>
+    <string name="forgot_password_title">Insira o seu email e recupere a sua senha</string>
     <string name="forgot_password_email">Email</string>
     <string name="forgot_password_button_finalization">Finalizar Recuperação</string>
 
@@ -118,4 +118,7 @@
     <string name="nav_header_exit">Sair</string>
 
     <string name="contact_title">Fale Conosco</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

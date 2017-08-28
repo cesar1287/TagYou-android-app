@@ -101,11 +101,6 @@
             android:label="@string/contact_title"
             android:parentActivityName=".view.MainActivity"
             android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".view.ForgotPasswordActivity"
-            android:parentActivityName=".view.SignUpActivity"
-            android:screenOrientation="portrait">
-        </activity>
     </application>
 
 </manifest>
