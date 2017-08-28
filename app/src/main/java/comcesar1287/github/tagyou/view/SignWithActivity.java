@@ -164,7 +164,6 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
 
                                 if(user !=null && user.isEmailVerified()) {
                                     dialog.dismiss();
-                                    finishLogin(user, database);
                                     Intent intent = new Intent(SignWithActivity.this, MainActivity.class);
                                     intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
                                     startActivity(intent);
@@ -247,7 +246,7 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
 
         Uid = user.getUid();
         name = user.getDisplayName();
-        email = user.getEmail();
+        email = ((user.getEmail()==null) ? "none" : user.getEmail());
         if(profile_pic!=null) {
             profile_pic = user.getPhotoUrl().toString();
         }
