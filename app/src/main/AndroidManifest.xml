@@ -91,17 +91,17 @@
             android:name=".view.IndicationPersonActivity"
             android:label="@string/indication_person"
             android:parentActivityName=".view.MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.SignUpActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.ContactUsActivity"
             android:label="@string/contact_title"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".view.MainActivity">
-        </activity>
+            android:parentActivityName=".view.MainActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".view.ForgotPasswordActivity"></activity>
     </application>
 
 </manifest>

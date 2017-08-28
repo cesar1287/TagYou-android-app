@@ -94,8 +94,14 @@
     <string name="login_email">Email</string>
     <string name="login_senha">Senha</string>
     <string name="login_faca_seu_cadastro">Não é membro? Faça seu cadastro</string>
+    <string name="login_forgot_password">Recupere a sua senha!</string>
     <string name="login_botton_entrar">Entrar</string>
     <string name="login_ou">-------------------------ou-------------------------</string>
+
+    <string name="forgot_password_title">Insira seu email e recupere a sua senha</string>
+    <string name="forgot_password_email">Email</string>
+    <string name="forgot_password_button_finalization">Finalizar Recuperação</string>
+
 
     <string name="tags_filter_text">Selecione as suas preferências</string>
     <string name="tags_filter_affinity">Afinidades</string>

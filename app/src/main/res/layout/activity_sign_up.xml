@@ -7,11 +7,37 @@
     tools:context="comcesar1287.github.tagyou.view.SignUpActivity"
     android:background="@drawable/smartcity">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_title"
+            android:textSize="55sp"
+            android:textColor="@color/colorTagYou"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/tagyou_tag"
+            android:layout_gravity="end"/>
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        android:layout_below="@id/logo">
 
         <TextView
             android:id="@+id/sign_up_text"
