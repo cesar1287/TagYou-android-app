@@ -85,8 +85,7 @@
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            android:layout_gravity="center_horizontal"
-            android:onClick="teste"/>
+            android:layout_gravity="center_horizontal"/>
 
         <Button
             android:id="@+id/sign_with_register"
@@ -117,7 +116,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_gravity="center"/>
-
     </LinearLayout>
+
+
 
 </ScrollView>

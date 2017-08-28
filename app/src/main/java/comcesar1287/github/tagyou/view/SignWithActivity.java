@@ -1,6 +1,8 @@
 package comcesar1287.github.tagyou.view;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -289,6 +291,5 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
                     }
                 });
     }
-
 
 }
