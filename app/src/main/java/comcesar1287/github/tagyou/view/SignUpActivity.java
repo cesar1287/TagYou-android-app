@@ -1,16 +1,26 @@
 package comcesar1287.github.tagyou.view;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -27,11 +37,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.domain.CompanyFirebase;
 import comcesar1287.github.tagyou.controller.domain.User;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.R.attr.resource;
+import static comcesar1287.github.tagyou.R.id.person;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -48,6 +65,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     Button btCreate;
 
     SharedPreferences sp;
+
+    CircleImageView photoProfile;
+    String local = "";
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int RESULT_LOAD_IMG = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +88,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         btCreate = (Button) findViewById(R.id.sign_up_button_register);
         btCreate.setOnClickListener(this);
-    }
+
+
+
+}
+
+
+
 
     @Override
     public void onClick(View view) {
@@ -212,4 +240,48 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 });
     }
+
+
+
+    public void teste(View view) {
+
+        selectImage();
+    }
+
+    //captura de imagem via galeria
+    public void selectImage() {
+        local = "galeria";
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+    }
+
+
+    protected void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+
+        photoProfile = (CircleImageView) findViewById(R.id.sign_up_image_profile);
+        photoProfile.setMaxWidth(200);
+        photoProfile.setMaxHeight(200);
+
+        if (local == "camera" && reqCode == REQUEST_IMAGE_CAPTURE) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            photoProfile.setImageBitmap(imageBitmap);
+        }
+
+        else if (local == "galeria" && reqCode == RESULT_LOAD_IMG) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                photoProfile.setImageBitmap(selectedImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
 }

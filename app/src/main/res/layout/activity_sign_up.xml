@@ -28,14 +28,15 @@
                 android:textSize="29sp"
                 android:gravity="center"/>
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/sign_up_image_profile"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
                 android:layout_marginTop="15dp"
                 android:layout_below="@id/sign_up_text"
                 android:background="@drawable/add_image"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"
+                android:onClick="teste"/>
 
             <TextView
                 android:id="@+id/sign_up_text_photo"
