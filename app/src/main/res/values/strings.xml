@@ -101,11 +101,9 @@
     <string name="login_ou">-------------------------ou-------------------------</string>
 
     <string name="forgot_password_title">Recupere a sua senha</string>
-    <string name="forgot_password_email">Email</string>
+    <string name="forgot_password_email">Digite seu email</string>
     <string name="forgot_password_button_send">Enviar</string>
     <string name="forgot_password_button_cancel">Cancelar</string>
-
-
 
     <string name="tags_filter_text">Selecione as suas preferências</string>
     <string name="tags_filter_affinity">Afinidades</string>
@@ -120,7 +118,4 @@
     <string name="nav_header_exit">Sair</string>
 
     <string name="contact_title">Fale Conosco</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
