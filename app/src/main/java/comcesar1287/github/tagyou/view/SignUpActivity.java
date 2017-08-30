@@ -159,6 +159,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                                 final FirebaseUser user = mAuth.getCurrentUser();
 
+
                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                         .setDisplayName(name)
                                         .build();
@@ -248,7 +249,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         selectImage();
     }
 
-    //captura de imagem via galeria
     public void selectImage() {
         local = "galeria";
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);

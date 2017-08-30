@@ -100,9 +100,11 @@
     <string name="login_botton_entrar">Entrar</string>
     <string name="login_ou">-------------------------ou-------------------------</string>
 
-    <string name="forgot_password_title">Insira o seu email e recupere a sua senha</string>
+    <string name="forgot_password_title">Recupere a sua senha</string>
     <string name="forgot_password_email">Email</string>
-    <string name="forgot_password_button_finalization">Finalizar Recuperação</string>
+    <string name="forgot_password_button_finalization">Finalizar</string>
+    <string name="forgot_password_button_cancel">Cancelar</string>
+
 
 
     <string name="tags_filter_text">Selecione as suas preferências</string>
