@@ -3,6 +3,7 @@ package comcesar1287.github.tagyou.view;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -29,11 +30,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.domain.Person;
 import comcesar1287.github.tagyou.controller.domain.User;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditPersonActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -48,7 +53,7 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
 
     private String name, email, phone, birth, sex, hashtag;
 
-    ImageView ivPhoto;
+    private ImageView ivPhoto;
 
     private TextInputLayout etName, etEmail, etPhone, etBirth, etHashtag;
 
@@ -57,6 +62,9 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
     private ProgressDialog dialog;
 
     Person person;
+    //String local = "";
+    //static final int RESULT_LOAD_IMG = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +165,8 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
         etEmail.getEditText().setText(person.getEmail());
         etBirth.getEditText().setText(person.getBirth());
         etPhone.getEditText().setText(person.getPhone());
+
+
 
         switch (person.getSex()) {
             case "Feminino":
@@ -269,4 +279,34 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
 
         FirebaseHelper.writeNewUser(mDatabase, uid, name, email, birth, sex, phone, profile_pic, hashtag);
     }
+
+    /*public void changePhoto(View view) {
+
+        selectImage();
+    }
+
+    public void selectImage() {
+        local = "galeria";
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+    }
+
+
+    protected void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+
+       if (local == "galeria" && reqCode == RESULT_LOAD_IMG) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                ivPhoto.setImageBitmap(selectedImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }*/
 }

@@ -66,7 +66,7 @@
     <string name="edit_person_email">Email</string>
     <string name="edit_person_phone">Telefone</string>
     <string name="edit_person_button_save">Salvar</string>
-
+    <string name="edit_photo">Clique na foto e faça a alteração</string>
     <string name="edit_company">Editar Cadastro Empresa</string>
     <string name="edit_company_name">Nome</string>
     <string name="edit_company_description">Descrição</string>

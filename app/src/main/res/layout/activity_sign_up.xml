@@ -36,7 +36,7 @@
                 android:layout_below="@id/sign_up_text"
                 android:background="@drawable/add_image"
                 android:layout_centerHorizontal="true"
-                android:onClick="teste"/>
+                android:onClick="changePhoto"/>
 
             <TextView
                 android:id="@+id/sign_up_text_photo"
