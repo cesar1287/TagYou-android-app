@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="comcesar1287.github.tagyou.view.SignWithActivity"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <LinearLayout
             android:layout_width="wrap_content"
