@@ -1,13 +1,11 @@
 package comcesar1287.github.tagyou.view;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -46,6 +44,7 @@ import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.domain.CompanyFirebase;
 import comcesar1287.github.tagyou.controller.domain.User;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
+import comcesar1287.github.tagyou.controller.fragment.ForgotPasswordFragment;
 import comcesar1287.github.tagyou.controller.util.Utility;
 
 public class SignWithActivity extends AppCompatActivity implements View.OnClickListener, FacebookCallback<LoginResult>{
@@ -89,6 +88,9 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
         Button btRegister = (Button) findViewById(R.id.sign_with_register);
         btRegister.setOnClickListener(this);
 
+        Button btForgot = (Button) findViewById(R.id.sign_with_forgot_password);
+        btForgot.setOnClickListener(this);
+
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions(Collections.singletonList("email"));
         loginButton.registerCallback(callbackManager, this);
@@ -128,7 +130,16 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
                 intent.putExtra(Utility.KEY_CONTENT_EXTRA_DATABASE, database);
                 startActivity(intent);
                 break;
+            case R.id.sign_with_forgot_password:
+                showNoticeDialog();
+                break;
         }
+    }
+
+    public void showNoticeDialog() {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new ForgotPasswordFragment();
+        dialog.show(getSupportFragmentManager(), "dialogFrag");
     }
 
     private void attemptLogin() {
@@ -291,6 +302,4 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
                     }
                 });
     }
-
-
 }

@@ -102,7 +102,7 @@
 
     <string name="forgot_password_title">Recupere a sua senha</string>
     <string name="forgot_password_email">Email</string>
-    <string name="forgot_password_button_finalization">Finalizar</string>
+    <string name="forgot_password_button_send">Enviar</string>
     <string name="forgot_password_button_cancel">Cancelar</string>
 
 
