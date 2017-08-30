@@ -56,14 +56,14 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
 
     private TextInputLayout etName, etEmail, etHashtag, etDescription, etCity, etStreet, etNumber, etPhone;
 
-    private CircleImageView ivPhoto;
+    private ImageView ivPhoto;
 
     private ProgressDialog dialog;
 
     private Company company;
 
-    String local = "";
-    static final int RESULT_LOAD_IMG = 1;
+    //String local = "";
+    //static final int RESULT_LOAD_IMG = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
 
         loadCompany();
 
-        ivPhoto = (CircleImageView) findViewById(R.id.register_photo);
+        ivPhoto = (ImageView) findViewById(R.id.register_photo);
         etName = (TextInputLayout) findViewById(R.id.register_name);
         etEmail = (TextInputLayout) findViewById(R.id.register_email);
         etHashtag = (TextInputLayout) findViewById(R.id.register_hashtag);
@@ -281,6 +281,7 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
                 "", logo, (int)(Math.random()*10), 40.233, -40.223, hashtag);
     }
 
+    /*
     public void changePhoto(View view) {
 
         selectImage();
@@ -307,5 +308,5 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 }

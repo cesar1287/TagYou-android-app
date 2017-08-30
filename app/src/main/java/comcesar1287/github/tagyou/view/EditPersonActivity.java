@@ -53,7 +53,7 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
 
     private String name, email, phone, birth, sex, hashtag;
 
-    private CircleImageView ivPhoto;
+    private ImageView ivPhoto;
 
     private TextInputLayout etName, etEmail, etPhone, etBirth, etHashtag;
 
@@ -62,8 +62,8 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
     private ProgressDialog dialog;
 
     Person person;
-    String local = "";
-    static final int RESULT_LOAD_IMG = 1;
+    //String local = "";
+    //static final int RESULT_LOAD_IMG = 1;
 
 
     @Override
@@ -81,7 +81,7 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
 
         loadPerson();
 
-        ivPhoto = (CircleImageView) findViewById(R.id.register_photo);
+        ivPhoto = (ImageView) findViewById(R.id.register_photo);
 
         spinnerSex = (Spinner)findViewById(R.id.register_spinner_sexo);
         ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<>(this,
@@ -280,7 +280,7 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
         FirebaseHelper.writeNewUser(mDatabase, uid, name, email, birth, sex, phone, profile_pic, hashtag);
     }
 
-    public void changePhoto(View view) {
+    /*public void changePhoto(View view) {
 
         selectImage();
     }
@@ -308,5 +308,5 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
         }
 
 
-    }
+    }*/
 }
