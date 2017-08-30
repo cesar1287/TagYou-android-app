@@ -29,6 +29,7 @@
     <string name="user_created_successfully">Usuário criado com sucesso. Enviando email de confirmação da conta…</string>
 
     <string name="processing_login">Processando login, por favor aguarde…</string>
+    <string name="sending_email">Enviando email…</string>
 
     <string name="done">done</string>
     <string name="tags_filter">tags_filter</string>
@@ -65,7 +66,6 @@
     <string name="edit_person_email">Email</string>
     <string name="edit_person_phone">Telefone</string>
     <string name="edit_person_button_save">Salvar</string>
-
 
     <string name="edit_company">Editar Cadastro Empresa</string>
     <string name="edit_company_name">Nome</string>
@@ -118,4 +118,7 @@
     <string name="nav_header_exit">Sair</string>
 
     <string name="contact_title">Fale Conosco</string>
+    <string name="error_failed_send_email_to_reset">Falha ao enviar o email para recuperar sua conta.\n\nConta não registrada</string>
+    <string name="email_successfully_sent">Email para resetar sua senha enviado com sucesso</string>
+    <string name="send_cancelled_email">Recuperação de email cancelada</string>
 </resources>
