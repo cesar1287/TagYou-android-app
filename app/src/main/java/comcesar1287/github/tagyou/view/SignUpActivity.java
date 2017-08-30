@@ -244,7 +244,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
-    public void teste(View view) {
+    public void changePhoto(View view) {
 
         selectImage();
     }
@@ -261,8 +261,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onActivityResult(reqCode, resultCode, data);
 
         photoProfile = (CircleImageView) findViewById(R.id.sign_up_image_profile);
-        photoProfile.setMaxWidth(200);
-        photoProfile.setMaxHeight(200);
 
         if (local == "camera" && reqCode == REQUEST_IMAGE_CAPTURE) {
             Bundle extras = data.getExtras();

@@ -3,6 +3,7 @@ package comcesar1287.github.tagyou.view;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -26,11 +27,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.domain.Company;
 import comcesar1287.github.tagyou.controller.domain.CompanyFirebase;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditCompanyActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -51,11 +56,14 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
 
     private TextInputLayout etName, etEmail, etHashtag, etDescription, etCity, etStreet, etNumber, etPhone;
 
-    private ImageView ivPhoto;
+    private CircleImageView ivPhoto;
 
     private ProgressDialog dialog;
 
     private Company company;
+
+    String local = "";
+    static final int RESULT_LOAD_IMG = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +80,7 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
 
         loadCompany();
 
-        ivPhoto = (ImageView) findViewById(R.id.register_photo);
+        ivPhoto = (CircleImageView) findViewById(R.id.register_photo);
         etName = (TextInputLayout) findViewById(R.id.register_name);
         etEmail = (TextInputLayout) findViewById(R.id.register_email);
         etHashtag = (TextInputLayout) findViewById(R.id.register_hashtag);
@@ -271,5 +279,33 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
 
         FirebaseHelper.writeNewCompany(mDatabase, Uid, name, description, email ,address, phone, "" ,
                 "", logo, (int)(Math.random()*10), 40.233, -40.223, hashtag);
+    }
+
+    public void changePhoto(View view) {
+
+        selectImage();
+    }
+
+    public void selectImage() {
+        local = "galeria";
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+    }
+
+
+    protected void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+
+        if (local == "galeria" && reqCode == RESULT_LOAD_IMG) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                ivPhoto.setImageBitmap(selectedImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
