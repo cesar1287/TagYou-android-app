@@ -7,20 +7,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -47,9 +41,6 @@ import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.R.attr.resource;
-import static comcesar1287.github.tagyou.R.id.person;
-
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
 
     private FirebaseAuth mAuth;
@@ -68,7 +59,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     CircleImageView photoProfile;
     String local = "";
-    static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int RESULT_LOAD_IMG = 1;
 
     @Override
@@ -88,13 +78,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         btCreate = (Button) findViewById(R.id.sign_up_button_register);
         btCreate.setOnClickListener(this);
-
-
-
-}
-
-
-
+    }
 
     @Override
     public void onClick(View view) {
@@ -242,8 +226,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 });
     }
 
-
-
     public void changePhoto(View view) {
 
         selectImage();
@@ -256,19 +238,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
     }
 
-
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
         super.onActivityResult(reqCode, resultCode, data);
 
         photoProfile = (CircleImageView) findViewById(R.id.sign_up_image_profile);
 
-        if (local == "camera" && reqCode == REQUEST_IMAGE_CAPTURE) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            photoProfile.setImageBitmap(imageBitmap);
-        }
-
-        else if (local == "galeria" && reqCode == RESULT_LOAD_IMG) {
+        if (local.equals("galeria") && reqCode == RESULT_LOAD_IMG) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
@@ -279,7 +254,5 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
     }
-
-
 
 }
