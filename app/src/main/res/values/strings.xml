@@ -29,7 +29,7 @@
     <string name="user_created_successfully">Usuário criado com sucesso. Enviando email de confirmação da conta…</string>
 
     <string name="processing_login">Processando login, por favor aguarde…</string>
-    <string name="sending_email">Enviando email…</string>
+    <string name="processing">Processando…</string>
 
     <string name="done">done</string>
     <string name="tags_filter">tags_filter</string>

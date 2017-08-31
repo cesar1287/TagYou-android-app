@@ -100,7 +100,10 @@
             android:name=".view.ContactUsActivity"
             android:label="@string/contact_title"
             android:parentActivityName=".view.MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.ForgotPasswordActivity"
+            android:theme="@style/AppTheme.Dialog"/>
     </application>
 
 </manifest>
