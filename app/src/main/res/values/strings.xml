@@ -121,4 +121,6 @@
     <string name="error_failed_send_email_to_reset">Falha ao enviar o email para recuperar sua conta.\n\nConta não registrada</string>
     <string name="email_successfully_sent">Email para resetar sua senha enviado com sucesso</string>
     <string name="send_cancelled_email">Recuperação de email cancelada</string>
+    <string name="error_need_select_profile_picture">É preciso selecionar uma foto de perfil</string>
+    <string name="uploading_image">Fazendo upload da imagem…</string>
 </resources>
