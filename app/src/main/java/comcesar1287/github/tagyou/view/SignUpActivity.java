@@ -81,9 +81,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         mStorage = FirebaseStorage.getInstance();
 
-        storageRef = mStorage.getReference()
-                .child("images/"+mAuth.getCurrentUser().getUid());
-
         mAuth = FirebaseAuth.getInstance();
 
         etName = (EditText) findViewById(R.id.sign_up_name);
@@ -178,6 +175,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                                                     getString(R.string.send_email_confirmation) + " " + user.getEmail(),
                                                                     Toast.LENGTH_LONG).show();
                                                             finishLogin(user, database);
+
+                                                            storageRef = mStorage.getReference()
+                                                                    .child("images/"+mAuth.getCurrentUser().getUid());
+
                                                             dialogUpload = ProgressDialog.show(SignUpActivity.this, "",
                                                                     getString(R.string.uploading_image), true, false);
                                                             uploadProfilePicture();
