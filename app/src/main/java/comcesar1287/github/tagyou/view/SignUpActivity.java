@@ -34,7 +34,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
@@ -50,8 +49,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private FirebaseAuth mAuth;
     private FirebaseStorage mStorage;
 
+    private FirebaseUser user;
+
     private StorageReference storageRef;
     private DatabaseReference mDatabase;
+
+    UserProfileChangeRequest profileUpdates;
 
     String Uid, name , email, password, database;
 
@@ -157,15 +160,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                             getResources().getString(R.string.user_created_successfully),
                                             Toast.LENGTH_LONG).show();
 
-                                    final FirebaseUser user = mAuth.getCurrentUser();
-
-                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                            .setDisplayName(name)
-                                            .build();
+                                    user = mAuth.getCurrentUser();
 
                                     if (user != null) {
-                                        user.updateProfile(profileUpdates);
-
                                         user.sendEmailVerification()
                                                 .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<Void>() {
                                                     @Override
@@ -174,7 +171,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                                             Toast.makeText(SignUpActivity.this,
                                                                     getString(R.string.send_email_confirmation) + " " + user.getEmail(),
                                                                     Toast.LENGTH_LONG).show();
-                                                            finishLogin(user, database);
 
                                                             storageRef = mStorage.getReference()
                                                                     .child("images/"+mAuth.getCurrentUser().getUid());
@@ -217,6 +213,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                 if(task.isSuccessful()){
                     dialogUpload.dismiss();
+                    profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setPhotoUri(task.getResult().getDownloadUrl())
+                            .setDisplayName(name)
+                            .build();
+
+                    user.updateProfile(profileUpdates);
+
+                    String profilePic = task.getResult().getDownloadUrl().toString();
+
+                    finishLogin(user, database, profilePic);
+
                     Toast.makeText(SignUpActivity.this, "Foto carregada com sucesso", Toast.LENGTH_SHORT).show();
                     finish();
                 }
@@ -230,7 +237,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-    public void finishLogin(final FirebaseUser user, final String database){
+    public void finishLogin(final FirebaseUser user, final String database, final String profilePic){
 
         Uid = user.getUid();
 
@@ -249,7 +256,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             // [START_EXCLUDE]
                             if (user == null) {
 
-                                FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, "", "", "", "", "");
+                                FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, "", "", "", profilePic, "");
                             }
                         }else{
                             // Get user value
