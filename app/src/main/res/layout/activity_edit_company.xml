@@ -142,7 +142,7 @@
                 android:id="@+id/register_edit_street"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/edit_company_city"/>
+                android:hint="@string/edit_company_address"/>
 
         </android.support.design.widget.TextInputLayout>
 

@@ -123,4 +123,5 @@
     <string name="send_cancelled_email">Recuperação de email cancelada</string>
     <string name="error_need_select_profile_picture">É preciso selecionar uma foto de perfil</string>
     <string name="uploading_image">Fazendo upload da imagem…</string>
+    <string name="edit_company_address">Endereço</string>
 </resources>
