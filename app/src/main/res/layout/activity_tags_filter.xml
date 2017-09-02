@@ -1,131 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical"
+    android:background="@color/colorBackgroundSplash"
+    tools:context="comcesar1287.github.tagyou.view.TagsFilterActivity">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <TextView
+        android:id="@+id/title_preferences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tags_filter_text"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/title_affinity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tags_filter_affinity"
+        android:textSize="17sp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/title_preferences"
+        android:gravity="center"
+        android:textColor="@color/white"/>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/flex_affinity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/colorBackgroundSplash"
-        tools:context="comcesar1287.github.tagyou.view.TagsFilterActivity">
+        android:layout_below="@+id/title_affinity"
+        app:flexWrap="wrap"
+        app:justifyContent="space_around"
+        app:alignContent="space_around"
+        app:alignItems="baseline"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"/>
 
-        <TextView
-            android:id="@+id/title_preferences"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tags_filter_text"
-            android:textSize="20sp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:textColor="@color/white"/>
+    <TextView
+        android:id="@+id/title_groups"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tags_filter_group"
+        android:textSize="17sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/flex_affinity"
+        android:gravity="center"
+        android:textColor="@color/white"/>
 
-        <TextView
-            android:id="@+id/title_affinity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tags_filter_affinity"
-            android:textSize="17sp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@id/title_preferences"
-            android:gravity="center"
-            android:textColor="@color/white"/>
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/flex_groups"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_groups"
+        app:flexWrap="wrap"
+        app:justifyContent="space_around"
+        app:alignContent="space_around"
+        app:alignItems="baseline"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"/>
 
-        <com.adroitandroid.chipcloud.ChipCloud
-            xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/chip_cloud_affinity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/title_affinity"
-            chipcloud:deselectTransitionMS="250"
-            chipcloud:selectTransitionMS="450"
-            chipcloud:selectMode="multi"
-            chipcloud:allCaps="true"
-            chipcloud:gravity="center"
-            chipcloud:minHorizontalSpacing="32dp"
-            chipcloud:verticalSpacing="16dp"
-            chipcloud:textSize="18sp"/>
+    <TextView
+        android:id="@+id/title_segments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tags_filter_Segments"
+        android:textSize="17sp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/flex_groups"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/white"/>
 
-        <TextView
-            android:id="@+id/title_groups"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tags_filter_group"
-            android:textSize="17sp"
-            android:layout_marginTop="13dp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@id/chip_cloud_affinity"
-            android:gravity="center"
-            android:textColor="@color/white"/>
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/flex_segments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_segments"
+        app:flexWrap="wrap"
+        app:justifyContent="space_around"
+        app:alignContent="space_around"
+        app:alignItems="baseline"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"/>
 
-        <com.adroitandroid.chipcloud.ChipCloud
-            xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/chip_cloud_groups"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/title_groups"
-            chipcloud:deselectTransitionMS="250"
-            chipcloud:selectTransitionMS="450"
-            chipcloud:selectMode="multi"
-            chipcloud:allCaps="true"
-            chipcloud:gravity="center"
-            chipcloud:minHorizontalSpacing="32dp"
-            chipcloud:verticalSpacing="16dp"
-            chipcloud:textSize="18sp"/>
+    <Button
+        android:id="@+id/btNextAffinity"
+        android:text="Salvar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="@color/concrete"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"/>
 
-        <TextView
-            android:id="@+id/title_segments"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tags_filter_Segments"
-            android:textSize="17sp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@id/chip_cloud_groups"
-            android:layout_marginTop="13dp"
-            android:gravity="center"
-            android:textColor="@color/white"/>
-
-        <com.adroitandroid.chipcloud.ChipCloud
-            xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/chip_cloud_segments"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/title_segments"
-            chipcloud:deselectTransitionMS="250"
-            chipcloud:selectTransitionMS="450"
-            chipcloud:selectMode="multi"
-            chipcloud:allCaps="true"
-            chipcloud:gravity="staggered"
-            chipcloud:minHorizontalSpacing="32dp"
-            chipcloud:verticalSpacing="16dp"
-            chipcloud:textSize="18sp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/concrete"
-            android:layout_below="@id/chip_cloud_segments"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="15dp">
-
-            <Button
-                android:id="@+id/btNextAffinity"
-                android:text="Salvar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:background="@color/concrete"
-                android:textColor="@color/white"
-                android:layout_alignParentBottom="true"/>
-        </LinearLayout>
-
-    </RelativeLayout>
-
-</ScrollView>
+</RelativeLayout>
