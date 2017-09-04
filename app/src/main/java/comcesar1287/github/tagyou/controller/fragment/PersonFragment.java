@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -31,12 +32,12 @@ import comcesar1287.github.tagyou.view.PersonsDetailsActivity;
 
 public class PersonFragment extends Fragment implements RecyclerViewOnClickListenerHack {
 
-    RecyclerView mRecyclerView;
-    public List<Person> mList;
+    RecyclerView mRecyclerViewTag1, mRecyclerViewTag2, mRecyclerViewTag3;
+    public List<Person> mListTag1, mListTag2, mListTag3;
 
     ArrayList<Person> peopleList;
 
-    public PersonAdapter adapter;
+    public PersonAdapter adapter1, adapter2, adapter3;
 
     private DatabaseReference mDatabase;
 
@@ -53,24 +54,64 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
-        mRecyclerView.setHasFixedSize(true);
+        setupRecyclerViewAffinity(view);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
-        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(gridLayoutManager);
+        setupRecyclerViewGroup(view);
 
-        mList = new ArrayList<>();
-        adapter = new PersonAdapter(getActivity(), mList);
-        adapter.setRecyclerViewOnClickListenerHack(this);
-        mRecyclerView.setAdapter( adapter );
-
-        mRecyclerView.addOnItemTouchListener(new RecyclerViewTouchListener( getActivity(), mRecyclerView, this ));
+        setupRecyclerViewSegment(view);
 
         getPeopleList();
 
         return view;
 
+    }
+
+    private void setupRecyclerViewAffinity(View view) {
+        mRecyclerViewTag1 = (RecyclerView) view.findViewById(R.id.rv_list_tag1);
+        mRecyclerViewTag1.setHasFixedSize(true);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        mRecyclerViewTag1.setLayoutManager(linearLayoutManager);
+
+        mListTag1 = new ArrayList<>();
+        adapter1 = new PersonAdapter(getActivity(), mListTag1);
+        adapter1.setRecyclerViewOnClickListenerHack(this);
+        mRecyclerViewTag1.setAdapter( adapter1 );
+
+        mRecyclerViewTag1.addOnItemTouchListener(new RecyclerViewTouchListener( getActivity(), mRecyclerViewTag1, this ));
+    }
+
+    private void setupRecyclerViewGroup(View view) {
+        mRecyclerViewTag2 = (RecyclerView) view.findViewById(R.id.rv_list_tag2);
+        mRecyclerViewTag2.setHasFixedSize(true);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        mRecyclerViewTag2.setLayoutManager(linearLayoutManager);
+
+        mListTag2 = new ArrayList<>();
+        adapter2 = new PersonAdapter(getActivity(), mListTag2);
+        adapter2.setRecyclerViewOnClickListenerHack(this);
+        mRecyclerViewTag2.setAdapter( adapter2 );
+
+        mRecyclerViewTag2.addOnItemTouchListener(new RecyclerViewTouchListener( getActivity(), mRecyclerViewTag2, this ));
+    }
+
+    private void setupRecyclerViewSegment(View view) {
+        mRecyclerViewTag3 = (RecyclerView) view.findViewById(R.id.rv_list_tag3);
+        mRecyclerViewTag3.setHasFixedSize(true);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        mRecyclerViewTag3.setLayoutManager(linearLayoutManager);
+
+        mListTag3 = new ArrayList<>();
+        adapter3 = new PersonAdapter(getActivity(), mListTag3);
+        adapter3.setRecyclerViewOnClickListenerHack(this);
+        mRecyclerViewTag3.setAdapter( adapter3 );
+
+        mRecyclerViewTag3.addOnItemTouchListener(new RecyclerViewTouchListener( getActivity(), mRecyclerViewTag3, this ));
     }
 
     public void loadList(){
@@ -90,6 +131,7 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
                     p.setEmail((String)postSnapshot.child("email").getValue());
                     p.setBirth((String)postSnapshot.child("birth").getValue());
                     p.setPhone((String)postSnapshot.child("phone").getValue());
+                    p.setSex((String)postSnapshot.child("sex").getValue());
 
                     peopleList.add(p);
                 }
@@ -106,9 +148,17 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
         singleValueEventListener = new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                mList.clear();
-                mList.addAll(peopleList);
-                adapter.notifyDataSetChanged();
+                mListTag1.clear();
+                mListTag1.addAll(peopleList);
+                adapter1.notifyDataSetChanged();
+
+                mListTag2.clear();
+                mListTag2.addAll(peopleList);
+                adapter2.notifyDataSetChanged();
+
+                mListTag3.clear();
+                mListTag3.addAll(peopleList);
+                adapter3.notifyDataSetChanged();
                 //dialog.dismiss();
             }
 
@@ -138,9 +188,9 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
 
     @Override
     public void onClickListener(View view, int position) {
-        Intent intent = new Intent(getActivity(), PersonsDetailsActivity.class);
-        intent.putExtra(Utility.KEY_CONTENT_EXTRA_COMPANY, mList.get(position));
-        startActivity(intent);
+        /*Intent intent = new Intent(getActivity(), PersonsDetailsActivity.class);
+        intent.putExtra(Utility.KEY_CONTENT_EXTRA_COMPANY, mListTag1.get(position));
+        startActivity(intent);*/
     }
 
     private static class RecyclerViewTouchListener implements RecyclerView.OnItemTouchListener {
