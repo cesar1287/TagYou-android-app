@@ -16,13 +16,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.33">
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_list_tag1"
-                android:scrollbars="vertical"
-                android:layout_centerHorizontal="true"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
             <TextView
                 android:id="@+id/tag1"
                 android:layout_width="match_parent"
@@ -34,21 +27,22 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:textStyle="bold"
-                android:layout_below="@id/tag1"
                 android:textColor="@color/white"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_list_tag1"
+                android:scrollbars="vertical"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@id/tag1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.33">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_list_tag2"
-                android:scrollbars="vertical"
-                android:layout_centerHorizontal="true"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
 
             <TextView
                 android:id="@+id/tag2"
@@ -56,25 +50,27 @@
                 android:layout_height="35dp"
                 android:text="GRUPO"
                 android:textStyle="bold"
-                android:layout_below="@id/tag2"
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
                 android:background="@color/colorPrimary"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:textColor="@color/white"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_list_tag2"
+                android:scrollbars="vertical"
+                android:layout_above="@id/tag2"
+                android:layout_centerHorizontal="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.33">
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_list_tag3"
-                android:scrollbars="vertical"
-                android:layout_centerHorizontal="true"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
 
             <TextView
                 android:id="@+id/tag3"
@@ -83,12 +79,19 @@
                 android:text="SEGMENTO"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:layout_below="@id/tag3"
                 android:layout_alignParentBottom="true"
                 android:background="@color/colorPrimary"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:textColor="@color/white"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_list_tag3"
+                android:scrollbars="vertical"
+                android:layout_centerHorizontal="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/tag3"/>
         </RelativeLayout>
     </LinearLayout>
 
