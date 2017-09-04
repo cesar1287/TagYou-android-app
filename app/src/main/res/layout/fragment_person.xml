@@ -34,6 +34,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:textStyle="bold"
+                android:layout_below="@id/tag1"
                 android:textColor="@color/white"/>
         </RelativeLayout>
 
@@ -55,6 +56,7 @@
                 android:layout_height="35dp"
                 android:text="GRUPO"
                 android:textStyle="bold"
+                android:layout_below="@id/tag2"
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
                 android:background="@color/colorPrimary"
@@ -81,6 +83,7 @@
                 android:text="SEGMENTO"
                 android:textStyle="bold"
                 android:gravity="center"
+                android:layout_below="@id/tag3"
                 android:layout_alignParentBottom="true"
                 android:background="@color/colorPrimary"
                 android:layout_centerHorizontal="true"
