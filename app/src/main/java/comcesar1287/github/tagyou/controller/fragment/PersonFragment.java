@@ -1,7 +1,6 @@
 package comcesar1287.github.tagyou.controller.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,27 +21,33 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.adapter.PersonAdapter;
 import comcesar1287.github.tagyou.controller.domain.Person;
+import comcesar1287.github.tagyou.controller.domain.Tag;
+import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.interfaces.RecyclerViewOnClickListenerHack;
-import comcesar1287.github.tagyou.controller.util.Utility;
-import comcesar1287.github.tagyou.view.PersonsDetailsActivity;
 
 public class PersonFragment extends Fragment implements RecyclerViewOnClickListenerHack {
 
     RecyclerView mRecyclerViewTag1, mRecyclerViewTag2, mRecyclerViewTag3;
     public List<Person> mListTag1, mListTag2, mListTag3;
 
-    ArrayList<Person> peopleList;
+    ArrayList<Person> peopleList, affinity, group, segment;
+    ArrayList<Tag> tagsList;
+
+    HashMap<String, Tag> mapTags;
+    HashMap<String, Person> mapPeople;
 
     public PersonAdapter adapter1, adapter2, adapter3;
 
     private DatabaseReference mDatabase;
 
-    Query person;
+    Query person, tags;
 
     ValueEventListener valueEventListener;
     ValueEventListener singleValueEventListener;
@@ -121,6 +127,7 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 peopleList = new ArrayList<>();
+                mapPeople = new HashMap<>();
 
                 Person p;
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
@@ -133,6 +140,7 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
                     p.setPhone((String)postSnapshot.child("phone").getValue());
                     p.setSex((String)postSnapshot.child("sex").getValue());
 
+                    mapPeople.put(postSnapshot.getKey(), p);
                     peopleList.add(p);
                 }
             }
@@ -147,18 +155,8 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
 
         singleValueEventListener = new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                mListTag1.clear();
-                mListTag1.addAll(peopleList);
-                adapter1.notifyDataSetChanged();
-
-                mListTag2.clear();
-                mListTag2.addAll(peopleList);
-                adapter2.notifyDataSetChanged();
-
-                mListTag3.clear();
-                mListTag3.addAll(peopleList);
-                adapter3.notifyDataSetChanged();
+                
+                getListTags();
                 //dialog.dismiss();
             }
 
@@ -173,6 +171,127 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
         person.addValueEventListener(valueEventListener);
 
         person.addListenerForSingleValueEvent(singleValueEventListener);
+    }
+
+    private void loadListTags() {
+
+        valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                tagsList = new ArrayList<>();
+                mapTags = new HashMap<>();
+
+                Tag tag;
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    tag = new Tag();
+                    tag.setAffinity((String)postSnapshot.child("affinity").getValue());
+                    tag.setGroup((String)postSnapshot.child("group").getValue());
+                    tag.setSegment((String)postSnapshot.child("segment").getValue());
+
+                    mapTags.put(postSnapshot.getKey(), tag);
+                    tagsList.add(tag);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                /*dialog.dismiss();
+                Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                finish();*/
+            }
+        };
+
+        singleValueEventListener = new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                setupInfoRecyclerView();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                /*dialog.dismiss();
+                Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                finish();*/
+            }
+        };
+
+        tags.addValueEventListener(valueEventListener);
+
+        tags.addListenerForSingleValueEvent(singleValueEventListener);
+    }
+
+    private void setupInfoRecyclerView() {
+        String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        affinity = new ArrayList<>();
+        group = new ArrayList<>();
+        segment = new ArrayList<>();
+
+        String []tagsAffinity, tagsGroup, tagsSegment;
+        if(mapTags.containsKey(Uid)){
+            Tag me = mapTags.get(Uid);
+
+            for(Map.Entry<String, Tag> entry: mapTags.entrySet()){
+                String affinityList = entry.getValue().getAffinity();
+                tagsAffinity = affinityList.split(";");
+
+                String groupList = entry.getValue().getGroup();
+                tagsGroup = groupList.split(";");
+
+                String segmentList = entry.getValue().getSegment();
+                tagsSegment = segmentList.split(";");
+
+                for(String tagEntry: tagsAffinity){
+                    if(me.getAffinity().contains(tagEntry) && !entry.getKey().equals(Uid)){
+                        affinity.add(mapPeople.get(entry.getKey()));
+                        break;
+                    }
+                }
+
+                for(String tagEntry: tagsGroup){
+                    if(me.getGroup().contains(tagEntry) && !entry.getKey().equals(Uid)){
+                        group.add(mapPeople.get(entry.getKey()));
+                        break;
+                    }
+                }
+
+                for(String tagEntry: tagsSegment){
+                    if(me.getSegment().contains(tagEntry) && !entry.getKey().equals(Uid)){
+                        segment.add(mapPeople.get(entry.getKey()));
+                        break;
+                    }
+                }
+            }
+
+            setupLists();
+        }else{
+            setupLists();
+        }
+    }
+
+    private void setupLists() {
+        mListTag1.clear();
+        mListTag1.addAll(affinity);
+        adapter1.notifyDataSetChanged();
+
+        mListTag2.clear();
+        mListTag2.addAll(group);
+        adapter2.notifyDataSetChanged();
+
+        mListTag3.clear();
+        mListTag3.addAll(segment);
+        adapter3.notifyDataSetChanged();
+        //dialog.dismiss();
+    }
+
+    private List<Tag> getListTags() {
+
+        tags = mDatabase
+                .child(FirebaseHelper.FIREBASE_DATABASE_TAGS);
+
+        loadListTags();
+
+        return tagsList;
     }
 
     public List<Person> getPeopleList() {
