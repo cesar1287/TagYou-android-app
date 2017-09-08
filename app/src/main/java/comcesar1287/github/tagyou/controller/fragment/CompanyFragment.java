@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -260,21 +261,27 @@ public class CompanyFragment extends Fragment implements RecyclerViewOnClickList
 
                 for(String tagEntry: tagsAffinity){
                     if(me.getAffinity().contains(tagEntry) && !entry.getKey().equals(Uid)){
-                        affinity.add(mapCompanies.get(entry.getKey()));
+                        if(mapCompanies.get(entry.getKey())!=null) {
+                            affinity.add(mapCompanies.get(entry.getKey()));
+                        }
                         break;
                     }
                 }
 
                 for(String tagEntry: tagsGroup){
                     if(me.getGroup().contains(tagEntry) && !entry.getKey().equals(Uid)){
-                        group.add(mapCompanies.get(entry.getKey()));
+                        if(mapCompanies.get(entry.getKey())!=null) {
+                            group.add(mapCompanies.get(entry.getKey()));
+                        }
                         break;
                     }
                 }
 
                 for(String tagEntry: tagsSegment){
                     if(me.getSegment().contains(tagEntry) && !entry.getKey().equals(Uid)){
-                        segment.add(mapCompanies.get(entry.getKey()));
+                        if(mapCompanies.get(entry.getKey())!=null) {
+                            segment.add(mapCompanies.get(entry.getKey()));
+                        }
                         break;
                     }
                 }

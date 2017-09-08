@@ -243,21 +243,27 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
 
                 for(String tagEntry: tagsAffinity){
                     if(me.getAffinity().contains(tagEntry) && !entry.getKey().equals(Uid)){
-                        affinity.add(mapPeople.get(entry.getKey()));
+                        if(mapPeople.get(entry.getKey())!=null) {
+                            affinity.add(mapPeople.get(entry.getKey()));
+                        }
                         break;
                     }
                 }
 
                 for(String tagEntry: tagsGroup){
                     if(me.getGroup().contains(tagEntry) && !entry.getKey().equals(Uid)){
-                        group.add(mapPeople.get(entry.getKey()));
+                        if(mapPeople.get(entry.getKey())!=null) {
+                            group.add(mapPeople.get(entry.getKey()));
+                        }
                         break;
                     }
                 }
 
                 for(String tagEntry: tagsSegment){
                     if(me.getSegment().contains(tagEntry) && !entry.getKey().equals(Uid)){
-                        segment.add(mapPeople.get(entry.getKey()));
+                        if(mapPeople.get(entry.getKey())!=null) {
+                            segment.add(mapPeople.get(entry.getKey()));
+                        }
                         break;
                     }
                 }
