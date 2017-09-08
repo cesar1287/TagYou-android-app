@@ -54,7 +54,9 @@ public class MainActivity extends AppCompatActivity
 
     private TabLayout tabLayout;
 
-    SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;
+
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +80,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -111,6 +112,13 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        setupViewPager(viewPager);
     }
 
     private void setupViewPager(ViewPager viewPager) {

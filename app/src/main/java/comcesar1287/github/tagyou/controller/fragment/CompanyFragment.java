@@ -2,17 +2,18 @@ package comcesar1287.github.tagyou.controller.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,8 +34,9 @@ import comcesar1287.github.tagyou.controller.domain.Company;
 import comcesar1287.github.tagyou.controller.domain.Tag;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.interfaces.RecyclerViewOnClickListenerHack;
+import comcesar1287.github.tagyou.view.TagsFilterActivity;
 
-public class CompanyFragment extends Fragment implements RecyclerViewOnClickListenerHack {
+public class CompanyFragment extends Fragment implements RecyclerViewOnClickListenerHack, View.OnClickListener {
 
     RecyclerView mRecyclerViewTag1, mRecyclerViewTag2, mRecyclerViewTag3;
     public List<Company> mListTag1, mListTag2, mListTag3;
@@ -55,11 +57,20 @@ public class CompanyFragment extends Fragment implements RecyclerViewOnClickList
 
     private ProgressDialog dialog;
 
+    TextView tag1, tag2, tag3;
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_company, container, false);
+
+        tag1 = (TextView) view.findViewById(R.id.tag1);
+        tag1.setOnClickListener(this);
+        tag2 = (TextView) view.findViewById(R.id.tag2);
+        tag2.setOnClickListener(this);
+        tag3 = (TextView) view.findViewById(R.id.tag3);
+        tag3.setOnClickListener(this);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -75,6 +86,23 @@ public class CompanyFragment extends Fragment implements RecyclerViewOnClickList
 
         return view;
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        switch (id){
+            case R.id.tag1:
+                startActivity(new Intent(getActivity(), TagsFilterActivity.class));
+                break;
+            case R.id.tag2:
+                startActivity(new Intent(getActivity(), TagsFilterActivity.class));
+                break;
+            case R.id.tag3:
+                startActivity(new Intent(getActivity(), TagsFilterActivity.class));
+                break;
+        }
     }
 
     private void setupRecyclerViewAffinity(View view) {
