@@ -103,7 +103,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.ForgotPasswordActivity"
-            android:theme="@style/AppTheme.Dialog"/>
+            android:theme="@style/AppTheme.Dialog" />
+        <activity
+            android:name=".view.TagsSpecificActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".view.MainActivity">            
+        </activity>
     </application>
 
 </manifest>
