@@ -132,4 +132,6 @@
     <string name="config_radius">Selecione raio de localização</string>
     <string name="config_age">Selecione Idade</string>
     <string name="config_sex">Selecione Sexo</string>
+    <string name="config_masc">Masculino</string>
+    <string name="config_fem">Feminino</string>
 </resources>

@@ -23,6 +23,10 @@
             android:icon="@drawable/tagyou_icon_chat"
             android:title="Chat"/>
         <item
+            android:id="@+id/nav_config"
+            android:icon="@drawable/tagyou_icon_config"
+            android:title="Configurações de Busca"/>
+        <item
             android:id="@+id/nav_indication"
             android:icon="@drawable/tagyou_icon_indication_person"
             android:title="Indique um Amigo"/>

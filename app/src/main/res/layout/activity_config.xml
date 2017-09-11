@@ -1,137 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="comcesar1287.github.tagyou.view.ConfigActivity"
-    android:background="@color/colorBackgroundSplash">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-    <RelativeLayout
-        android:id="@+id/config_0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-        android:id="@+id/title_config"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="45dp"
-        android:layout_centerHorizontal="true"
-        android:text="@string/config_title"
-        android:textSize="25sp"
-        android:textColor="@color/white"/>
-    </RelativeLayout>
-
-
-
-    <RelativeLayout
-        android:id="@+id/config_1"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/config_0"
-        android:layout_marginTop="25dp"
-        android:background="@color/grey">
+        tools:context="comcesar1287.github.tagyou.view.ConfigActivity"
+        android:background="@color/colorBackgroundSplash">
 
-        <TextView
-            android:id="@+id/title_radius"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/config_radius"
-            android:textSize="17sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"/>
 
         <RelativeLayout
-            android:id="@+id/rl_radius"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:layout_margin="7dp"
-            android:layout_below="@id/title_radius"
-            android:background="@color/white">
-            <SeekBar
-                android:id="@+id/sb_radius"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:max="10"
-                android:layout_margin="7dp"/>
+            android:id="@+id/config_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
             <TextView
-                android:id="@+id/tv_radius"
+            android:id="@+id/title_config"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="29dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/config_title"
+            android:textSize="25sp"
+            android:textColor="@color/white"/>
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:id="@+id/config_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/config_0"
+            android:layout_marginTop="25dp"
+            android:background="@color/grey">
+
+            <TextView
+                android:id="@+id/title_radius"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="teste"
-                android:layout_below="@id/sb_radius"
-                android:layout_marginLeft="15dp"/>
-        </RelativeLayout>
+                android:text="@string/config_radius"
+                android:textSize="17sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/title_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/config_age"
-            android:textSize="17sp"
-            android:layout_below="@id/rl_radius"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp"
-            android:textStyle="bold"/>
-
-        <RelativeLayout
-            android:id="@+id/rl_age"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:layout_margin="7dp"
-            android:layout_below="@id/title_age"
-            android:background="@color/white">
-            <SeekBar
-                android:id="@+id/sb_age"
+            <RelativeLayout
+                android:id="@+id/rl_radius"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:max="10"
-                android:layout_margin="7dp"/>
+                android:layout_height="65dp"
+                android:layout_margin="7dp"
+                android:layout_below="@id/title_radius"
+                android:background="@color/white">
+                <SeekBar
+                    android:id="@+id/sb_radius"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:max="10"
+                    android:layout_margin="7dp"/>
+                <TextView
+                    android:id="@+id/tv_radius"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="teste"
+                    android:layout_below="@id/sb_radius"
+                    android:layout_marginLeft="20dp"/>
+            </RelativeLayout>
+
             <TextView
-                android:id="@+id/tv_age"
+                android:id="@+id/title_age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="teste"
-                android:layout_below="@id/sb_age"
-                android:layout_marginLeft="15dp"/>
-        </RelativeLayout>
+                android:text="@string/config_age"
+                android:textSize="17sp"
+                android:layout_below="@id/rl_radius"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/title_sex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/config_sex"
-            android:textSize="17sp"
-            android:layout_below="@id/rl_age"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp"
-            android:textStyle="bold"/>
-
-        <RelativeLayout
-            android:id="@+id/rl_sex"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:layout_margin="7dp"
-            android:layout_below="@id/title_sex"
-            android:background="@color/white">
-            <Spinner
+            <RelativeLayout
+                android:id="@+id/rl_age"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="7dp">
-            </Spinner>
+                android:layout_height="65dp"
+                android:layout_margin="7dp"
+                android:layout_below="@id/title_age"
+                android:background="@color/white">
+                <SeekBar
+                    android:id="@+id/sb_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:max="100"
+                    android:layout_margin="7dp"/>
+                <TextView
+                    android:id="@+id/tv_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="teste"
+                    android:layout_below="@id/sb_age"
+                    android:layout_marginLeft="20dp"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/title_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/config_sex"
+                android:textSize="17sp"
+                android:layout_below="@id/rl_age"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_sex"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="@color/white"
+                android:layout_marginTop="11dp"
+                android:layout_below="@+id/title_sex"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+                <TextView
+                    android:id="@+id/tv_masc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/config_masc"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="15dp" />
+                <Switch
+                    android:id="@+id/s_masc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_alignBottom="@+id/tv_masc"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+                <TextView
+                    android:id="@+id/tv_fem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/config_fem"
+                    android:layout_alignTop="@+id/s_fem"
+                    android:layout_alignLeft="@+id/tv_masc"
+                    android:layout_alignStart="@+id/tv_masc" />
+                <Switch
+                    android:id="@+id/s_fem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignLeft="@+id/s_masc"
+                    android:layout_alignStart="@+id/s_masc" />
+            </RelativeLayout>
+
         </RelativeLayout>
+
 
     </RelativeLayout>
 
-
-</RelativeLayout>
+</ScrollView>
