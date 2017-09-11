@@ -126,4 +126,10 @@
     <string name="edit_company_address">Endereço</string>
 
     <string name="spefic_tags_title">Selecione as suas preferências.</string>
+
+    <string name="config_label">Configurações</string>
+    <string name="config_title">Personalize de acordo com seus interesses de busca.</string>
+    <string name="config_radius">Selecione raio de localização</string>
+    <string name="config_age">Selecione Idade</string>
+    <string name="config_sex">Selecione Sexo</string>
 </resources>

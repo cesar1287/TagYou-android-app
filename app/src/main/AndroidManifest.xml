@@ -112,7 +112,8 @@
         <activity
             android:name=".view.ConfigActivity"
             android:parentActivityName=".view.MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:label="@string/config_label"            >
         </activity>
     </application>
 
