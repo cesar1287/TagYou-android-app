@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="comcesar1287.github.tagyou.view.TagsSpecificActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="comcesar1287.github.tagyou.view.TagsSpecificActivity"
+    android:background="@color/colorBackgroundSplash">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/title_specific_tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/spefic_tags_title"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:textSize="29sp"
+        android:layout_marginTop="45dp"/>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/flex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_specific_tags"
+        app:flexWrap="wrap"
+        app:justifyContent="space_around"
+        app:alignContent="space_around"
+        app:alignItems="baseline"
+        android:layout_margin="16dp"/>
+
+</RelativeLayout>

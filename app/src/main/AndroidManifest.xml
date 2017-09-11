@@ -106,8 +106,13 @@
             android:theme="@style/AppTheme.Dialog" />
         <activity
             android:name=".view.TagsSpecificActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".view.MainActivity">            
+            android:parentActivityName=".view.MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".view.ConfigActivity"
+            android:parentActivityName=".view.MainActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

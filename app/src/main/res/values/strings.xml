@@ -124,4 +124,6 @@
     <string name="error_need_select_profile_picture">É preciso selecionar uma foto de perfil</string>
     <string name="uploading_image">Fazendo upload da imagem…</string>
     <string name="edit_company_address">Endereço</string>
+
+    <string name="spefic_tags_title">Selecione as suas preferências.</string>
 </resources>
