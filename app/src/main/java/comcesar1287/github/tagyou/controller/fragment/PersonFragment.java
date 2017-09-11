@@ -34,6 +34,7 @@ import comcesar1287.github.tagyou.controller.domain.Tag;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.interfaces.RecyclerViewOnClickListenerHack;
 import comcesar1287.github.tagyou.view.TagsFilterActivity;
+import comcesar1287.github.tagyou.view.TagsSpecificActivity;
 
 public class PersonFragment extends Fragment implements RecyclerViewOnClickListenerHack, View.OnClickListener {
 
@@ -90,13 +91,13 @@ public class PersonFragment extends Fragment implements RecyclerViewOnClickListe
 
         switch (id){
             case R.id.tag1:
-                startActivity(new Intent(getActivity(), TagsFilterActivity.class));
+                startActivity(new Intent(getActivity(), TagsSpecificActivity.class));
                 break;
             case R.id.tag2:
-                startActivity(new Intent(getActivity(), TagsFilterActivity.class));
+                startActivity(new Intent(getActivity(), TagsSpecificActivity.class));
                 break;
             case R.id.tag3:
-                startActivity(new Intent(getActivity(), TagsFilterActivity.class));
+                startActivity(new Intent(getActivity(), TagsSpecificActivity.class));
                 break;
         }
     }
