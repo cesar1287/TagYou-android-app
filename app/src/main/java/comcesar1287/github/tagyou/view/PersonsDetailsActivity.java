@@ -67,5 +67,4 @@ public class PersonsDetailsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

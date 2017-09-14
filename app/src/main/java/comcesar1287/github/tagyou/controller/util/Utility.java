@@ -24,8 +24,13 @@ public class Utility {
     public static final String KEY_CONTENT_EXTRA_COMPANY = "company";
     public static final String KEY_CONTENT_EXTRA_DATABASE = "database";
     public static final String KEY_CONTENT_EXTRA_DATA = "data";
+    public static final String KEY_CONTENT_EXTRA_TAG = "tag";
     public static final String KEY_MAP_FRAGMENT = "mainFrag";
     public static final String TAGYOU_PHONE = "(85)00000–0000";
+
+    public static final String AFFINITY = "affinity";
+    public static final String GROUP = "group";
+    public static final String SEGMENT = "segment";
 
     public static boolean verifyEmptyField(String name, String email, String pass){
 

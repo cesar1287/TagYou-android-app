@@ -29,4 +29,14 @@
         app:alignItems="baseline"
         android:layout_margin="16dp"/>
 
+    <Button
+        android:id="@+id/btNextAffinity"
+        android:text="Salvar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="@color/concrete"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"/>
+
 </RelativeLayout>

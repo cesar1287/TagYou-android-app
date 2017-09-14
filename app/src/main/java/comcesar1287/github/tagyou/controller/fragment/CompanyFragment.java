@@ -34,6 +34,7 @@ import comcesar1287.github.tagyou.controller.domain.Company;
 import comcesar1287.github.tagyou.controller.domain.Tag;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.interfaces.RecyclerViewOnClickListenerHack;
+import comcesar1287.github.tagyou.controller.util.Utility;
 import comcesar1287.github.tagyou.view.TagsFilterActivity;
 import comcesar1287.github.tagyou.view.TagsSpecificActivity;
 
@@ -92,16 +93,23 @@ public class CompanyFragment extends Fragment implements RecyclerViewOnClickList
     @Override
     public void onClick(View view) {
         int id = view.getId();
+        Intent intent;
 
         switch (id){
             case R.id.tag1:
-                startActivity(new Intent(getActivity(), TagsSpecificActivity.class));
+                intent = new Intent(getActivity(), TagsSpecificActivity.class);
+                intent.putExtra(Utility.KEY_CONTENT_EXTRA_TAG, Utility.AFFINITY);
+                startActivity(intent);
                 break;
             case R.id.tag2:
-                startActivity(new Intent(getActivity(), TagsSpecificActivity.class));
+                intent = new Intent(getActivity(), TagsSpecificActivity.class);
+                intent.putExtra(Utility.KEY_CONTENT_EXTRA_TAG, Utility.GROUP);
+                startActivity(intent);
                 break;
             case R.id.tag3:
-                startActivity(new Intent(getActivity(), TagsSpecificActivity.class));
+                intent = new Intent(getActivity(), TagsSpecificActivity.class);
+                intent.putExtra(Utility.KEY_CONTENT_EXTRA_TAG, Utility.SEGMENT);
+                startActivity(intent);
                 break;
         }
     }
