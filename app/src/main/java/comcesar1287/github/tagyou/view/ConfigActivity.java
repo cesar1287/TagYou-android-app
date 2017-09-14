@@ -45,7 +45,7 @@ public class ConfigActivity extends AppCompatActivity {
 
     public void radiusCurrent(){
         seekBarRadius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int progress = 0;
+            int progress = 2;
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
