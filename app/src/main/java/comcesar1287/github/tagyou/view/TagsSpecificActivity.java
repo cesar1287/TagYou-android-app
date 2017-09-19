@@ -21,9 +21,9 @@ import fisk.chipcloud.ChipListener;
 
 public class TagsSpecificActivity extends AppCompatActivity implements View.OnClickListener{
 
-    String tag;
+    String tagDb;
 
-    String [] arrayAffinity, arrayGroups, arraySegments;
+    String [] array;
 
     private DatabaseReference mDatabase;
 
@@ -34,12 +34,12 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        tag = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_TAG);
+        tagDb = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_TAG);
 
         Button btNextSegments = (Button) findViewById(R.id.btNextAffinity);
         btNextSegments.setOnClickListener(this);
 
-        switch (tag){
+        switch (tagDb){
             case Utility.AFFINITY:
                 //To create the same wrapping cloud as previous incarnation use Google's FlexboxLayout:
                 FlexboxLayout flexboxAffinity = (FlexboxLayout) findViewById(R.id.flex);
@@ -58,15 +58,15 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
                 final String[] affinity = getResources().getStringArray(R.array.tags_filter_affinity);
                 chipCloudAffinity.addChips(affinity);
 
-                arrayAffinity = new String[affinity.length];
+                array = new String[affinity.length];
 
                 chipCloudAffinity.setListener(new fisk.chipcloud.ChipListener() {
                     @Override
                     public void chipCheckedChange(int i, boolean b, boolean b1) {
                         if(b){
-                            arrayAffinity[i] = affinity[i];
+                            array[i] = affinity[i];
                         }else{
-                            arrayAffinity[i] = null;
+                            array[i] = null;
                         }
                     }
                 });
@@ -89,15 +89,15 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
                 final String[] groups = getResources().getStringArray(R.array.tags_filter_groups);
                 chipCloudGroups.addChips(groups);
 
-                arrayGroups = new String[groups.length];
+                array = new String[groups.length];
 
                 chipCloudGroups.setListener(new ChipListener() {
                     @Override
                     public void chipCheckedChange(int i, boolean b, boolean b1) {
                         if(b){
-                            arrayGroups[i] = groups[i];
+                            array[i] = groups[i];
                         }else{
-                            arrayGroups[i] = null;
+                            array[i] = null;
                         }
                     }
                 });
@@ -120,15 +120,15 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
                 final String[] segments = getResources().getStringArray(R.array.tags_filter_segments);
                 chipCloudSegments.addChips(segments);
 
-                arraySegments = new String[segments.length];
+                array = new String[segments.length];
 
                 chipCloudSegments.setListener(new ChipListener() {
                     @Override
                     public void chipCheckedChange(int i, boolean b, boolean b1) {
                         if(b){
-                            arraySegments[i] = segments[i];
+                            array[i] = segments[i];
                         }else{
-                            arraySegments[i] = null;
+                            array[i] = null;
                         }
                     }
                 });
@@ -142,30 +142,17 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
 
         switch (id){
             case R.id.btNextAffinity:
-                String affinity = "", groups = "", segments = "";
-                for(String affinityItem : arrayAffinity){
-                    if(affinityItem!=null) {
-                        affinity += affinityItem+";";
+                String tag = "";
+                for(String tagItem : array){
+                    if(tagItem!=null) {
+                        tag += tagItem+";";
                     }
                 }
-
-                for(String groupsItem : arrayGroups){
-                    if(groupsItem!=null) {
-                        groups += groupsItem+";";
-                    }
-                }
-
-                for(String segmentsItem : arraySegments){
-                    if(segmentsItem!=null) {
-                        segments += segmentsItem+";";
-                    }
-                }
-
-                Tags tags = new Tags(affinity, groups, segments);
 
                 mDatabase.child(FirebaseHelper.FIREBASE_DATABASE_TAGS)
                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .setValue(tags);
+                        .child(tagDb)
+                        .setValue(tag);
                 Toast.makeText(this, "Tags cadastradas com sucesso", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
