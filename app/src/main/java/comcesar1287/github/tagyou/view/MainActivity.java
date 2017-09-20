@@ -1,5 +1,6 @@
 package comcesar1287.github.tagyou.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -13,9 +14,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -40,6 +43,7 @@ import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.fragment.CompanyFragment;
 import comcesar1287.github.tagyou.controller.fragment.PersonFragment;
 import comcesar1287.github.tagyou.controller.util.Utility;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -58,9 +62,18 @@ public class MainActivity extends AppCompatActivity
 
     private ViewPager viewPager;
 
+    CircleImageView photoCompany, photoMultiplier, photoPerson;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        photoCompany = (CircleImageView) findViewById(R.id.photoCompany);
+        photoMultiplier = (CircleImageView) findViewById(R.id.photoMultiplier);
+        photoPerson = (CircleImageView) findViewById(R.id.photoPerson);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -95,6 +108,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         setupUI();
+
+        setActionBar();
+
     }
 
     public void verifyUserIsLogged(){
@@ -237,5 +253,17 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void setActionBar(){
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+
+
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.action_bar, null);
+
+        actionBar.setCustomView(v);
     }
 }
