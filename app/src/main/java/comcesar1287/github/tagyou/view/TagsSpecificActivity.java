@@ -13,9 +13,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import comcesar1287.github.tagyou.R;
-import comcesar1287.github.tagyou.controller.domain.Tags;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
+import fisk.chipcloud.ChipCloud;
 import fisk.chipcloud.ChipCloudConfig;
 import fisk.chipcloud.ChipListener;
 
@@ -53,7 +53,7 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
                         .useInsetPadding(true);
 
                 //Create a new ChipCloud with a Context and ViewGroup:
-                fisk.chipcloud.ChipCloud chipCloudAffinity = new fisk.chipcloud.ChipCloud(this, flexboxAffinity, configAffinity);
+                ChipCloud chipCloudAffinity = new ChipCloud(this, flexboxAffinity, configAffinity);
 
                 final String[] affinity = getResources().getStringArray(R.array.tags_filter_affinity);
                 chipCloudAffinity.addChips(affinity);
@@ -84,7 +84,7 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
                         .useInsetPadding(true);
 
                 //Create a new ChipCloud with a Context and ViewGroup:
-                fisk.chipcloud.ChipCloud chipCloudGroups = new fisk.chipcloud.ChipCloud(this, flexboxGroups, configGroups);
+                ChipCloud chipCloudGroups = new ChipCloud(this, flexboxGroups, configGroups);
 
                 final String[] groups = getResources().getStringArray(R.array.tags_filter_groups);
                 chipCloudGroups.addChips(groups);
@@ -115,7 +115,7 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
                         .useInsetPadding(true);
 
                 //Create a new ChipCloud with a Context and ViewGroup:
-                fisk.chipcloud.ChipCloud chipCloudSegments = new fisk.chipcloud.ChipCloud(this, flexboxSegments, configSegments);
+                ChipCloud chipCloudSegments = new ChipCloud(this, flexboxSegments, configSegments);
 
                 final String[] segments = getResources().getStringArray(R.array.tags_filter_segments);
                 chipCloudSegments.addChips(segments);

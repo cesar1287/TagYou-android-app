@@ -12,6 +12,7 @@
         <item>Negócios</item>
         <item>Religião</item>
         <item>Saúde</item>
+        <item>Sucarte</item>
     </string-array>
 
     <string-array name="tags_filter_groups">
@@ -24,6 +25,7 @@
         <item>Consultoria</item>
         <item>Tecnologia</item>
         <item>Marketing</item>
+        <item>Decoração e Arte</item>
     </string-array>
 
     <string-array name="tags_filter_affinity">
