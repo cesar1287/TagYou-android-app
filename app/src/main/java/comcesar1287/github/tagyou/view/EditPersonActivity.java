@@ -15,6 +15,7 @@ import android.view.View;
 
 import android.widget.Button;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -60,6 +61,8 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
     private Spinner spinnerSex;
 
     private ProgressDialog dialog;
+
+    private EditText etDescriptionOne, etDescriptiontwo, etSocialNetwork;
 
     Person person;
     //String local = "";

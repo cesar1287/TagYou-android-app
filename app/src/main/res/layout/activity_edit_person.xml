@@ -117,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/edit_person_sex"
-            android:textColor="@color/white"
+            android:textColor="@color/concrete"
             android:layout_below="@id/register_date"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="7dp"/>
@@ -166,10 +166,85 @@
 
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:id="@+id/description_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_person_description_one"
+            android:layout_below="@id/register_phone"
+            android:textColor="@color/concrete"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"/>
+
+        <EditText
+            android:id="@+id/edit_description_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_below="@id/description_one"
+            android:inputType="textMultiLine"
+            android:maxLength="500"
+            android:padding="2dp"
+            android:background="@drawable/border"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"/>
+
+        <TextView
+            android:id="@+id/description_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_person_description_two"
+            android:layout_below="@id/edit_description_one"
+            android:layout_marginTop="9dp"
+            android:textColor="@color/concrete"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"/>
+
+        <EditText
+            android:id="@+id/edit_description_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_below="@id/description_two"
+            android:inputType="textMultiLine"
+            android:maxLength="500"
+            android:layout_marginTop="2dp"
+            android:padding="2dp"
+            android:background="@drawable/border"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"/>
+
+        <TextView
+            android:id="@+id/social_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_person_social_network"
+            android:layout_below="@id/edit_description_two"
+            android:layout_marginTop="9dp"
+            android:textColor="@color/concrete"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"/>
+
+        <EditText
+            android:id="@+id/edit_social_network"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_below="@id/social_network"
+            android:inputType="textWebEmailAddress"
+            android:maxLength="500"
+            android:layout_marginTop="2dp"
+            android:padding="2dp"
+            android:background="@drawable/border"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/register_phone"
+            android:layout_below="@id/edit_social_network"
             android:background="@color/concrete"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="15dp">

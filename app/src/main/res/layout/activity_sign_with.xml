@@ -75,7 +75,8 @@
             android:text="@string/login_botton_entrar"
             android:layout_gravity="center"
             android:layout_marginBottom="1dp"
-            android:background="@drawable/button"/>
+            android:background="@drawable/button"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/sign_with_forgot_password"

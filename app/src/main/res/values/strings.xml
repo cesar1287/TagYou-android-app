@@ -50,7 +50,7 @@
     <string name="indication_person">Indique um Amigo</string>
     <string name="title_indication_person">Faça uma indicação e compartilhe os benefícios do TagYou…</string>
     <string name="text_indication_person">Indique um amigo para que ele aproveite as melhores promoções da região, ou
-        indique uma empresa para ele aproveitar esse maravilhosa ferramenta de marketing.</string>
+        indique uma empresa para ela aproveitar essa maravilhosa ferramenta de marketing.</string>
     <string name="indication_share_code">Compartinhe o código abaixo</string>
     <string name="indication_button_whatapp">Whatsapp</string>
 
@@ -59,15 +59,19 @@
     <string name="categoty_pessoa">Pessoa</string>
     <string name="categoty_empresa">Empresa</string>
 
-    <string name="edit_person">Editar Cadastro Pessoa</string>
+    <string name="edit_person">Cadastro pessoal</string>
     <string name="edit_person_name">Nome</string>
     <string name="edit_person_date">Nascimento</string>
     <string name="edit_person_sex">Sexo</string>
     <string name="edit_person_email">Email</string>
     <string name="edit_person_phone">Telefone</string>
     <string name="edit_person_button_save">Salvar</string>
+    <string name="edit_person_description_one">Faça uma breve descrição do que você oferece</string>
+    <string name="edit_person_description_two">Faça uma breve descrição do que você deseja</string>
+    <string name="edit_person_social_network">Insira o link da sua rede social</string>
+
     <string name="edit_photo">Clique na foto e faça a alteração</string>
-    <string name="edit_company">Editar Cadastro Empresa</string>
+    <string name="edit_company">Cadastro Empresa</string>
     <string name="edit_company_name">Nome</string>
     <string name="edit_company_description">Descrição</string>
     <string name="edit_company_city">Cidade</string>
