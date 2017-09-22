@@ -91,7 +91,7 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
         etName = (TextInputLayout) findViewById(R.id.register_name);
         etEmail = (TextInputLayout) findViewById(R.id.register_email);
         etHashtag = (TextInputLayout) findViewById(R.id.register_hashtag);
-        etDescription = (TextInputLayout) findViewById(R.id.register_description);
+        etDescriptionOne = (EditText) findViewById(R.id.edit_description_one);
         etCity = (TextInputLayout) findViewById(R.id.register_city);
         etStreet = (TextInputLayout) findViewById(R.id.register_street);
         etNumber = (TextInputLayout) findViewById(R.id.register_number);
@@ -188,7 +188,7 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
         etName.getEditText().setText(company.getName());
         etEmail.getEditText().setText(company.getEmail());
         etHashtag.getEditText().setText(company.getHashtag());
-        etDescription.getEditText().setText(company.getDescription());
+        etDescriptionOne.setText(company.getDescription());
         //etCity.getEditText().setText(company.get);
         //etStreet = (TextInputLayout) findViewById(R.id.register_street);
         //etNumber = (TextInputLayout) findViewById(R.id.register_number);
@@ -209,7 +209,7 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
         email = etEmail.getEditText().getText().toString();
         phone = etPhone.getEditText().getText().toString();
         hashtag = etHashtag.getEditText().getText().toString();
-        description = etDescription.getEditText().getText().toString();
+        description = etDescriptionOne.getText().toString();
         city = etCity.getEditText().getText().toString();
         street = etStreet.getEditText().getText().toString();
         number = etNumber.getEditText().getText().toString();
@@ -295,21 +295,16 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
 
     /*
     public void changePhoto(View view) {
-
         selectImage();
     }
-
     public void selectImage() {
         local = "galeria";
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
     }
-
-
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
         super.onActivityResult(reqCode, resultCode, data);
-
         if (local == "galeria" && reqCode == RESULT_LOAD_IMG) {
             try {
                 final Uri imageUri = data.getData();

@@ -8,7 +8,6 @@
     tools:context="comcesar1287.github.tagyou.view.SplashScreenActivity"
     android:background="@drawable/smartcity">
 
-
     <LinearLayout
         android:id="@id/logo"
         android:layout_width="wrap_content"
