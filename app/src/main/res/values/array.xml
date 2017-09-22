@@ -5,7 +5,15 @@
         <item>Feminino</item>
         <item>Masculino</item>
         <item>Outros</item>
+    </string-array>
 
+    <string-array name="segment">
+        <item>Selecione</item>
+        <item>Comércio</item>
+        <item>Indústria</item>
+        <item>Serviços</item>
+        <item>Setor Público</item>
+        <item>Terceiro Setor</item>
     </string-array>
 
     <string-array name="tags_filter_segments">

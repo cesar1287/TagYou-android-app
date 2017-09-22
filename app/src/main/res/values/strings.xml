@@ -71,7 +71,7 @@
     <string name="edit_person_social_network">Insira o link da sua rede social</string>
 
     <string name="edit_photo">Clique na foto e faça a alteração</string>
-    <string name="edit_company">Cadastro Empresa</string>
+    <string name="edit_company">Cadastro da Empresa</string>
     <string name="edit_company_name">Nome</string>
     <string name="edit_company_description">Descrição</string>
     <string name="edit_company_city">Cidade</string>
@@ -80,6 +80,10 @@
     <string name="edit_company_email">Email</string>
     <string name="edit_company_phone">Telefone</string>
     <string name="edit_company_button_save">Salvar</string>
+    <string name="edit_company_segment">Segmento</string>
+    <string name="edit_company_description_one">Faça uma breve descrição do que você oferece</string>
+    <string name="edit_company_description_two">Faça uma breve descrição do que você deseja</string>
+    <string name="edit_company_social_network">Insira o link da sua rede social</string>
 
     <string name="details_person_email">Email</string>
     <string name="details_person_phone">Telefone</string>

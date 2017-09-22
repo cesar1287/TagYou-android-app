@@ -12,8 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -62,6 +65,10 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
 
     private Company company;
 
+    private Spinner spinnerSegment;
+
+    private EditText etDescriptionOne, etDescriptiontwo, etSocialNetwork;
+
     //String local = "";
     //static final int RESULT_LOAD_IMG = 1;
 
@@ -89,6 +96,11 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
         etStreet = (TextInputLayout) findViewById(R.id.register_street);
         etNumber = (TextInputLayout) findViewById(R.id.register_number);
         etPhone = (TextInputLayout) findViewById(R.id.register_phone);
+
+        spinnerSegment = (Spinner)findViewById(R.id.register_spinner_segment);
+        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.segment));
+        spinnerSegment.setAdapter(spinnerCountShoesArrayAdapter);
 
         Button advance = (Button) findViewById(R.id.advance);
         advance.setOnClickListener(this);
