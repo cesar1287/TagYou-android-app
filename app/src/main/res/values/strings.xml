@@ -59,7 +59,7 @@
     <string name="categoty_pessoa">Pessoa</string>
     <string name="categoty_empresa">Empresa</string>
 
-    <string name="edit_person">Cadastro pessoal</string>
+    <string name="edit_person">Editar Cadastro Pessoal</string>
     <string name="edit_person_name">Nome</string>
     <string name="edit_person_date">Nascimento</string>
     <string name="edit_person_sex">Sexo</string>
@@ -71,7 +71,7 @@
     <string name="edit_person_social_network">Insira o link da sua rede social</string>
 
     <string name="edit_photo">Clique na foto e faça a alteração</string>
-    <string name="edit_company">Cadastro da Empresa</string>
+    <string name="edit_company">Editar Cadastro da Empresa</string>
     <string name="edit_company_name">Nome</string>
     <string name="edit_company_description">Descrição</string>
     <string name="edit_company_city">Cidade</string>

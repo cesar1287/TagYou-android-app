@@ -3,7 +3,6 @@ package comcesar1287.github.tagyou.view;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -38,7 +37,6 @@ import comcesar1287.github.tagyou.controller.domain.Company;
 import comcesar1287.github.tagyou.controller.domain.CompanyFirebase;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditCompanyActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -57,7 +55,7 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
 
     ValueEventListener valueEventListener, singleValueEventListener;
 
-    private TextInputLayout etName, etEmail, etHashtag, etDescription, etCity, etStreet, etNumber, etPhone;
+    private TextInputLayout etName, etEmail, etHashtag, etCity, etStreet, etNumber, etPhone;
 
     private ImageView ivPhoto;
 
