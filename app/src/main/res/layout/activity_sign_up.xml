@@ -113,7 +113,8 @@
                 android:layout_marginTop="35dp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/sign_up_code_indication"
-                android:background="@drawable/button"/>
+                android:background="@drawable/button"
+                android:textColor="@color/white"/>
 
         </RelativeLayout>
 

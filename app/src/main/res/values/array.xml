@@ -4,6 +4,8 @@
         <item>Selecione</item>
         <item>Feminino</item>
         <item>Masculino</item>
+        <item>Outros</item>
+
     </string-array>
 
     <string-array name="tags_filter_segments">

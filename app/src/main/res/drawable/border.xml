@@ -6,9 +6,9 @@
     <corners
         android:radius="2dp"
         />
-    <solid android:color="@color/white"
+    <solid android:color="@color/colorBackgroundSplash"
         />
     <stroke
         android:width="2dip"
-        android:color="@color/black" />
+        android:color="@color/concrete" />
 </shape>

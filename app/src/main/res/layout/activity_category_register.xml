@@ -58,14 +58,16 @@
             android:layout_height="40dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/button"
-            android:text="@string/categoty_pessoa" />
+            android:text="@string/categoty_pessoa"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/btCategoryCompany"
             android:layout_width="270dp"
             android:layout_height="40dp"
             android:text="@string/categoty_empresa"
-            android:background="@drawable/button"/>
+            android:background="@drawable/button"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
 </RelativeLayout>
