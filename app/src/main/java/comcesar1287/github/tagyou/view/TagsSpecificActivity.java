@@ -9,8 +9,12 @@ import android.widget.Toast;
 
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
@@ -21,11 +25,13 @@ import fisk.chipcloud.ChipListener;
 
 public class TagsSpecificActivity extends AppCompatActivity implements View.OnClickListener{
 
-    String tagDb;
+    private String tagDb, tagFirebase;
 
-    String [] array;
+    private String [] array;
 
     private DatabaseReference mDatabase;
+
+    private Query tag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +42,55 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
 
         tagDb = getIntent().getStringExtra(Utility.KEY_CONTENT_EXTRA_TAG);
 
+        getCurrentTag();
+
         Button btNextSegments = (Button) findViewById(R.id.btNextAffinity);
         btNextSegments.setOnClickListener(this);
+    }
 
+    private void getCurrentTag() {
+        tag = mDatabase
+                .child(FirebaseHelper.FIREBASE_DATABASE_TAGS)
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(tagDb);
+
+        loadCurrentTag();
+    }
+
+    private void loadCurrentTag() {
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tagFirebase = String.valueOf(dataSnapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                /*dialog.dismiss();
+                Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                finish();*/
+            }
+        };
+
+        ValueEventListener singleValueEventListener = new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                setupChipCloud();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                /*dialog.dismiss();
+                Toasty.error(PartnerCategoryActivity.this, getResources().getString(R.string.error_loading_partners), Toast.LENGTH_SHORT, true).show();
+                finish();*/
+            }
+        };
+
+        tag.addValueEventListener(valueEventListener);
+
+        tag.addListenerForSingleValueEvent(singleValueEventListener);
+    }
+
+    private void setupChipCloud() {
         switch (tagDb){
             case Utility.AFFINITY:
                 //To create the same wrapping cloud as previous incarnation use Google's FlexboxLayout:
@@ -70,6 +122,13 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
                         }
                     }
                 });
+
+                for(int x = 0; x<affinity.length; x++){
+                    if(tagFirebase.contains(affinity[x])){
+                        chipCloudAffinity.setChecked(x);
+                        array[x] = affinity[x];
+                    }
+                }
                 break;
             case Utility.GROUP:
                 //To create the same wrapping cloud as previous incarnation use Google's FlexboxLayout:
@@ -101,6 +160,13 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
                         }
                     }
                 });
+
+                for(int x = 0; x<groups.length; x++){
+                    if(tagFirebase.contains(groups[x])){
+                        chipCloudGroups.setChecked(x);
+                        array[x] = groups[x];
+                    }
+                }
                 break;
             case Utility.SEGMENT:
                 //To create the same wrapping cloud as previous incarnation use Google's FlexboxLayout:
@@ -132,6 +198,13 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
                         }
                     }
                 });
+
+                for(int x = 0; x<segments.length; x++){
+                    if(tagFirebase.contains(segments[x])){
+                        chipCloudSegments.setChecked(x);
+                        array[x] = segments[x];
+                    }
+                }
                 break;
         }
     }
