@@ -64,9 +64,6 @@ public class MainActivity extends AppCompatActivity
 
     CircleImageView photoCompany, photoMultiplier, photoPerson;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +107,6 @@ public class MainActivity extends AppCompatActivity
         setupUI();
 
         setActionBar();
-
     }
 
     public void verifyUserIsLogged(){
@@ -259,7 +255,6 @@ public class MainActivity extends AppCompatActivity
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
-
 
         LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.action_bar, null);

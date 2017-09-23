@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Person implements Serializable{
 
-    private String name, email, birth, phone, sex, profilePic, hashtag;
+    private String name, email, birth, phone, sex, profilePic, hashtag, descriptionOffer, descriptionDesire, socialNetwork;
 
     public String getName() {
         return name;
@@ -60,5 +60,29 @@ public class Person implements Serializable{
 
     public void setHashtag(String hashtag) {
         this.hashtag = hashtag;
+    }
+
+    public String getDescriptionOffer() {
+        return descriptionOffer;
+    }
+
+    public void setDescriptionOffer(String descriptionOffer) {
+        this.descriptionOffer = descriptionOffer;
+    }
+
+    public String getDescriptionDesire() {
+        return descriptionDesire;
+    }
+
+    public void setDescriptionDesire(String descriptionDesire) {
+        this.descriptionDesire = descriptionDesire;
+    }
+
+    public String getSocialNetwork() {
+        return socialNetwork;
+    }
+
+    public void setSocialNetwork(String socialNetwork) {
+        this.socialNetwork = socialNetwork;
     }
 }

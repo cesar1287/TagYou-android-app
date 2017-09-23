@@ -13,9 +13,10 @@ public class FirebaseHelper {
     public static final String FIREBASE_DATABASE_TAGS = "tags";
 
     public static void writeNewUser(DatabaseReference mDatabase, String userId, String name,
-                                    String email, String birth, String sex, String phone, String profile_pic, String hashtag) {
+                                    String email, String birth, String sex, String phone, String profile_pic,
+                                    String hashtag, String description_offer, String description_desire, String social_network) {
 
-        User user = new User(name, email, birth, phone, sex, profile_pic, hashtag);
+        User user = new User(name, email, birth, phone, sex, profile_pic, hashtag, description_offer, description_desire, social_network);
 
         mDatabase.child(FIREBASE_DATABASE_USERS).child(userId).setValue(user);
     }

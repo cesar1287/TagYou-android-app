@@ -52,7 +52,7 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
     ValueEventListener valueEventListener;
     ValueEventListener singleValueEventListener;
 
-    private String name, email, phone, birth, sex, hashtag;
+    private String name, email, phone, birth, sex, hashtag, descriptionOffer, descriptionDesire, socialNetwork;
 
     private ImageView ivPhoto;
 
@@ -62,7 +62,7 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
 
     private ProgressDialog dialog;
 
-    private EditText etDescriptionOne, etDescriptiontwo, etSocialNetwork;
+    private EditText etDescriptionOffer, etDescriptionDesire, etSocialNetwork;
 
     Person person;
     //String local = "";
@@ -96,6 +96,9 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
         etBirth = (TextInputLayout) findViewById(R.id.register_date);
         etPhone = (TextInputLayout) findViewById(R.id.register_phone);
         etHashtag = (TextInputLayout) findViewById(R.id.register_hashtag);
+        etDescriptionOffer = (EditText) findViewById(R.id.edit_description_offer);
+        etDescriptionDesire = (EditText) findViewById(R.id.edit_description_desire);
+        etSocialNetwork = (EditText) findViewById(R.id.edit_social_network);
 
         Button advance = (Button) findViewById(R.id.advance);
         advance.setOnClickListener(this);
@@ -122,6 +125,9 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
                 person.setBirth(user.birth);
                 person.setHashtag(user.hashtag);
                 person.setSex(user.sex);
+                person.setDescriptionOffer(user.description_offer);
+                person.setDescriptionDesire(user.description_desire);
+                person.setSocialNetwork(user.social_network);
             }
 
             @Override
@@ -168,8 +174,9 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
         etEmail.getEditText().setText(person.getEmail());
         etBirth.getEditText().setText(person.getBirth());
         etPhone.getEditText().setText(person.getPhone());
-
-
+        etDescriptionOffer.setText(person.getDescriptionOffer());
+        etDescriptionDesire.setText(person.getDescriptionDesire());
+        etSocialNetwork.setText(person.getSocialNetwork());
 
         switch (person.getSex()) {
             case "Feminino":
@@ -177,6 +184,9 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
                 break;
             case "Masculino":
                 spinnerSex.setSelection(2);
+                break;
+            case "Outros":
+                spinnerSex.setSelection(3);
                 break;
             default:
                 spinnerSex.setSelection(0);
@@ -206,7 +216,6 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
     public void editCadastre(){
 
         boolean allFieldsFilled = true;
-        boolean allFilledRight = true;
 
         name = etName.getEditText().getText().toString();
         email = etEmail.getEditText().getText().toString();
@@ -214,6 +223,9 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
         phone = etPhone.getEditText().getText().toString();
         sex = spinnerSex.getSelectedItem().toString();
         hashtag = etHashtag.getEditText().getText().toString();
+        descriptionOffer = etDescriptionOffer.getText().toString();
+        descriptionDesire = etDescriptionDesire.getText().toString();
+        socialNetwork = etSocialNetwork.getText().toString();
 
         if(name.equals("")){
             allFieldsFilled = false;
@@ -222,18 +234,6 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
             etName.setErrorEnabled(false);
         }
 
-//        if(sex.equals("Selecione")){
-//            allFieldsFilled = false;
-//            Toast.makeText(this, "Campo sexo é obrigatório", Toast.LENGTH_SHORT).show();
-//        }
-
-//        if(phone.equals("")){
-//            allFieldsFilled = false;
-//            etPhone.setError("Campo obrigatório");
-//        }else{
-//            etPhone.setErrorEnabled(false);
-//        }
-
         if(email.equals("")){
             allFieldsFilled = false;
             etEmail.setError("Campo obrigatório");
@@ -241,31 +241,7 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
             etEmail.setErrorEnabled(false);
         }
 
-//        if(birth.equals("")){
-//            allFieldsFilled = false;
-//            etBirth.setError("Campo obrigatório");
-//        }else{
-//            etBirth.setErrorEnabled(false);
-//        }
-
-//        if(allFieldsFilled) {
-//
-//            if (phone.length() < 14) {
-//                allFilledRight = false;
-//                etPhone.setError("Telefone inválido");
-//            } else {
-//                etPhone.setErrorEnabled(false);
-//            }
-//
-//            if (birth.length() < 10) {
-//                allFilledRight = false;
-//                etBirth.setError("Data de nascimento inválida");
-//            } else {
-//                etBirth.setErrorEnabled(false);
-//            }
-//        }
-
-        if(allFieldsFilled && allFilledRight) {
+        if(allFieldsFilled) {
             FirebaseUser user = mAuth.getCurrentUser();
             finishLogin(user);
             Toast.makeText(this, "Editado com sucesso", Toast.LENGTH_SHORT).show();
@@ -280,7 +256,7 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
         String uid = user.getUid();
         String profile_pic = user.getPhotoUrl().toString();
 
-        FirebaseHelper.writeNewUser(mDatabase, uid, name, email, birth, sex, phone, profile_pic, hashtag);
+        FirebaseHelper.writeNewUser(mDatabase, uid, name, email, birth, sex, phone, profile_pic, hashtag, descriptionOffer, descriptionDesire, socialNetwork);
     }
 
     /*public void changePhoto(View view) {

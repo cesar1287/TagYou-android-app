@@ -269,7 +269,7 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
 
                             // [START_EXCLUDE]
                             if (user == null) {
-                                FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, "", "", "", profile_pic, "");
+                                FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, "", "", "", profile_pic, "", "", "", "");
                             }
 
                         }else{

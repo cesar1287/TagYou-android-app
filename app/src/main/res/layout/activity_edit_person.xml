@@ -167,7 +167,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <TextView
-            android:id="@+id/description_one"
+            android:id="@+id/description_offer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/edit_person_description_one"
@@ -178,11 +178,11 @@
             android:layout_marginRight="7dp"/>
 
         <EditText
-            android:id="@+id/edit_description_one"
+            android:id="@+id/edit_description_offer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:layout_below="@id/description_one"
+            android:layout_below="@id/description_offer"
             android:inputType="textMultiLine"
             android:maxLength="500"
             android:padding="2dp"
@@ -192,22 +192,22 @@
             android:layout_marginRight="7dp"/>
 
         <TextView
-            android:id="@+id/description_two"
+            android:id="@+id/description_desire"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/edit_person_description_two"
-            android:layout_below="@id/edit_description_one"
+            android:layout_below="@id/edit_description_offer"
             android:layout_marginTop="9dp"
             android:textColor="@color/concrete"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"/>
 
         <EditText
-            android:id="@+id/edit_description_two"
+            android:id="@+id/edit_description_desire"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:layout_below="@id/description_two"
+            android:layout_below="@id/description_desire"
             android:inputType="textMultiLine"
             android:maxLength="500"
             android:layout_marginTop="2dp"
@@ -221,7 +221,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/edit_person_social_network"
-            android:layout_below="@id/edit_description_two"
+            android:layout_below="@id/edit_description_desire"
             android:layout_marginTop="9dp"
             android:textColor="@color/concrete"
             android:layout_marginLeft="7dp"

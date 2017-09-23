@@ -256,7 +256,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             // [START_EXCLUDE]
                             if (user == null) {
 
-                                FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, "", "", "", profilePic, "");
+                                FirebaseHelper.writeNewUser(mDatabase, Uid, name, email, "", "", "", profilePic, "", "", "", "");
                             }
                         }else{
                             // Get user value
