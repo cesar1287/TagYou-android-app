@@ -266,7 +266,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             if (companyFirebase == null) {
 
                                 FirebaseHelper.writeNewCompany(mDatabase, Uid, name, "", email, "", "", "",
-                                        "", profilePic, (int) (Math.random() * 10), 40.233, -40.223, "");
+                                        "", profilePic, (int) (Math.random() * 10), 40.233, -40.223, "", "", "", "");
                             }
                         }
                     }

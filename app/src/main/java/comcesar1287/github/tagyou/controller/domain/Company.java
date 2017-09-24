@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 public class Company implements Parcelable{
 
-    private String name, description, email, address, phone, site, banner, logo, hashtag;
+    private String name, description, email, address, phone, site, banner, logo, hashtag, description_offer, description_desire, social_network;
     private long quantity;
     private double latitude, longitude;
 
@@ -26,6 +26,9 @@ public class Company implements Parcelable{
         longitude = p.readDouble();
         hashtag = p.readString();
         logo = p.readString();
+        description_offer = p.readString();
+        description_desire = p.readString();
+        social_network = p.readString();
     }
 
     public static final Parcelable.Creator<Company>
@@ -140,6 +143,30 @@ public class Company implements Parcelable{
         return 0;
     }
 
+    public String getDescription_offer() {
+        return description_offer;
+    }
+
+    public void setDescription_offer(String description_offer) {
+        this.description_offer = description_offer;
+    }
+
+    public String getDescription_desire() {
+        return description_desire;
+    }
+
+    public void setDescription_desire(String description_desire) {
+        this.description_desire = description_desire;
+    }
+
+    public String getSocial_network() {
+        return social_network;
+    }
+
+    public void setSocial_network(String social_network) {
+        this.social_network = social_network;
+    }
+
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(name);
@@ -154,5 +181,8 @@ public class Company implements Parcelable{
         parcel.writeDouble(longitude);
         parcel.writeString(hashtag);
         parcel.writeString(logo);
+        parcel.writeString(description_offer);
+        parcel.writeString(description_desire);
+        parcel.writeString(social_network);
     }
 }

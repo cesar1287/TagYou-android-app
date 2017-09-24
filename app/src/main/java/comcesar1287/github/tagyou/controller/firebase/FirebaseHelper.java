@@ -23,10 +23,10 @@ public class FirebaseHelper {
 
     public static void writeNewCompany(DatabaseReference mDatabase, String userId, String name, String description,
                                     String email, String address, String phone, String site, String banner, String logo, int quantity,
-                                       double latitude, double longitude, String hashtag) {
+                                       double latitude, double longitude, String hashtag, String description_offer, String description_desire, String social_network) {
 
         CompanyFirebase company = new CompanyFirebase(name, description, email, address, phone, site, banner, logo, quantity,
-                latitude, longitude, hashtag);
+                latitude, longitude, hashtag, description_offer, description_desire, social_network);
 
         mDatabase.child(FIREBASE_DATABASE_COMPANIES).child(userId).setValue(company);
     }

@@ -279,7 +279,7 @@ public class SignWithActivity extends AppCompatActivity implements View.OnClickL
                             // [START_EXCLUDE]
                             if (companyFirebase == null) {
                                 FirebaseHelper.writeNewCompany(mDatabase, Uid, name, "", email, "", "", "",
-                                        "", profile_pic, (int) (Math.random() * 10), 40.233, -40.223, "");
+                                        "", profile_pic, (int) (Math.random() * 10), 40.233, -40.223, "", "", "", "");
                             }
                         }
                     }

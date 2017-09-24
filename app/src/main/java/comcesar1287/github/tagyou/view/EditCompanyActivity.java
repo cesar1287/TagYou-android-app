@@ -45,7 +45,7 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
     private DatabaseReference mDatabase;
 
     private String Uid, name , email, phone, description, address, site, banner,
-            logo, hashtag, city, street, number;
+            logo, hashtag, city, street, number, descriptionOffer, descriptionDesire, socialNetwork;
 
     private int quantity;
 
@@ -65,7 +65,7 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
 
     private Spinner spinnerSegment;
 
-    private EditText etDescriptionOne, etDescriptiontwo, etSocialNetwork;
+    private EditText etDescriptionOffer, etDescriptionDesire, etSocialNetwork;
 
     //String local = "";
     //static final int RESULT_LOAD_IMG = 1;
@@ -89,11 +89,13 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
         etName = (TextInputLayout) findViewById(R.id.register_name);
         etEmail = (TextInputLayout) findViewById(R.id.register_email);
         etHashtag = (TextInputLayout) findViewById(R.id.register_hashtag);
-        etDescriptionOne = (EditText) findViewById(R.id.edit_description_one);
         etCity = (TextInputLayout) findViewById(R.id.register_city);
         etStreet = (TextInputLayout) findViewById(R.id.register_street);
         etNumber = (TextInputLayout) findViewById(R.id.register_number);
         etPhone = (TextInputLayout) findViewById(R.id.register_phone);
+        etDescriptionOffer = (EditText) findViewById(R.id.edit_description_offer);
+        etDescriptionDesire = (EditText) findViewById(R.id.edit_description_desire);
+        etSocialNetwork = (EditText) findViewById(R.id.edit_social_network);
 
         spinnerSegment = (Spinner)findViewById(R.id.register_spinner_segment);
         ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<>(this,
@@ -141,6 +143,9 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
                 company.setQuantity(companyFirebase.quantity);
                 company.setLatitude(companyFirebase.latitude);
                 company.setLongitude(companyFirebase.longitude);
+                company.setDescription_offer(companyFirebase.description_offer);
+                company.setDescription_desire(companyFirebase.description_desire);
+                company.setSocial_network(companyFirebase.social_network);
             }
 
             @Override
@@ -186,11 +191,13 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
         etName.getEditText().setText(company.getName());
         etEmail.getEditText().setText(company.getEmail());
         etHashtag.getEditText().setText(company.getHashtag());
-        etDescriptionOne.setText(company.getDescription());
         //etCity.getEditText().setText(company.get);
         //etStreet = (TextInputLayout) findViewById(R.id.register_street);
         //etNumber = (TextInputLayout) findViewById(R.id.register_number);
         etPhone.getEditText().setText(company.getPhone());
+        etDescriptionOffer.setText(company.getDescription_offer());
+        etDescriptionDesire.setText(company.getDescription_desire());
+        etSocialNetwork.setText(company.getSocial_network());
     }
 
     public void setupFieldMasks(){
@@ -201,16 +208,17 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
     public void editCadastre(){
 
         boolean allFieldsFilled = true;
-        boolean allFilledRight = true;
 
         name = etName.getEditText().getText().toString();
         email = etEmail.getEditText().getText().toString();
         phone = etPhone.getEditText().getText().toString();
         hashtag = etHashtag.getEditText().getText().toString();
-        description = etDescriptionOne.getText().toString();
         city = etCity.getEditText().getText().toString();
         street = etStreet.getEditText().getText().toString();
         number = etNumber.getEditText().getText().toString();
+        descriptionOffer = etDescriptionOffer.getText().toString();
+        descriptionDesire = etDescriptionDesire.getText().toString();
+        socialNetwork = etSocialNetwork.getText().toString();
 
         if(name.equals("")){
             allFieldsFilled = false;
@@ -219,13 +227,6 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
             etName.setErrorEnabled(false);
         }
 
-//        if(phone.equals("")){
-//            allFieldsFilled = false;
-//            etPhone.setError("Campo obrigatório");
-//        }else{
-//            etPhone.setErrorEnabled(false);
-//        }
-
         if(email.equals("")){
             allFieldsFilled = false;
             etEmail.setError("Campo obrigatório");
@@ -233,50 +234,10 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
             etEmail.setErrorEnabled(false);
         }
 
-//        if(description.equals("")){
-//            allFieldsFilled = false;
-//            etDescription.setError("Campo obrigatório");
-//        }else{
-//            etDescription.setErrorEnabled(false);
-//        }
-
-//        if(city.equals("")){
-//            allFieldsFilled = false;
-//            etCity.setError("Campo obrigatório");
-//        }else{
-//            etCity.setErrorEnabled(false);
-//        }
-//
-//        if(street.equals("")){
-//            allFieldsFilled = false;
-//            etStreet.setError("Campo obrigatório");
-//        }else{
-//            etStreet.setErrorEnabled(false);
-//        }
-//
-//        if(number.equals("")){
-//            allFieldsFilled = false;
-//            etNumber.setError("Campo obrigatório");
-//        }else{
-//            etNumber.setErrorEnabled(false);
-//        }
-
-//        if(allFieldsFilled) {
-//
-//            if (phone.length() < 14) {
-//                allFilledRight = false;
-//                etPhone.setError("Telefone inválido");
-//            } else {
-//                etPhone.setErrorEnabled(false);
-//            }
-//        }
-
-        if(allFieldsFilled && allFilledRight) {
+        if(allFieldsFilled) {
             FirebaseUser user = mAuth.getCurrentUser();
             finishLogin(user);
             Toast.makeText(this, "Editado com sucesso", Toast.LENGTH_SHORT).show();
-
-            startActivity(new Intent(this, TagsFilterActivity.class));
             finish();
         }
     }
@@ -288,7 +249,7 @@ public class EditCompanyActivity extends AppCompatActivity implements View.OnCli
         address = street+", "+number+", "+city;
 
         FirebaseHelper.writeNewCompany(mDatabase, Uid, name, description, email ,address, phone, "" ,
-                "", logo, (int)(Math.random()*10), 40.233, -40.223, hashtag);
+                "", logo, (int)(Math.random()*10), 40.233, -40.223, hashtag, descriptionOffer, descriptionDesire, socialNetwork);
     }
 
     /*
