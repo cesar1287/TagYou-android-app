@@ -14,7 +14,7 @@ public class ConfigActivity extends AppCompatActivity {
 
     TextView textViewRadius, textViewAge;
     SeekBar seekBarRadius, seekBarAge;
-    Switch swiMasc, swiFem;
+    Switch swiMasc, swiFem, swiOthers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class ConfigActivity extends AppCompatActivity {
 
         swiMasc  = (Switch) findViewById(R.id.s_masc);
         swiFem  = (Switch) findViewById(R.id.s_fem);
+        swiOthers = (Switch) findViewById(R.id.s_others);
     }
 
     public void radiusCurrent(){

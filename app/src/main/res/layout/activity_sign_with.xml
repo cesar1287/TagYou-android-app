@@ -38,6 +38,22 @@
                 android:layout_gravity="end"/>
         </LinearLayout>
 
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_ou"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginBottom="25dp"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,24 +117,6 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:layout_gravity="center_horizontal"/>
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_ou"
-            android:textSize="20sp"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:layout_marginBottom="35dp"/>
-
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
-            android:layout_width="310dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center"/>
     </LinearLayout>
 
 </ScrollView>
