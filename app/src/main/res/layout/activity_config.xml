@@ -121,7 +121,7 @@
             <RelativeLayout
                 android:id="@+id/rl_sex"
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_height="110dp"
                 android:background="@color/white"
                 android:layout_marginTop="11dp"
                 android:layout_marginLeft="7dp"
@@ -154,16 +154,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/config_fem"
-                    android:layout_alignTop="@+id/s_fem"
+                    android:layout_centerVertical="true"
                     android:layout_alignLeft="@+id/tv_masc"
                     android:layout_alignStart="@+id/tv_masc" />
                 <Switch
                     android:id="@+id/s_fem"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
+                    android:layout_alignBaseline="@+id/tv_fem"
+                    android:layout_alignBottom="@+id/tv_fem"
                     android:layout_alignLeft="@+id/s_masc"
                     android:layout_alignStart="@+id/s_masc" />
+                <TextView
+                    android:id="@+id/tv_others"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/config_others"
+                    android:layout_alignTop="@+id/s_others"
+                    android:layout_alignLeft="@+id/tv_fem"
+                    android:layout_alignStart="@+id/tv_fem" />
+                <Switch
+                    android:id="@+id/s_others"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignLeft="@+id/s_fem"
+                    android:layout_alignStart="@+id/s_fem" />
             </RelativeLayout>
 
         </RelativeLayout>

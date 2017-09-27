@@ -142,4 +142,5 @@
     <string name="config_sex">Selecione Sexo</string>
     <string name="config_masc">Masculino</string>
     <string name="config_fem">Feminino</string>
+    <string name="config_others">Outros</string>
 </resources>
