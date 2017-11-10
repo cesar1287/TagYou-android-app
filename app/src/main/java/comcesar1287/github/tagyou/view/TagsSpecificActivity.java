@@ -17,6 +17,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import comcesar1287.github.tagyou.R;
+import comcesar1287.github.tagyou.controller.domain.Tag;
+import comcesar1287.github.tagyou.controller.domain.Tags;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.util.Utility;
 import fisk.chipcloud.ChipCloud;
@@ -32,6 +34,10 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
     private DatabaseReference mDatabase;
 
     private Query tag;
+
+    private Tags tags;
+
+    private Tag tagObj = new Tag();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +57,7 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
     private void getCurrentTag() {
         tag = mDatabase
                 .child(FirebaseHelper.FIREBASE_DATABASE_TAGS)
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(tagDb);
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         loadCurrentTag();
     }
@@ -61,7 +66,28 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                tagFirebase = String.valueOf(dataSnapshot.getValue());
+                tagObj.setAffinity((String)dataSnapshot.child(Utility.AFFINITY).getValue());
+                tagObj.setGroup((String)dataSnapshot.child(Utility.GROUP).getValue());
+                tagObj.setSegment((String)dataSnapshot.child(Utility.SEGMENT).getValue());
+
+                switch (tagDb) {
+                    case Utility.AFFINITY:
+                        tagFirebase = tagObj.getAffinity();
+                        break;
+                    case Utility.GROUP:
+                        tagFirebase = tagObj.getGroup();
+                        break;
+                    case Utility.SEGMENT:
+                        tagFirebase = tagObj.getSegment();
+                        break;
+                }
+
+                if(tagFirebase==null){
+                    tagFirebase = "";
+                    tagObj.setAffinity("");
+                    tagObj.setGroup("");
+                    tagObj.setSegment("");
+                }
             }
 
             @Override
@@ -215,17 +241,28 @@ public class TagsSpecificActivity extends AppCompatActivity implements View.OnCl
 
         switch (id){
             case R.id.btNextAffinity:
-                String tag = "";
+                StringBuilder tag = new StringBuilder();
                 for(String tagItem : array){
                     if(tagItem!=null) {
-                        tag += tagItem+";";
+                        tag.append(tagItem).append(";");
                     }
+                }
+
+                switch (tagDb) {
+                    case Utility.AFFINITY:
+                        tags = new Tags(tag.toString(), tagObj.getGroup(), tagObj.getSegment());
+                        break;
+                    case Utility.GROUP:
+                        tags = new Tags(tagObj.getAffinity(), tag.toString(), tagObj.getSegment());
+                        break;
+                    case Utility.SEGMENT:
+                        tags = new Tags(tagObj.getAffinity(), tagObj.getGroup(), tag.toString());
+                        break;
                 }
 
                 mDatabase.child(FirebaseHelper.FIREBASE_DATABASE_TAGS)
                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .child(tagDb)
-                        .setValue(tag);
+                        .setValue(tags);
                 Toast.makeText(this, "Tags cadastradas com sucesso", Toast.LENGTH_SHORT).show();
                 finish();
                 break;

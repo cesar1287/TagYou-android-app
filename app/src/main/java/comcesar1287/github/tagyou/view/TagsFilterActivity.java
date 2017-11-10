@@ -123,9 +123,11 @@ public class TagsFilterActivity extends AppCompatActivity implements View.OnClic
         });
 
         for(int x = 0; x<affinity.length; x++){
-            if(tag.getAffinity().contains(affinity[x])){
-                chipCloudAffinity.setChecked(x);
-                arrayAffinity[x] = affinity[x];
+            if(tag.getAffinity()!=null) {
+                if (tag.getAffinity().contains(affinity[x])) {
+                    chipCloudAffinity.setChecked(x);
+                    arrayAffinity[x] = affinity[x];
+                }
             }
         }
 
@@ -160,9 +162,11 @@ public class TagsFilterActivity extends AppCompatActivity implements View.OnClic
         });
 
         for(int x = 0; x<groups.length; x++){
-            if(tag.getGroup().contains(groups[x])){
-                chipCloudGroups.setChecked(x);
-                arrayGroups[x] = groups[x];
+            if(tag.getGroup()!=null) {
+                if (tag.getGroup().contains(groups[x])) {
+                    chipCloudGroups.setChecked(x);
+                    arrayGroups[x] = groups[x];
+                }
             }
         }
 
@@ -197,9 +201,11 @@ public class TagsFilterActivity extends AppCompatActivity implements View.OnClic
         });
 
         for(int x = 0; x<segments.length; x++){
-            if(tag.getSegment().contains(segments[x])){
-                chipCloudSegments.setChecked(x);
-                arraySegments[x] = segments[x];
+            if(tag.getSegment()!=null) {
+                if (tag.getSegment().contains(segments[x])) {
+                    chipCloudSegments.setChecked(x);
+                    arraySegments[x] = segments[x];
+                }
             }
         }
     }
