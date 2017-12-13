@@ -3,6 +3,7 @@
     package="comcesar1287.github.tagyou">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -35,6 +36,10 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDODPf87mzDEZnnbkTHqlvjQY96LLpvPRs" />
+
+        <meta-data
+            android:name="com.google.android.nearby.messages.API_KEY"
+            android:value="AIzaSyCJ7q2qr9WcbGX2nUpQhQXXNoy6aTifJZ8" />
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -115,6 +120,10 @@
             android:screenOrientation="portrait"
             android:label="@string/config_label"            >
         </activity>
+
+        <service
+            android:name=".controller.util.BeaconMessageReceiver"
+            android:exported="false" />
     </application>
 
 </manifest>

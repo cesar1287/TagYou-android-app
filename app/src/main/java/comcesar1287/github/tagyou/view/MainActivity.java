@@ -1,16 +1,20 @@
 package comcesar1287.github.tagyou.view;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.ViewPager;
@@ -18,6 +22,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
@@ -27,10 +32,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.nearby.Nearby;
+import com.google.android.gms.nearby.messages.Message;
+import com.google.android.gms.nearby.messages.MessageListener;
+import com.google.android.gms.nearby.messages.MessagesClient;
+import com.google.android.gms.nearby.messages.MessagesOptions;
+import com.google.android.gms.nearby.messages.NearbyPermissions;
+import com.google.android.gms.nearby.messages.Strategy;
+import com.google.android.gms.nearby.messages.SubscribeOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
@@ -42,11 +56,15 @@ import comcesar1287.github.tagyou.R;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.fragment.CompanyFragment;
 import comcesar1287.github.tagyou.controller.fragment.PersonFragment;
+import comcesar1287.github.tagyou.controller.util.BeaconMessageReceiver;
 import comcesar1287.github.tagyou.controller.util.Utility;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String TAG = "MainActivity";
+    private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
     private FirebaseAuth mAuth;
 
@@ -64,6 +82,10 @@ public class MainActivity extends AppCompatActivity
 
     CircleImageView photoCompany, photoMultiplier, photoPerson;
 
+    MessageListener mMessageListener;
+    Message mMessage;
+    MessagesClient mMessagesClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +101,17 @@ public class MainActivity extends AppCompatActivity
         verifyUserIsLogged();
 
         setContentView(R.layout.activity_main);
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+                mMessagesClient = Nearby.getMessagesClient(this, new MessagesOptions.Builder()
+                    .setPermissions(NearbyPermissions.BLE)
+                    .build());
+        }else{
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
@@ -107,6 +140,92 @@ public class MainActivity extends AppCompatActivity
         setupUI();
 
         setActionBar();
+
+        setupBeacon();
+
+        subscribe();
+
+        backgroundSubscribe();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        setupViewPager(viewPager);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Nearby.getMessagesClient(this).publish(mMessage);
+        Nearby.getMessagesClient(this).subscribe(mMessageListener);
+    }
+
+    @Override
+    public void onStop() {
+        Nearby.getMessagesClient(this).unpublish(mMessage);
+        Nearby.getMessagesClient(this).unsubscribe(mMessageListener);
+        super.onStop();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+                    Toast.makeText(this, "O app depende dessa permissão para funcionar corretamente", Toast.LENGTH_SHORT).show();
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+    private void setupBeacon() {
+        mMessageListener = new MessageListener() {
+            @Override
+            public void onFound(Message message) {
+                Log.d(TAG, "Found message: " + new String(message.getContent()));
+            }
+
+            @Override
+            public void onLost(Message message) {
+                Log.d(TAG, "Lost sight of message: " + new String(message.getContent()));
+            }
+        };
+
+        mMessage = new Message("Hello World".getBytes());
+    }
+
+    // Subscribe to messages in the background.
+    private void backgroundSubscribe() {
+        Log.i(TAG, "Subscribing for background updates.");
+        SubscribeOptions options = new SubscribeOptions.Builder()
+                .setStrategy(Strategy.BLE_ONLY)
+                .build();
+        Nearby.getMessagesClient(this).subscribe(getPendingIntent(), options);
+    }
+
+    private PendingIntent getPendingIntent() {
+        return PendingIntent.getBroadcast(this, 0, new Intent(this, BeaconMessageReceiver.class),
+                PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+    // Subscribe to receive messages.
+    private void subscribe() {
+        Log.i(TAG, "Subscribing.");
+        SubscribeOptions options = new SubscribeOptions.Builder()
+                .setStrategy(Strategy.BLE_ONLY)
+                .build();
+        Nearby.getMessagesClient(this).subscribe(mMessageListener, options);
     }
 
     public void verifyUserIsLogged(){
@@ -124,13 +243,6 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        setupViewPager(viewPager);
     }
 
     private void setupViewPager(ViewPager viewPager) {
