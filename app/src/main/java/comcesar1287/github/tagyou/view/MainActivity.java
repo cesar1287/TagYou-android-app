@@ -1,19 +1,27 @@
 package comcesar1287.github.tagyou.view;
 
+import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -31,6 +39,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,18 +59,26 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import comcesar1287.github.tagyou.R;
+import comcesar1287.github.tagyou.controller.beacon.DeviceAdapter;
+import comcesar1287.github.tagyou.controller.beacon.DumpTask;
+import comcesar1287.github.tagyou.controller.domain.IBeacon;
 import comcesar1287.github.tagyou.controller.firebase.FirebaseHelper;
 import comcesar1287.github.tagyou.controller.fragment.CompanyFragment;
 import comcesar1287.github.tagyou.controller.fragment.PersonFragment;
 import comcesar1287.github.tagyou.controller.util.BeaconMessageReceiver;
+import comcesar1287.github.tagyou.controller.util.BleUtil;
+import comcesar1287.github.tagyou.controller.util.ScannedDevice;
 import comcesar1287.github.tagyou.controller.util.Utility;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        BluetoothAdapter.LeScanCallback {
 
     private static final String TAG = "MainActivity";
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
@@ -80,12 +97,19 @@ public class MainActivity extends AppCompatActivity
 
     private ViewPager viewPager;
 
+    private static final String TAG_LICENSE = "license";
+    private BluetoothAdapter mBTAdapter;
+    private DeviceAdapter mDeviceAdapter;
+    private DumpTask mDumpTask;
+    private boolean mIsScanning;
+
+    private boolean bobsShowed = false;
+    private boolean mcDonalsShowed = false;
+    private boolean saraivaShowed = false;
+
     CircleImageView photoCompany, photoMultiplier, photoPerson;
 
-    MessageListener mMessageListener;
-    Message mMessage;
-    MessagesClient mMessagesClient;
-
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,9 +128,9 @@ public class MainActivity extends AppCompatActivity
 
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-                mMessagesClient = Nearby.getMessagesClient(this, new MessagesOptions.Builder()
+                /*mMessagesClient = Nearby.getMessagesClient(this, new MessagesOptions.Builder()
                     .setPermissions(NearbyPermissions.BLE)
-                    .build());
+                    .build());*/
         }else{
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -141,11 +165,57 @@ public class MainActivity extends AppCompatActivity
 
         setActionBar();
 
-        setupBeacon();
+        init();
 
-        subscribe();
+        startScan();
+    }
 
-        backgroundSubscribe();
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    private void init() {
+        // BLE check
+        if (!BleUtil.isBLESupported(this)) {
+            Toast.makeText(this, R.string.ble_not_supported, Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        // BT check
+        BluetoothManager manager = BleUtil.getManager(this);
+        if (manager != null) {
+            mBTAdapter = manager.getAdapter();
+        }
+        if (mBTAdapter == null) {
+            Toast.makeText(this, R.string.bt_not_supported, Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        // init listview
+//        ListView deviceListView = (ListView) findViewById(R.id.list);
+//        mDeviceAdapter = new DeviceAdapter(this, R.layout.listitem_device,
+//                new ArrayList<ScannedDevice>());
+//        deviceListView.setAdapter(mDeviceAdapter);
+        //stopScan();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    private void startScan() {
+        if ((mBTAdapter != null) && (!mIsScanning)) {
+            mBTAdapter.startLeScan(this);
+            mIsScanning = true;
+            setProgressBarIndeterminateVisibility(true);
+            invalidateOptionsMenu();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    private void stopScan() {
+        if (mBTAdapter != null) {
+            mBTAdapter.stopLeScan(this);
+        }
+        mIsScanning = false;
+        setProgressBarIndeterminateVisibility(false);
+        invalidateOptionsMenu();
     }
 
     @Override
@@ -153,20 +223,6 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
 
         setupViewPager(viewPager);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Nearby.getMessagesClient(this).publish(mMessage);
-        Nearby.getMessagesClient(this).subscribe(mMessageListener);
-    }
-
-    @Override
-    public void onStop() {
-        Nearby.getMessagesClient(this).unpublish(mMessage);
-        Nearby.getMessagesClient(this).unsubscribe(mMessageListener);
-        super.onStop();
     }
 
     @Override
@@ -187,45 +243,6 @@ public class MainActivity extends AppCompatActivity
             // other 'case' lines to check for other
             // permissions this app might request
         }
-    }
-
-    private void setupBeacon() {
-        mMessageListener = new MessageListener() {
-            @Override
-            public void onFound(Message message) {
-                Log.d(TAG, "Found message: " + new String(message.getContent()));
-            }
-
-            @Override
-            public void onLost(Message message) {
-                Log.d(TAG, "Lost sight of message: " + new String(message.getContent()));
-            }
-        };
-
-        mMessage = new Message("Hello World".getBytes());
-    }
-
-    // Subscribe to messages in the background.
-    private void backgroundSubscribe() {
-        Log.i(TAG, "Subscribing for background updates.");
-        SubscribeOptions options = new SubscribeOptions.Builder()
-                .setStrategy(Strategy.BLE_ONLY)
-                .build();
-        Nearby.getMessagesClient(this).subscribe(getPendingIntent(), options);
-    }
-
-    private PendingIntent getPendingIntent() {
-        return PendingIntent.getBroadcast(this, 0, new Intent(this, BeaconMessageReceiver.class),
-                PendingIntent.FLAG_UPDATE_CURRENT);
-    }
-
-    // Subscribe to receive messages.
-    private void subscribe() {
-        Log.i(TAG, "Subscribing.");
-        SubscribeOptions options = new SubscribeOptions.Builder()
-                .setStrategy(Strategy.BLE_ONLY)
-                .build();
-        Nearby.getMessagesClient(this).subscribe(mMessageListener, options);
     }
 
     public void verifyUserIsLogged(){
@@ -250,6 +267,79 @@ public class MainActivity extends AppCompatActivity
         adapter.addFragment(new CompanyFragment(), "Empresas");
         adapter.addFragment(new PersonFragment(), "Pessoas");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onLeScan(final BluetoothDevice device, final int rssi, final byte[] scanRecord) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //String summary = mDeviceAdapter.update(device, rssi, scanRecord);
+                if(scanRecord!=null) {
+                    IBeacon iBeacon = IBeacon.fromScanData(scanRecord, rssi);
+                    if(iBeacon != null){
+                        Log.i(TAG, iBeacon.getProximityUuid());
+                        if(iBeacon.getProximityUuid().
+                                equals("aa0ba7b7-5800-4285-b2da-336298781ab9") && !bobsShowed) {
+                            createNotificationBeacon("Bobs", "Promoção Bob's",
+                                    "Venha conferir a nova oferta do Bob's");
+                            bobsShowed = true;
+                        }else if(iBeacon.getProximityUuid().
+                                equals("db0e7935-ef5d-49b1-a7d5-3996c3a82ce5") && !mcDonalsShowed){
+                            createNotificationBeacon("McDonals", "PromoMac",
+                                    "Venha conferir a nova oferta do McDonals");
+                            mcDonalsShowed = true;
+                        }else if(iBeacon.getProximityUuid().
+                                equals("bd858f4b-86e8-4215-b8d8-b346651988d8") && !saraivaShowed){
+                            createNotificationBeacon("Saraiva", "Liquidação Saraiva",
+                                    "Venha conferir a nova oferta da Saraiva");
+
+                            saraivaShowed = true;
+                        }
+                    }
+                }
+                /*if (summary != null) {
+                    getActionBar().setSubtitle(summary);
+                }*/
+            }
+        });
+    }
+
+    private void createNotificationBeacon(String loja, String titulo, String texto) {
+        int id = -1;
+        //Assign Big Picture style notification
+        NotificationCompat.BigPictureStyle bigPictureStyle=new NotificationCompat.BigPictureStyle();
+        if(loja.equals("Bobs")) {
+            id = 0;
+            bigPictureStyle.bigPicture(BitmapFactory.decodeResource(getResources(), R.drawable.tagyou_image_notification_bobs)).build();
+        }else if(loja.equals("McDonals")) {
+            id = 1;
+            bigPictureStyle.bigPicture(BitmapFactory.decodeResource(getResources(), R.drawable.tagyou_image_notification_mcdonalds)).build();
+        }else if(loja.equals("Saraiva")) {
+            id = 2;
+            bigPictureStyle.bigPicture(BitmapFactory.decodeResource(getResources(), R.drawable.tagyou_image_notification_saraiva)).build();
+        }
+
+        //gets instance of notification manager service
+        NotificationManager notificationManager=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+
+        //set intents and pending intents to call activity on click of "show activity" action button of notification
+        Intent intent=new Intent(this,MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent= PendingIntent.getActivity(this,(int) Calendar.getInstance().getTimeInMillis(),intent,0);
+
+
+        // build notification
+        NotificationCompat.Builder builder=(NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(titulo)
+                .setContentText(texto)
+                .setStyle(bigPictureStyle);
+
+        PendingIntent.getActivity(getApplicationContext(),0,getIntent(),0,null);
+
+        // post notification on the notification bar
+        notificationManager.notify(id,builder.build());
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
